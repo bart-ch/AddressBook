@@ -5,7 +5,6 @@ using namespace std;
 
 int main()
 {
-
     KsiazkaAdresowa ksiazka;
     ksiazka.rejestracjaUzytkownika();
     ksiazka.rejestracjaUzytkownika();
