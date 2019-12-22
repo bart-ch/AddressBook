@@ -5,7 +5,7 @@ using namespace std;
 
 int main()
 {
-    KsiazkaAdresowa ksiazka;
+    KsiazkaAdresowa ksiazka("Uzytk.txt");
     ksiazka.wypiszWszystkichUzytkownikow();
     ksiazka.rejestracjaUzytkownika();
     ksiazka.rejestracjaUzytkownika();

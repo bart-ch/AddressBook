@@ -1,13 +1,14 @@
 #include "PlikiZUzytkownikami.h"
 
 
-PlikiZUzytkownikami::PlikiZUzytkownikami()
+PlikiZUzytkownikami::PlikiZUzytkownikami(string NAZWAPLIKUZUZYTKOWNIKAMI)
+:  nazwaPlikuZUzytkownikami(NAZWAPLIKUZUZYTKOWNIKAMI)
 {
-    nazwaPlikuZUzytkownikami = "Uzytkownicy.txt";
 }
 
 void PlikiZUzytkownikami::dopiszUzytkownikaDoPliku(Uzytkownik uzytkownik)
 {
+    fstream plikTekstowy;
     string liniaZDanymiUzytkownika = "";
     plikTekstowy.open(nazwaPlikuZUzytkownikami.c_str(), ios::app);
 
@@ -21,7 +22,7 @@ void PlikiZUzytkownikami::dopiszUzytkownikaDoPliku(Uzytkownik uzytkownik)
         }
         else
         {
-            plikTekstowy << endl << liniaZDanymiUzytkownika ;
+            plikTekstowy << endl << liniaZDanymiUzytkownika;
         }
     }
     else
@@ -31,6 +32,7 @@ void PlikiZUzytkownikami::dopiszUzytkownikaDoPliku(Uzytkownik uzytkownik)
 
 bool PlikiZUzytkownikami::czyPlikJestPusty()
 {
+    fstream plikTekstowy;
     plikTekstowy.seekg(0, ios::end);
     if (plikTekstowy.tellg() == 0)
         return true;
@@ -52,6 +54,7 @@ string PlikiZUzytkownikami::zamienDaneUzytkownikaNaLinieZDanymiOddzielonaPionowy
 vector <Uzytkownik> PlikiZUzytkownikami::wczytajUzytkownikowZPliku()
 {
     Uzytkownik uzytkownik;
+    fstream plikTekstowy;
     vector <Uzytkownik> uzytkownicy;
     string daneJednegoUzytkownikaOddzielonePionowymiKreskami = "";
 

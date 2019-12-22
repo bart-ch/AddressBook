@@ -12,7 +12,7 @@ class KsiazkaAdresowa
 
 public:
 
-    KsiazkaAdresowa();
+    KsiazkaAdresowa(string nazwaPlikuZUzytkownikami="Uzytkownicy.txt");
     void rejestracjaUzytkownika();
     void wypiszWszystkichUzytkownikow();
 
