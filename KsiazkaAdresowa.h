@@ -15,6 +15,7 @@ public:
     KsiazkaAdresowa(string nazwaPlikuZUzytkownikami="Uzytkownicy.txt");
     void rejestracjaUzytkownika();
     void wypiszWszystkichUzytkownikow();
+    void logowanieUzytkownika();
 
 };
 
