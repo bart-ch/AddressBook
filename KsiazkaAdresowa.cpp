@@ -21,5 +21,10 @@ void KsiazkaAdresowa::rejestracjaUzytkownika()
      uzytkownikMenedzer.logowanieUzytkownika();
  }
 
+   void KsiazkaAdresowa::zmianaHaslaZalogowanegoUzytkownika()
+ {
+     uzytkownikMenedzer.zmianaHaslaZalogowanegoUzytkownika();
+ }
+
 
 

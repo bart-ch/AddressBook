@@ -75,6 +75,11 @@ void UzytkownikMenedzer::wczytajUzytkownikowZPliku()
    uzytkownicy = plikZUzytkownikami.wczytajUzytkownikowZPliku();
 }
 
+void UzytkownikMenedzer::zmianaHaslaZalogowanegoUzytkownika()
+{
+   uzytkownicy = plikZUzytkownikami.zmianaHaslaZalogowanegoUzytkownika(idZalogowanegoUzytkownika);
+}
+
 int UzytkownikMenedzer::logowanieUzytkownika()
 {
     Uzytkownik uzytkownik;
@@ -96,7 +101,9 @@ int UzytkownikMenedzer::logowanieUzytkownika()
                 {
                     cout << endl << "Zalogowales sie." << endl << endl;
                     system("pause");
-                    return uzytkownicy[i].pobierzId();
+                    idZalogowanegoUzytkownika = uzytkownicy[i].pobierzId();
+
+                    return idZalogowanegoUzytkownika;
                 }
             }
             cout << "Wprowadzono 3 razy bledne haslo." << endl;
