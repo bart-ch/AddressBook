@@ -15,15 +15,18 @@ using namespace std;
 class PlikiZUzytkownikami
 {
     const string nazwaPlikuZUzytkownikami;
+    vector <Uzytkownik> uzytkownicy;
 
     bool czyPlikJestPusty();
     string zamienDaneUzytkownikaNaLinieZDanymiOddzielonaPionowymiKreskami(Uzytkownik uzytkownik);
     Uzytkownik pobierzDaneUzytkownika(string daneJednegoUzytkownikaOddzielonePionowymiKreskami);
+    void zapiszWszystkichUzytkownikowDoPliku(vector <Uzytkownik> &uzytkownicy);
 
 public:
     PlikiZUzytkownikami(string);
     void dopiszUzytkownikaDoPliku(Uzytkownik uzytkownik);
     vector <Uzytkownik> wczytajUzytkownikowZPliku();
+    vector <Uzytkownik> zmianaHaslaZalogowanegoUzytkownika(int idZalogowanegoUzytkownika);
 };
 
 #endif

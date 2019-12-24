@@ -55,7 +55,7 @@ vector <Uzytkownik> PlikiZUzytkownikami::wczytajUzytkownikowZPliku()
 {
     Uzytkownik uzytkownik;
     fstream plikTekstowy;
-    vector <Uzytkownik> uzytkownicy;
+   // vector <Uzytkownik> uzytkownicy;
     string daneJednegoUzytkownikaOddzielonePionowymiKreskami = "";
 
     plikTekstowy.open(nazwaPlikuZUzytkownikami.c_str(), ios::in);
@@ -105,4 +105,56 @@ Uzytkownik PlikiZUzytkownikami::pobierzDaneUzytkownika(string daneJednegoUzytkow
         }
     }
     return uzytkownik;
+}
+
+vector <Uzytkownik> PlikiZUzytkownikami::zmianaHaslaZalogowanegoUzytkownika(int idZalogowanegoUzytkownika)
+{
+    string noweHaslo = "";
+    cout << "Podaj nowe haslo: ";
+ // vector <Uzytkownik> uzytkownicy;
+    cin >> noweHaslo;
+
+    for (int i = 0; i < uzytkownicy.size(); i++)
+    {
+        if (uzytkownicy[i].pobierzId() == idZalogowanegoUzytkownika)
+        {
+            uzytkownicy[i].ustawHaslo(noweHaslo);
+            cout << "Haslo zostalo zmienione." << endl << endl;
+            system("pause");
+        }
+    }
+    zapiszWszystkichUzytkownikowDoPliku(uzytkownicy);
+
+    return uzytkownicy;
+}
+
+void PlikiZUzytkownikami::zapiszWszystkichUzytkownikowDoPliku(vector <Uzytkownik> &uzytkownicy)
+{
+    fstream plikTekstowy;
+    string liniaZDanymiUzytkownika = "";
+
+    plikTekstowy.open(nazwaPlikuZUzytkownikami.c_str(), ios::out);
+
+    if (plikTekstowy.good() == true)
+    {
+        for (int i = 0; i < uzytkownicy.size(); i++)
+        {
+            liniaZDanymiUzytkownika = zamienDaneUzytkownikaNaLinieZDanymiOddzielonaPionowymiKreskami(uzytkownicy[i]);
+
+            if (i == uzytkownicy.size() - 1)
+            {
+               plikTekstowy << liniaZDanymiUzytkownika;
+            }
+            else
+            {
+                plikTekstowy << liniaZDanymiUzytkownika << endl;
+            }
+            liniaZDanymiUzytkownika = "";
+        }
+    }
+    else
+    {
+        cout << "Nie mozna otworzyc pliku " << nazwaPlikuZUzytkownikami << endl;
+    }
+    plikTekstowy.close();
 }
