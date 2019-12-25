@@ -1,12 +1,16 @@
 #ifndef ADRESATMENEDZER_H
 #define ADRESATMENEDZER_H
 
+#include "PlikiZAdresatami.h"
 
 class AdresatMenedzer
 {
-    public:
 
-//    void wyswietlWszystkichAdresatow(vector <Adresat> &adresaci);
+    PlikiZAdresatami plikiZAdresatami;
+
+public:
+
+    AdresatMenedzer(string nazwaPlikuZAdresatami);
 
 };
 
