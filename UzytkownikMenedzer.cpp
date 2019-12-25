@@ -1,8 +1,8 @@
 #include "UzytkownikMenedzer.h"
 
-UzytkownikMenedzer::UzytkownikMenedzer(string nazwaPlikuZUzytkownikami)
+UzytkownikMenedzer::UzytkownikMenedzer(string nazwaPlikuZUzytkownikami,string nazwaPlikuZAdresatami)
     : plikZUzytkownikami(nazwaPlikuZUzytkownikami),
-      adresatMenedzer("Adresaci.txt")
+      adresatMenedzer(nazwaPlikuZAdresatami)
 {
 }
 

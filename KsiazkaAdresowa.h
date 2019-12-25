@@ -14,7 +14,7 @@ class KsiazkaAdresowa
 
 public:
 
-    KsiazkaAdresowa(string nazwaPlikuZUzytkownikami="Uzytkownicy.txt",string nazwaPlikuZAdresatami="Adresaci.txt");
+    KsiazkaAdresowa(string nazwaPlikuZUzytkownikami="Uzytkownicy.txt",string nazwaPlikuZAdresatami="Adresacix.txt");
     void rejestracjaUzytkownika();
     void wypiszWszystkichUzytkownikow();
     void logowanieUzytkownika();

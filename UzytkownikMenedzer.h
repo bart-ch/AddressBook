@@ -25,7 +25,7 @@ class UzytkownikMenedzer
     AdresatMenedzer adresatMenedzer;
 
 public:
-    UzytkownikMenedzer(string);
+    UzytkownikMenedzer(string,string);
     void rejestracjaUzytkownika();
     void wypiszWszystkichUzytkownikow();
     void wczytajUzytkownikowZPliku();
