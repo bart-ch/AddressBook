@@ -9,6 +9,7 @@
 
 #include "Uzytkownik.h"
 #include "PlikiZUzytkownikami.h"
+#include "AdresatMenedzer.h"
 
 using namespace std;
 
@@ -21,14 +22,17 @@ class UzytkownikMenedzer
     int pobierzIdNowegoUzytkownika();
     bool czyIstniejeLogin(string login);
     PlikiZUzytkownikami plikZUzytkownikami;
+    AdresatMenedzer adresatMenedzer;
 
 public:
-    UzytkownikMenedzer(string nazwaPlikuZUzytkownikami);
+    UzytkownikMenedzer(string);
     void rejestracjaUzytkownika();
     void wypiszWszystkichUzytkownikow();
     void wczytajUzytkownikowZPliku();
     int logowanieUzytkownika();
     void zmianaHaslaZalogowanegoUzytkownika();
+    int pobierzIdZalogowanegoUzytkownika();
+    void dodajAdresata();
 };
 
 #endif

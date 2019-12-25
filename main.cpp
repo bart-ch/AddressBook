@@ -8,10 +8,12 @@ int main()
     KsiazkaAdresowa ksiazka;
     ksiazka.wypiszWszystkichUzytkownikow();
     ksiazka.logowanieUzytkownika();
-   // ksiazka.rejestracjaUzytkownika();
-   // ksiazka.rejestracjaUzytkownika();
-    ksiazka.wypiszWszystkichUzytkownikow();
- //  ksiazka.zmianaHaslaZalogowanegoUzytkownika();
+    // ksiazka.rejestracjaUzytkownika();
+    // ksiazka.rejestracjaUzytkownika();
+    ksiazka.dodajAdresata();
+
+        ksiazka.dodajAdresata();
+// ksiazka.zmianaHaslaZalogowanegoUzytkownika();
 
     return 0;
 }

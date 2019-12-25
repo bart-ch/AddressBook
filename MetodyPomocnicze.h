@@ -10,6 +10,8 @@ class MetodyPomocnicze
 {
     public:
        static string konwerjsaIntNaString(int liczba);
+       static string zamienPierwszaLitereNaDuzaAPozostaleNaMale(string tekst);
+
 };
 
 #endif

@@ -27,5 +27,9 @@ void KsiazkaAdresowa::zmianaHaslaZalogowanegoUzytkownika()
     uzytkownikMenedzer.zmianaHaslaZalogowanegoUzytkownika();
 }
 
+void KsiazkaAdresowa::dodajAdresata()
+{
+    uzytkownikMenedzer.dodajAdresata();
+}
 
 

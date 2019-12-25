@@ -1,16 +1,17 @@
 #include "UzytkownikMenedzer.h"
 
-  UzytkownikMenedzer::UzytkownikMenedzer(string nazwaPlikuZUzytkownikami)
-  : plikZUzytkownikami(nazwaPlikuZUzytkownikami)
-  {
-  }
+UzytkownikMenedzer::UzytkownikMenedzer(string nazwaPlikuZUzytkownikami)
+    : plikZUzytkownikami(nazwaPlikuZUzytkownikami),
+      adresatMenedzer("Adresaci.txt")
+{
+}
 
 void UzytkownikMenedzer::rejestracjaUzytkownika()
 {
     Uzytkownik uzytkownik = podajDaneNowegoUzytkownika();
 
     uzytkownicy.push_back(uzytkownik);
-   plikZUzytkownikami.dopiszUzytkownikaDoPliku(uzytkownik);
+    plikZUzytkownikami.dopiszUzytkownikaDoPliku(uzytkownik);
 
     cout << endl << "Konto zalozono pomyslnie" << endl << endl;
     system("pause");
@@ -72,12 +73,12 @@ void UzytkownikMenedzer::wypiszWszystkichUzytkownikow()
 
 void UzytkownikMenedzer::wczytajUzytkownikowZPliku()
 {
-   uzytkownicy = plikZUzytkownikami.wczytajUzytkownikowZPliku();
+    uzytkownicy = plikZUzytkownikami.wczytajUzytkownikowZPliku();
 }
 
 void UzytkownikMenedzer::zmianaHaslaZalogowanegoUzytkownika()
 {
-   uzytkownicy = plikZUzytkownikami.zmianaHaslaZalogowanegoUzytkownika(idZalogowanegoUzytkownika);
+    uzytkownicy = plikZUzytkownikami.zmianaHaslaZalogowanegoUzytkownika(idZalogowanegoUzytkownika);
 }
 
 int UzytkownikMenedzer::logowanieUzytkownika()
@@ -114,4 +115,10 @@ int UzytkownikMenedzer::logowanieUzytkownika()
     cout << "Nie ma uzytkownika z takim loginem" << endl << endl;
     system("pause");
     return 0;
+}
+
+
+void UzytkownikMenedzer::dodajAdresata()
+{
+    adresatMenedzer.dodajAdresata(idZalogowanegoUzytkownika);
 }

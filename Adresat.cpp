@@ -5,6 +5,11 @@ void Adresat::ustawIdAdresata(int noweId)
     id = noweId;
 }
 
+void Adresat::ustawIdUzytkownika(int noweId)
+{
+    idUzytkownika = noweId;
+}
+
 void Adresat::ustawImie(string noweImie)
 {
     imie = noweImie;

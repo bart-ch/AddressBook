@@ -12,6 +12,7 @@ class Adresat
 
 public:
     void ustawIdAdresata(int noweId);
+    void ustawIdUzytkownika(int noweId);
     void ustawImie(string noweImie);
     void ustawNazwisko(string noweNazwisko);
     void ustawNumerTelefonu(string nowyNrTelefonu);
