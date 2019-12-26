@@ -38,4 +38,9 @@ void KsiazkaAdresowa::wypiszWszystkichAdresatow()
     adresatMenedzer.wypiszWszystkichAdresatow();
 }
 
+void KsiazkaAdresowa::wyloguj()
+{
+    adresatMenedzer.wyloguj();
+}
+
 

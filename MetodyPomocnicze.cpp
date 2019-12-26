@@ -1,5 +1,4 @@
 #include "MetodyPomocnicze.h"
-#include <algorithm>
 
 string MetodyPomocnicze::konwerjsaIntNaString(int liczba)
 {

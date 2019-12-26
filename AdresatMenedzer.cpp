@@ -69,4 +69,11 @@ void AdresatMenedzer::wypiszWszystkichAdresatow()
     }
 }
 
+void AdresatMenedzer::wyloguj()
+{
+    adresaci.clear();
+    cout << "Zostales wylogowany." << endl;
+    system("pause");
+}
+
 

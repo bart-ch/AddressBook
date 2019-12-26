@@ -5,7 +5,7 @@ UzytkownikMenedzer::UzytkownikMenedzer(string nazwaPlikuZUzytkownikami)
 {
 }
 
- int UzytkownikMenedzer::idZalogowanegoUzytkownika;
+int UzytkownikMenedzer::idZalogowanegoUzytkownika;
 
 void UzytkownikMenedzer::rejestracjaUzytkownika()
 {
@@ -118,7 +118,7 @@ int UzytkownikMenedzer::logowanieUzytkownika()
     return 0;
 }
 
-    int UzytkownikMenedzer::pobierzIdZalogowanegoUzytkownika()
-   {
-       return idZalogowanegoUzytkownika;
-   }
+int UzytkownikMenedzer::pobierzIdZalogowanegoUzytkownika()
+{
+    return idZalogowanegoUzytkownika;
+}
