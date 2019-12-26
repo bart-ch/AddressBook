@@ -16,8 +16,6 @@ void AdresatMenedzer::dodajAdresata()
 
     adresaci.push_back(adresat);
     plikiZAdresatami.dopiszAdresataDoPliku(adresat);
-
-     ++idOstatniegoAdresata;
 }
 
 Adresat AdresatMenedzer::podajDaneNowegoAdresata(int idZalogowanegoUzytkownika)
@@ -52,3 +50,23 @@ Adresat AdresatMenedzer::podajDaneNowegoAdresata(int idZalogowanegoUzytkownika)
 
     return adresat;
 }
+
+void AdresatMenedzer::wczytajAdresatowZalogowanegoUzytkownikaZPliku()
+{
+    idOstatniegoAdresata = plikiZAdresatami.wczytajAdresatowZalogowanegoUzytkownikaZPliku(adresaci);
+}
+
+void AdresatMenedzer::wypiszWszystkichAdresatow()
+{
+    for(int i = 0; i<adresaci.size(); i++)
+    {
+        cout << "ID: " << adresaci[i].pobierzIdAdresata() << endl;
+        cout << "Imie: " << adresaci[i].pobierzImie() << endl;
+        cout << "Nazwisko: " << adresaci[i].pobierzNazwisko() << endl;
+        cout << "Numer telefonu: " << adresaci[i].pobierzNumerTelefonu() << endl;
+        cout << "Email: " << adresaci[i].pobierzEmail() << endl;
+        cout << "Adres: " << adresaci[i].pobierzAdres() << endl << endl;
+    }
+}
+
+

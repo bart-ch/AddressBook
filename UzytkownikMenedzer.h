@@ -15,7 +15,7 @@ using namespace std;
 
 class UzytkownikMenedzer
 {
-   static int idZalogowanegoUzytkownika;
+    static int idZalogowanegoUzytkownika;
     vector <Uzytkownik> uzytkownicy;
 
     Uzytkownik podajDaneNowegoUzytkownika();
@@ -29,7 +29,7 @@ public:
     void wczytajUzytkownikowZPliku();
     int logowanieUzytkownika();
     void zmianaHaslaZalogowanegoUzytkownika();
-   static int pobierzIdZalogowanegoUzytkownika();
+    static int pobierzIdZalogowanegoUzytkownika();
 };
 
 #endif

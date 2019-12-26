@@ -20,6 +20,7 @@ void KsiazkaAdresowa::wypiszWszystkichUzytkownikow()
 void KsiazkaAdresowa::logowanieUzytkownika()
 {
     uzytkownikMenedzer.logowanieUzytkownika();
+    adresatMenedzer.wczytajAdresatowZalogowanegoUzytkownikaZPliku();
 }
 
 void KsiazkaAdresowa::zmianaHaslaZalogowanegoUzytkownika()
@@ -30,6 +31,11 @@ void KsiazkaAdresowa::zmianaHaslaZalogowanegoUzytkownika()
 void KsiazkaAdresowa::dodajAdresata()
 {
     adresatMenedzer.dodajAdresata();
+}
+
+void KsiazkaAdresowa::wypiszWszystkichAdresatow()
+{
+    adresatMenedzer.wypiszWszystkichAdresatow();
 }
 
 

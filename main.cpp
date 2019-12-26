@@ -11,9 +11,11 @@ int main()
     // ksiazka.rejestracjaUzytkownika();
     // ksiazka.rejestracjaUzytkownika();
     ksiazka.dodajAdresata();
+    ksiazka.dodajAdresata();
+    ksiazka.wypiszWszystkichAdresatow();
 
- //       ksiazka.dodajAdresata();
- //ksiazka.zmianaHaslaZalogowanegoUzytkownika();
+//       ksiazka.dodajAdresata();
+//ksiazka.zmianaHaslaZalogowanegoUzytkownika();
 
     return 0;
 }

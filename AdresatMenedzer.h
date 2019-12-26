@@ -17,6 +17,8 @@ public:
     AdresatMenedzer(string nazwaPlikuZAdresatami);
     void dodajAdresata();
     Adresat podajDaneNowegoAdresata(int idZalogowanegoUzytkownika);
+    void wczytajAdresatowZalogowanegoUzytkownikaZPliku();
+    void wypiszWszystkichAdresatow();
 };
 
 #endif // ADRESATMENEDZER_H
