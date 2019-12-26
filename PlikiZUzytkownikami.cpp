@@ -16,7 +16,7 @@ void PlikiZUzytkownikami::dopiszUzytkownikaDoPliku(Uzytkownik uzytkownik)
     {
         liniaZDanymiUzytkownika = zamienDaneUzytkownikaNaLinieZDanymiOddzielonaPionowymiKreskami(uzytkownik);
 
-        if (czyPlikJestPusty() == true)
+        if (czyPlikJestPusty(plikTekstowy) == true)
         {
             plikTekstowy << liniaZDanymiUzytkownika;
         }
@@ -30,9 +30,9 @@ void PlikiZUzytkownikami::dopiszUzytkownikaDoPliku(Uzytkownik uzytkownik)
     plikTekstowy.close();
 }
 
-bool PlikiZUzytkownikami::czyPlikJestPusty()
+bool PlikiZUzytkownikami::czyPlikJestPusty(fstream &plikTekstowy)
 {
-    fstream plikTekstowy;
+
     plikTekstowy.seekg(0, ios::end);
     if (plikTekstowy.tellg() == 0)
         return true;
@@ -55,7 +55,7 @@ vector <Uzytkownik> PlikiZUzytkownikami::wczytajUzytkownikowZPliku()
 {
     Uzytkownik uzytkownik;
     fstream plikTekstowy;
-   // vector <Uzytkownik> uzytkownicy;
+
     string daneJednegoUzytkownikaOddzielonePionowymiKreskami = "";
 
     plikTekstowy.open(nazwaPlikuZUzytkownikami.c_str(), ios::in);
@@ -111,7 +111,6 @@ vector <Uzytkownik> PlikiZUzytkownikami::zmianaHaslaZalogowanegoUzytkownika(int 
 {
     string noweHaslo = "";
     cout << "Podaj nowe haslo: ";
- // vector <Uzytkownik> uzytkownicy;
     cin >> noweHaslo;
 
     for (int i = 0; i < uzytkownicy.size(); i++)
