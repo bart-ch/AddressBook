@@ -3,6 +3,7 @@
 
 #include "PlikiZAdresatami.h"
 #include "MetodyPomocnicze.h"
+#include "UzytkownikMenedzer.h"
 
 class AdresatMenedzer
 {
@@ -14,7 +15,7 @@ class AdresatMenedzer
 public:
 
     AdresatMenedzer(string nazwaPlikuZAdresatami);
-    void dodajAdresata(int idZalogowanegoAdresata);
+    void dodajAdresata();
     Adresat podajDaneNowegoAdresata(int idZalogowanegoUzytkownika);
 };
 

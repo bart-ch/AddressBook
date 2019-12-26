@@ -12,8 +12,8 @@ int main()
     // ksiazka.rejestracjaUzytkownika();
     ksiazka.dodajAdresata();
 
-        ksiazka.dodajAdresata();
-// ksiazka.zmianaHaslaZalogowanegoUzytkownika();
+ //       ksiazka.dodajAdresata();
+ //ksiazka.zmianaHaslaZalogowanegoUzytkownika();
 
     return 0;
 }

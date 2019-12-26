@@ -1,10 +1,11 @@
 #include "UzytkownikMenedzer.h"
 
-UzytkownikMenedzer::UzytkownikMenedzer(string nazwaPlikuZUzytkownikami,string nazwaPlikuZAdresatami)
-    : plikZUzytkownikami(nazwaPlikuZUzytkownikami),
-      adresatMenedzer(nazwaPlikuZAdresatami)
+UzytkownikMenedzer::UzytkownikMenedzer(string nazwaPlikuZUzytkownikami)
+    : plikZUzytkownikami(nazwaPlikuZUzytkownikami)
 {
 }
+
+ int UzytkownikMenedzer::idZalogowanegoUzytkownika;
 
 void UzytkownikMenedzer::rejestracjaUzytkownika()
 {
@@ -117,8 +118,7 @@ int UzytkownikMenedzer::logowanieUzytkownika()
     return 0;
 }
 
-
-void UzytkownikMenedzer::dodajAdresata()
-{
-    adresatMenedzer.dodajAdresata(idZalogowanegoUzytkownika);
-}
+    int UzytkownikMenedzer::pobierzIdZalogowanegoUzytkownika()
+   {
+       return idZalogowanegoUzytkownika;
+   }

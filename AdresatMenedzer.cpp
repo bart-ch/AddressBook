@@ -5,9 +5,10 @@ AdresatMenedzer::AdresatMenedzer(string nazwaPlikuZAdresatami)
 {
 }
 
-void AdresatMenedzer::dodajAdresata(int idZalogowanegoUzytkownika)
+void AdresatMenedzer::dodajAdresata()
 {
     Adresat adresat;
+    int idZalogowanegoUzytkownika = UzytkownikMenedzer::pobierzIdZalogowanegoUzytkownika();
 
     system("cls");
     cout << " >>> DODAWANIE NOWEGO ADRESATA <<<" << endl << endl;
@@ -44,9 +45,10 @@ Adresat AdresatMenedzer::podajDaneNowegoAdresata(int idZalogowanegoUzytkownika)
     cout << "Podaj email: ";
     cin >> email;
     adresat.ustawEmail(email);
+
     cout << "Podaj adres: ";
     cin >> adres;
-    adresat.ustawEmail(adres);
+    adresat.ustawAdres(adres);
 
     return adresat;
 }
