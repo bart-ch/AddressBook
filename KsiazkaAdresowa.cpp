@@ -53,4 +53,12 @@ char KsiazkaAdresowa::wybierzOpcjeZMenuGlownego()
     uzytkownikMenedzer.wybierzOpcjeZMenuGlownego();
 }
 
+bool KsiazkaAdresowa::czyUzytkownikJestZalogowany()
+{
+    if(UzytkownikMenedzer::pobierzIdZalogowanegoUzytkownika() == 0)
+        return false;
+    else
+        return true;
+}
+
 

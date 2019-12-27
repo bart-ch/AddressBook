@@ -24,6 +24,7 @@ public:
     void wyloguj();
     char wybierzOpcjeZMenuUzytkownika();
     char wybierzOpcjeZMenuGlownego();
+    bool czyUzytkownikJestZalogowany();
 
 };
 

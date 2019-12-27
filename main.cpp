@@ -11,7 +11,7 @@ int main()
 
     while (true)
     {
-        if (UzytkownikMenedzer::pobierzIdZalogowanegoUzytkownika() == 0)
+        if (ksiazka.czyUzytkownikJestZalogowany() == false)
         {
             wybor = ksiazka.wybierzOpcjeZMenuGlownego();
 
