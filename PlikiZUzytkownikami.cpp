@@ -2,7 +2,7 @@
 
 
 PlikiZUzytkownikami::PlikiZUzytkownikami(string NAZWAPLIKUZUZYTKOWNIKAMI)
-:  nazwaPlikuZUzytkownikami(NAZWAPLIKUZUZYTKOWNIKAMI)
+    :  nazwaPlikuZUzytkownikami(NAZWAPLIKUZUZYTKOWNIKAMI)
 {
 }
 
@@ -111,7 +111,7 @@ vector <Uzytkownik> PlikiZUzytkownikami::zmianaHaslaZalogowanegoUzytkownika(int 
 {
     string noweHaslo = "";
     cout << "Podaj nowe haslo: ";
-    cin >> noweHaslo;
+    noweHaslo = MetodyPomocnicze::wczytajLinie();
 
     for (int i = 0; i < uzytkownicy.size(); i++)
     {
@@ -142,7 +142,7 @@ void PlikiZUzytkownikami::zapiszWszystkichUzytkownikowDoPliku(vector <Uzytkownik
 
             if (i == uzytkownicy.size() - 1)
             {
-               plikTekstowy << liniaZDanymiUzytkownika;
+                plikTekstowy << liniaZDanymiUzytkownika;
             }
             else
             {

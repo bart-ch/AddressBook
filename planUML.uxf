@@ -94,14 +94,16 @@ PlikZUzytkownikami()
       <x>20</x>
       <y>230</y>
       <w>490</w>
-      <h>100</h>
+      <h>120</h>
     </coordinates>
     <panel_attributes>MetodyPomocnicze
 --
 + konwerjsaIntNaString() : static string
 + konwersjaStringNaInt() : static int
 + zamienPierwszaLitereNaDuzaAPozostaleNaMale() : static string
-+ pobierzLiczbe() : static string</panel_attributes>
++ pobierzLiczbe() : static string
++ wczytajZnak() : static char
++ wczytajLinie() : static string</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -124,6 +126,10 @@ UzytkownikMenedzer() :
 + wczytajUzytkownikowZPliku() : void
 + logowanieUzytkownika () : int
 + zmianaHaslaZalogowanegoUzytkownika() : void
++ wybierzOpcjeZMenuGlownego() : void
++ wybierzOpcjeZMenuUzytkownika() : void
++ wybierzOpcjeZMenuUzytkownika() : char
++ wybierzOpcjeZMenuGlownego() : char
 - podajDaneUzytkownika () : Uzytkownik
 - pobierzIdNowegoUzytkownika() : int
 - bool czyIstniejeLogin();</panel_attributes>

@@ -6,13 +6,6 @@ using namespace std;
 int main()
 {
     KsiazkaAdresowa ksiazka;
-    ksiazka.logowanieUzytkownika();
-    ksiazka.dodajAdresata();
-    ksiazka.wypiszWszystkichAdresatow();
-    ksiazka.zmianaHaslaZalogowanegoUzytkownika();
-    ksiazka.wyloguj();
-    ksiazka.logowanieUzytkownika();
-    ksiazka.wypiszWszystkichAdresatow();
 
     char wybor;
 
@@ -20,7 +13,7 @@ int main()
     {
         if (UzytkownikMenedzer::pobierzIdZalogowanegoUzytkownika() == 0)
         {
-            wybor = wybierzOpcjeZMenuGlownego();
+            wybor = ksiazka.wybierzOpcjeZMenuGlownego();
 
             switch (wybor)
             {
@@ -42,28 +35,28 @@ int main()
         else
         {
 
-            wybor = wybierzOpcjeZMenuUzytkownika();
+            wybor = ksiazka.wybierzOpcjeZMenuUzytkownika();
 
             switch (wybor)
             {
             case '1':
-                ksiazka.dodajAdresata()
+                ksiazka.dodajAdresata();
                 break;
             case '2':
-            //    wyszukajAdresatowPoImieniu(adresaci);
+                //    wyszukajAdresatowPoImieniu(adresaci);
                 break;
             case '3':
-        //        wyszukajAdresatowPoNazwisku(adresaci);
+                //        wyszukajAdresatowPoNazwisku(adresaci);
                 break;
             case '4':
                 ksiazka.wypiszWszystkichAdresatow();
                 break;
             case '5':
-            //    idUsunietegoAdresata = usunAdresata(adresaci);
-           //     idOstatniegoAdresata = podajIdOstatniegoAdresataPoUsunieciuWybranegoAdresata(idUsunietegoAdresata, idOstatniegoAdresata);
+                //    idUsunietegoAdresata = usunAdresata(adresaci);
+                //     idOstatniegoAdresata = podajIdOstatniegoAdresataPoUsunieciuWybranegoAdresata(idUsunietegoAdresata, idOstatniegoAdresata);
                 break;
             case '6':
-           //     edytujAdresata(adresaci);
+                //     edytujAdresata(adresaci);
                 break;
             case '7':
                 ksiazka.zmianaHaslaZalogowanegoUzytkownika();

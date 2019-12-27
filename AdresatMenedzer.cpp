@@ -27,25 +27,25 @@ Adresat AdresatMenedzer::podajDaneNowegoAdresata(int idZalogowanegoUzytkownika)
     adresat.ustawIdUzytkownika(idZalogowanegoUzytkownika);
 
     cout << "Podaj imie: ";
-    cin >> imie;
+    imie = MetodyPomocnicze::wczytajLinie();
     imie = MetodyPomocnicze::zamienPierwszaLitereNaDuzaAPozostaleNaMale(imie);
     adresat.ustawImie(imie);
 
     cout << "Podaj nazwisko: ";
-    cin >> nazwisko;
+    nazwisko = MetodyPomocnicze::wczytajLinie();
     nazwisko = MetodyPomocnicze::zamienPierwszaLitereNaDuzaAPozostaleNaMale(nazwisko);
     adresat.ustawNazwisko(nazwisko);
 
     cout << "Podaj numer telefonu: ";
-    cin >> numerTelefonu;
+    numerTelefonu = MetodyPomocnicze::wczytajLinie();
     adresat.ustawNumerTelefonu(numerTelefonu);
 
     cout << "Podaj email: ";
-    cin >> email;
+    email = MetodyPomocnicze::wczytajLinie();
     adresat.ustawEmail(email);
 
     cout << "Podaj adres: ";
-    cin >> adres;
+    adres = MetodyPomocnicze::wczytajLinie();
     adresat.ustawAdres(adres);
 
     return adresat;
@@ -58,20 +58,31 @@ void AdresatMenedzer::wczytajAdresatowZalogowanegoUzytkownikaZPliku()
 
 void AdresatMenedzer::wypiszWszystkichAdresatow()
 {
-    for(int i = 0; i<adresaci.size(); i++)
+    if(adresaci.empty() == true)
     {
-        cout << "ID: " << adresaci[i].pobierzIdAdresata() << endl;
-        cout << "Imie: " << adresaci[i].pobierzImie() << endl;
-        cout << "Nazwisko: " << adresaci[i].pobierzNazwisko() << endl;
-        cout << "Numer telefonu: " << adresaci[i].pobierzNumerTelefonu() << endl;
-        cout << "Email: " << adresaci[i].pobierzEmail() << endl;
-        cout << "Adres: " << adresaci[i].pobierzAdres() << endl << endl;
+        cout << "Ksiazka adresowa jest pusta." << endl;
+        system("pause");
+        return;
+    }
+    else
+    {
+        for(int i = 0; i<adresaci.size(); i++)
+        {
+            cout << "ID: " << adresaci[i].pobierzIdAdresata() << endl;
+            cout << "Imie: " << adresaci[i].pobierzImie() << endl;
+            cout << "Nazwisko: " << adresaci[i].pobierzNazwisko() << endl;
+            cout << "Numer telefonu: " << adresaci[i].pobierzNumerTelefonu() << endl;
+            cout << "Email: " << adresaci[i].pobierzEmail() << endl;
+            cout << "Adres: " << adresaci[i].pobierzAdres() << endl << endl;
+        }
+        system("pause");
     }
 }
 
 void AdresatMenedzer::wyloguj()
 {
     adresaci.clear();
+    UzytkownikMenedzer::ustawIdZalogowanegoUzytkownika(0);
     cout << "Zostales wylogowany." << endl;
     system("pause");
 }
