@@ -14,7 +14,7 @@
 - uzytkownikMenedzer : UzytkownikMenedzer
 - adresatMenedzer : AdresatMenedzer
 --
-KsiazkaAdresowa(nazwaPlikuZUzytkownikami:string,nazwaPlikuZAdresatami:string)
+KsiazkaAdresowa()
 + rejestracjaUzytkownika() : void
 + wypiszWszystkichUzytkownikow() : void
 + logowanieUzytkownika() : void
@@ -59,12 +59,12 @@ KsiazkaAdresowa(nazwaPlikuZUzytkownikami:string,nazwaPlikuZAdresatami:string)
 - idOstatniegoAdresata : int
 - PlikiZAdresatami plikiZAdresatami;
 --
-AdresatMenedzer(nazwaPlikuZAdresatami:string)
+AdresatMenedzer()
 + dodajAdresata() : void
-+ wczytajAdresatowZalogowanegoUzytkownikaZPliku : void
++ wczytajAdresatowZalogowanegoUzytkownikaZPliku() : void
 + wypiszWszystkichAdresatow() : void
 + wyloguj () : void
-- podajDaneNowegoAdresata(idZalogowanegoUzytkownika:int) : Adresat</panel_attributes>
+- podajDaneNowegoAdresata() : Adresat</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -80,12 +80,12 @@ AdresatMenedzer(nazwaPlikuZAdresatami:string)
 - nazwaPlikuZAdresatami : const string
 - adresaci : vector &lt;Adresat&gt;
 --
-PlikZUzytkownikami(string)
-+ dopiszAdresataDoPliku(adresat:Adresat) : void
-+ wczytajAdresatowZalogowanegoUzytkownikaZPliku(&amp;adresaci:vector &lt;Adresat&gt;) : int
-- pobierzIdUzytkownikaZDanychOddzielonychPionowymiKreskami(daneJednegoAdresataOddzielonePionowymiKreskami:string) : int
-- zamienDaneAdresataNaLinieZDanymiOddzielonymiPionowymiKreskami(adresat:Adresat) : string
-- pobierzIdAdresataZDanychOddzielonychPionowymiKreskami(daneJednegoAdresataOddzielonePionowymiKreskami:string) : int</panel_attributes>
+PlikZUzytkownikami()
++ dopiszAdresataDoPliku() : void
++ wczytajAdresatowZalogowanegoUzytkownikaZPliku() : int
+- pobierzIdUzytkownikaZDanychOddzielonychPionowymiKreskami() : int
+- zamienDaneAdresataNaLinieZDanymiOddzielonymiPionowymiKreskami() : string
+- pobierzIdAdresataZDanychOddzielonychPionowymiKreskami() : int</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -98,10 +98,10 @@ PlikZUzytkownikami(string)
     </coordinates>
     <panel_attributes>MetodyPomocnicze
 --
-+ konwerjsaIntNaString(liczba:int) : static string
-+ konwersjaStringNaInt(liczba:string) : static int
-+ zamienPierwszaLitereNaDuzaAPozostaleNaMale(tekst:string) : static string
-+ pobierzLiczbe(tekst:string,pozycjaZnaku:int) : static string</panel_attributes>
++ konwerjsaIntNaString() : static string
++ konwersjaStringNaInt() : static int
++ zamienPierwszaLitereNaDuzaAPozostaleNaMale() : static string
++ pobierzLiczbe() : static string</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -118,7 +118,7 @@ PlikZUzytkownikami(string)
 - uzytkownicy : vector&lt;Uzytkownik&gt;
 - plikiZUzytkownikami : PlikiZUzytkownikami
 --
-UzytkownikMenedzer(string) : 
+UzytkownikMenedzer() : 
 + wypiszWszystkichUzytkowników() : void
 + rejestracjaUzytkownika () : void
 + wczytajUzytkownikowZPliku() : void
@@ -126,7 +126,7 @@ UzytkownikMenedzer(string) :
 + zmianaHaslaZalogowanegoUzytkownika() : void
 - podajDaneUzytkownika () : Uzytkownik
 - pobierzIdNowegoUzytkownika() : int
-- bool czyIstniejeLogin(login:string);</panel_attributes>
+- bool czyIstniejeLogin();</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -142,14 +142,14 @@ UzytkownikMenedzer(string) :
 - nazwaPlikuZUzytkownikami : const string
 - uzytkownicy : vector &lt;Uzytkownik&gt;
 --
-PlikiZUzytkownikami(string)
-+ dopiszUzytkownikaDoPliku(uzytkownik:Uzytkownik) : void
-+ wczytajUzytkownikowZPliku: vector &lt;Uzytkownik&gt;
-+ zmianaHaslaZalogowanegoUzytkownika(idZalogowanegoUzytkownika:int) : vector &lt;Uzytkownik&gt;
-- czyPlikJestPusty(&amp;plikTekstowy:fstream) : bool
-- zamienDaneUzytkownikaNaLinieZDanymiOddzielonaPionowymiKreskami(uzytkownik:Uzytkownik) : string
-- zapiszWszystkichUzytkownikowDoPliku(&amp;uzytkownicy:vector &lt;Uzytkownik&gt;) : void
-- pobierzDaneUzytkownika(daneJednegoUzytkownikaOddzielonePionowymiKreskami:string) : Uzytkownik</panel_attributes>
+PlikiZUzytkownikami()
++ dopiszUzytkownikaDoPliku() : void
++ wczytajUzytkownikowZPliku() : vector &lt;Uzytkownik&gt;
++ zmianaHaslaZalogowanegoUzytkownika() : vector &lt;Uzytkownik&gt;
+- czyPlikJestPusty() : bool
+- zamienDaneUzytkownikaNaLinieZDanymiOddzielonaPionowymiKreskami() : string
+- zapiszWszystkichUzytkownikowDoPliku() : void
+- pobierzDaneUzytkownika() : Uzytkownik</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
