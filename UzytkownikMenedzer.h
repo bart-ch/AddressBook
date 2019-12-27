@@ -10,7 +10,6 @@
 #include "Uzytkownik.h"
 #include "PlikiZUzytkownikami.h"
 
-
 using namespace std;
 
 class UzytkownikMenedzer
@@ -30,6 +29,9 @@ public:
     int logowanieUzytkownika();
     void zmianaHaslaZalogowanegoUzytkownika();
     static int pobierzIdZalogowanegoUzytkownika();
+    static void ustawIdZalogowanegoUzytkownika(int noweId);
+    char wybierzOpcjeZMenuUzytkownika();
+    char wybierzOpcjeZMenuGlownego();
 };
 
 #endif

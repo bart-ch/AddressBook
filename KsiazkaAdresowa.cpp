@@ -43,4 +43,14 @@ void KsiazkaAdresowa::wyloguj()
     adresatMenedzer.wyloguj();
 }
 
+char KsiazkaAdresowa::wybierzOpcjeZMenuUzytkownika()
+{
+    uzytkownikMenedzer.wybierzOpcjeZMenuUzytkownika();
+}
+
+char KsiazkaAdresowa::wybierzOpcjeZMenuGlownego()
+{
+    uzytkownikMenedzer.wybierzOpcjeZMenuGlownego();
+}
+
 

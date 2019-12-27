@@ -22,6 +22,8 @@ public:
     void dodajAdresata();
     void wypiszWszystkichAdresatow();
     void wyloguj();
+    char wybierzOpcjeZMenuUzytkownika();
+    char wybierzOpcjeZMenuGlownego();
 
 };
 
