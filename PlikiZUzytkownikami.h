@@ -14,7 +14,7 @@ using namespace std;
 
 class PlikiZUzytkownikami
 {
-    const string nazwaPlikuZUzytkownikami;
+    const string NAZWA_PLIKU_Z_UZYTKOWNIKAMI;
     vector <Uzytkownik> uzytkownicy;
 
     bool czyPlikJestPusty(fstream &plikTekstowy);

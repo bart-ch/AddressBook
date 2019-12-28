@@ -34,7 +34,6 @@ int main()
         }
         else
         {
-
             wybor = ksiazka.wybierzOpcjeZMenuUzytkownika();
 
             switch (wybor)

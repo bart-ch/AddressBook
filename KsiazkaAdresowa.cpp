@@ -2,9 +2,14 @@
 
 KsiazkaAdresowa::KsiazkaAdresowa(string nazwaPlikuZUzytkownikami,string nazwaPlikuZAdresatami)
     : uzytkownikMenedzer(nazwaPlikuZUzytkownikami),
-      adresatMenedzer(nazwaPlikuZAdresatami)
+      NAZWA_PLIKU_Z_ADRESATAMI(nazwaPlikuZAdresatami)
 {
-    uzytkownikMenedzer.wczytajUzytkownikowZPliku();
+}
+
+KsiazkaAdresowa::~KsiazkaAdresowa()
+{
+    delete adresatMenedzer;
+    adresatMenedzer = NULL;
 }
 
 void KsiazkaAdresowa::rejestracjaUzytkownika()
@@ -20,7 +25,10 @@ void KsiazkaAdresowa::wypiszWszystkichUzytkownikow()
 void KsiazkaAdresowa::logowanieUzytkownika()
 {
     uzytkownikMenedzer.logowanieUzytkownika();
-    adresatMenedzer.wczytajAdresatowZalogowanegoUzytkownikaZPliku();
+    if(uzytkownikMenedzer.czyUzytkownikJestZalogowany())
+    {
+        adresatMenedzer = new AdresatMenedzer(NAZWA_PLIKU_Z_ADRESATAMI,uzytkownikMenedzer.pobierzIdZalogowanegoUzytkownika());
+    }
 }
 
 void KsiazkaAdresowa::zmianaHaslaZalogowanegoUzytkownika()
@@ -30,35 +38,72 @@ void KsiazkaAdresowa::zmianaHaslaZalogowanegoUzytkownika()
 
 void KsiazkaAdresowa::dodajAdresata()
 {
-    adresatMenedzer.dodajAdresata();
+    if(uzytkownikMenedzer.czyUzytkownikJestZalogowany())
+    {
+        adresatMenedzer->dodajAdresata();
+    }
 }
 
 void KsiazkaAdresowa::wypiszWszystkichAdresatow()
 {
-    adresatMenedzer.wypiszWszystkichAdresatow();
+    adresatMenedzer->wypiszWszystkichAdresatow();
 }
 
 void KsiazkaAdresowa::wyloguj()
 {
-    adresatMenedzer.wyloguj();
+    uzytkownikMenedzer.wyloguj();
+    delete adresatMenedzer;
+    adresatMenedzer = NULL;
 }
 
 char KsiazkaAdresowa::wybierzOpcjeZMenuUzytkownika()
 {
-    uzytkownikMenedzer.wybierzOpcjeZMenuUzytkownika();
+    char wybor;
+
+    system("cls");
+    cout << " >>> MENU UZYTKOWNIKA <<<" << endl;
+    cout << "---------------------------" << endl;
+    cout << "1. Dodaj adresata" << endl;
+    cout << "2. Wyszukaj po imieniu" << endl;
+    cout << "3. Wyszukaj po nazwisku" << endl;
+    cout << "4. Wyswietl adresatow" << endl;
+    cout << "5. Usun adresata" << endl;
+    cout << "6. Edytuj adresata" << endl;
+    cout << "---------------------------" << endl;
+    cout << "7. Zmien haslo" << endl;
+    cout << "8. Wyloguj sie" << endl;
+    cout << "---------------------------" << endl;
+    cout << "Twoj wybor: ";
+    wybor = MetodyPomocnicze::wczytajZnak();
+
+    return wybor;
 }
 
 char KsiazkaAdresowa::wybierzOpcjeZMenuGlownego()
 {
-    uzytkownikMenedzer.wybierzOpcjeZMenuGlownego();
+    char wybor;
+
+    system("cls");
+    cout << "    >>> MENU  GLOWNE <<<" << endl;
+    cout << "---------------------------" << endl;
+    cout << "1. Rejestracja" << endl;
+    cout << "2. Logowanie" << endl;
+    cout << "9. Koniec programu" << endl;
+    cout << "---------------------------" << endl;
+    cout << "Twoj wybor: ";
+    wybor = MetodyPomocnicze::wczytajZnak();
+
+    return wybor;
 }
 
 bool KsiazkaAdresowa::czyUzytkownikJestZalogowany()
 {
-    if(UzytkownikMenedzer::pobierzIdZalogowanegoUzytkownika() == 0)
-        return false;
-    else
+    if(uzytkownikMenedzer.czyUzytkownikJestZalogowany())
         return true;
+    else
+        return false;
 }
+
+
 
 

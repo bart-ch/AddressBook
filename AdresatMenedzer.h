@@ -7,19 +7,16 @@
 
 class AdresatMenedzer
 {
-
+    const int ID_ZALOGOWANEGO_UZYTKOWNIKA;
     vector <Adresat> adresaci;
     PlikiZAdresatami plikiZAdresatami;
-    int idOstatniegoAdresata;
-    Adresat podajDaneNowegoAdresata(int idZalogowanegoUzytkownika);
+    Adresat podajDaneNowegoAdresata();
 
 public:
 
-    AdresatMenedzer(string nazwaPlikuZAdresatami);
+    AdresatMenedzer(string nazwaPlikuZAdresatami, int idZalogowanegoUzytkownika);
     void dodajAdresata();
-    void wczytajAdresatowZalogowanegoUzytkownikaZPliku();
     void wypiszWszystkichAdresatow();
-    void wyloguj();
 };
 
 #endif // ADRESATMENEDZER_H
