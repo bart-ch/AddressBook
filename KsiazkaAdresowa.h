@@ -27,6 +27,7 @@ public:
     char wybierzOpcjeZMenuUzytkownika();
     char wybierzOpcjeZMenuGlownego();
     bool czyUzytkownikJestZalogowany();
+    void usunaAdresata();
 
 };
 
