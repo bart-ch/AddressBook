@@ -104,6 +104,16 @@ bool KsiazkaAdresowa::czyUzytkownikJestZalogowany()
         return false;
 }
 
+void KsiazkaAdresowa::usunaAdresata()
+{
+     adresatMenedzer->usunAdresata();
+}
+
+void KsiazkaAdresowa::edytujAdresata()
+{
+    adresatMenedzer->edytujAdresata();
+}
+
 
 
 

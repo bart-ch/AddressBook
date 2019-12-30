@@ -22,11 +22,19 @@ class PlikiZAdresatami
     Adresat pobierzDaneAdresata(string daneAdresataOddzielonePionowymiKreskami);
     int pobierzIdAdresataZDanychOddzielonychPionowymiKreskami(string daneJednegoAdresataOddzielonePionowymiKreskami);
 
+
+    void usunPlik(string nazwaPlikuZRozszerzeniem);
+    void zmienNazwePliku(string staraNazwa, string nowaNazwa);
+    int podajIdOstatniegoAdresataPoUsunieciuWybranegoAdresata(int idUsuwanegoAdresata);
+    int pobierzZPlikuIdOstatniegoAdresata();
+
 public:
     PlikiZAdresatami(string);
     bool dopiszAdresataDoPliku(Adresat adresat);
     vector <Adresat> wczytajAdresatowZalogowanegoUzytkownikaZPliku(int idZalogowanegoUzytkownika);
     int pobierzIdOstatniegoAdresata();
+    int usunWybranegoAdresataZPliku(int idUsuwanegoAdresata);
+    void zaktualizujDaneEdytowanegoAdresata(Adresat adresat);
 };
 
 

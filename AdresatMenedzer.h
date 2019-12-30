@@ -12,11 +12,18 @@ class AdresatMenedzer
     PlikiZAdresatami plikiZAdresatami;
     Adresat podajDaneNowegoAdresata();
 
+
+    int podajIdWybranegoAdresata();
+    char wybierzOpcjeZMenuEdycja();
+
 public:
 
     AdresatMenedzer(string nazwaPlikuZAdresatami, int idZalogowanegoUzytkownika);
     void dodajAdresata();
     void wypiszWszystkichAdresatow();
+
+    int usunAdresata();
+    void edytujAdresata();
 };
 
 #endif // ADRESATMENEDZER_H

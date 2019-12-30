@@ -51,11 +51,10 @@ int main()
                 ksiazka.wypiszWszystkichAdresatow();
                 break;
             case '5':
-                //    idUsunietegoAdresata = usunAdresata(adresaci);
-                //     idOstatniegoAdresata = podajIdOstatniegoAdresataPoUsunieciuWybranegoAdresata(idUsunietegoAdresata, idOstatniegoAdresata);
+                ksiazka.usunaAdresata();
                 break;
             case '6':
-                //     edytujAdresata(adresaci);
+                ksiazka.edytujAdresata();
                 break;
             case '7':
                 ksiazka.zmianaHaslaZalogowanegoUzytkownika();
