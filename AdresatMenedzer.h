@@ -15,6 +15,8 @@ class AdresatMenedzer
 
     int podajIdWybranegoAdresata();
     char wybierzOpcjeZMenuEdycja();
+    void wyswietlDaneAdresata(Adresat adresat);
+    void wyswietlIloscWyszukanychAdresatow(int iloscAdresatow);
 
 public:
 
@@ -24,6 +26,8 @@ public:
 
     int usunAdresata();
     void edytujAdresata();
+    void wyszukajAdresatowPoImieniu();
+    void wyszukajAdresatowPoNazwisku();
 };
 
 #endif // ADRESATMENEDZER_H
