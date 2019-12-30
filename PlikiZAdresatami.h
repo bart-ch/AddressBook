@@ -34,6 +34,7 @@ public:
     vector <Adresat> wczytajAdresatowZalogowanegoUzytkownikaZPliku(int idZalogowanegoUzytkownika);
     int pobierzIdOstatniegoAdresata();
     int usunWybranegoAdresataZPliku(int idUsuwanegoAdresata);
+    void zaktualizujDaneEdytowanegoAdresata(Adresat adresat);
 };
 
 
