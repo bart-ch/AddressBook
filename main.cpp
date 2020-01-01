@@ -42,10 +42,10 @@ int main()
                 ksiazka.dodajAdresata();
                 break;
             case '2':
-                //    wyszukajAdresatowPoImieniu(adresaci);
+                ksiazka.wyszukajAdresatowPoImieniu();
                 break;
             case '3':
-                //        wyszukajAdresatowPoNazwisku(adresaci);
+                ksiazka.wyszukajAdresatowPoNazwisku();
                 break;
             case '4':
                 ksiazka.wypiszWszystkichAdresatow();

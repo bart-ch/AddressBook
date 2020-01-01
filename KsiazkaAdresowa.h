@@ -29,6 +29,8 @@ public:
     bool czyUzytkownikJestZalogowany();
     void usunaAdresata();
     void edytujAdresata();
+    void wyszukajAdresatowPoImieniu();
+    void wyszukajAdresatowPoNazwisku();
 
 };
 
