@@ -13,7 +13,6 @@ using namespace std;
 
 class PlikiZAdresatami :public PlikTekstowy
 {
-    const string NAZWA_PLIKU_Z_ADRESATAMI;
     const string NAZWA_PLIKU_TYMCZASOWEGO_Z_ADRESATAMI;
     int idOstatniegoAdresata;
 
@@ -21,8 +20,6 @@ class PlikiZAdresatami :public PlikTekstowy
     int pobierzIdUzytkownikaZDanychOddzielonychPionowymiKreskami(string daneJednegoAdresataOddzielonePionowymiKreskami);
     Adresat pobierzDaneAdresata(string daneAdresataOddzielonePionowymiKreskami);
     int pobierzIdAdresataZDanychOddzielonychPionowymiKreskami(string daneJednegoAdresataOddzielonePionowymiKreskami);
-
-
     void usunPlik(string nazwaPlikuZRozszerzeniem);
     void zmienNazwePliku(string staraNazwa, string nowaNazwa);
     int podajIdOstatniegoAdresataPoUsunieciuWybranegoAdresata(int idUsuwanegoAdresata);
@@ -36,7 +33,5 @@ public:
     int usunWybranegoAdresataZPliku(int idUsuwanegoAdresata);
     void zaktualizujDaneEdytowanegoAdresata(Adresat adresat);
 };
-
-
 
 #endif

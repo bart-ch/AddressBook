@@ -21,6 +21,7 @@ class UzytkownikMenedzer
     Uzytkownik podajDaneNowegoUzytkownika();
     int pobierzIdNowegoUzytkownika();
     bool czyIstniejeLogin(string login);
+
 public:
     UzytkownikMenedzer(string);
     void rejestracjaUzytkownika();

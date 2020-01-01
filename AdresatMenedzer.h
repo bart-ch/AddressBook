@@ -10,9 +10,8 @@ class AdresatMenedzer
     const int ID_ZALOGOWANEGO_UZYTKOWNIKA;
     vector <Adresat> adresaci;
     PlikiZAdresatami plikiZAdresatami;
+
     Adresat podajDaneNowegoAdresata();
-
-
     int podajIdWybranegoAdresata();
     char wybierzOpcjeZMenuEdycja();
     void wyswietlDaneAdresata(Adresat adresat);
@@ -23,7 +22,6 @@ public:
     AdresatMenedzer(string nazwaPlikuZAdresatami, string nazwaPlikuTymczasowegoZAdresatami, int idZalogowanegoUzytkownika);
     void dodajAdresata();
     void wypiszWszystkichAdresatow();
-
     int usunAdresata();
     void edytujAdresata();
     void wyszukajAdresatowPoImieniu();

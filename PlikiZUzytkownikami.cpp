@@ -112,12 +112,12 @@ vector <Uzytkownik> PlikiZUzytkownikami::zmianaHaslaZalogowanegoUzytkownika(int 
             system("pause");
         }
     }
-    zapiszWszystkichUzytkownikowDoPliku(uzytkownicy);
+    zapiszWszystkichUzytkownikowDoPliku();
 
     return uzytkownicy;
 }
 
-void PlikiZUzytkownikami::zapiszWszystkichUzytkownikowDoPliku(vector <Uzytkownik> &uzytkownicy)
+void PlikiZUzytkownikami::zapiszWszystkichUzytkownikowDoPliku()
 {
     fstream plikTekstowy;
     string liniaZDanymiUzytkownika = "";

@@ -19,7 +19,7 @@ class PlikiZUzytkownikami :public PlikTekstowy
 
     string zamienDaneUzytkownikaNaLinieZDanymiOddzielonaPionowymiKreskami(Uzytkownik uzytkownik);
     Uzytkownik pobierzDaneUzytkownika(string daneJednegoUzytkownikaOddzielonePionowymiKreskami);
-    void zapiszWszystkichUzytkownikowDoPliku(vector <Uzytkownik> &uzytkownicy);
+    void zapiszWszystkichUzytkownikowDoPliku();
 
 public:
     PlikiZUzytkownikami(string);
