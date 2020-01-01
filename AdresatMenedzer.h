@@ -20,7 +20,7 @@ class AdresatMenedzer
 
 public:
 
-    AdresatMenedzer(string nazwaPlikuZAdresatami, int idZalogowanegoUzytkownika);
+    AdresatMenedzer(string nazwaPlikuZAdresatami, string nazwaPlikuTymczasowegoZAdresatami, int idZalogowanegoUzytkownika);
     void dodajAdresata();
     void wypiszWszystkichAdresatow();
 

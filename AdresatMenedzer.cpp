@@ -1,7 +1,7 @@
 #include "AdresatMenedzer.h"
 
-AdresatMenedzer::AdresatMenedzer(string nazwaPlikuZAdresatami, int idZalogowanegoUzytkownika)
-    : plikiZAdresatami(nazwaPlikuZAdresatami),
+AdresatMenedzer::AdresatMenedzer(string nazwaPlikuZAdresatami, string nazwaPlikuTymczasowegoZAdresatami, int idZalogowanegoUzytkownika)
+    : plikiZAdresatami(nazwaPlikuZAdresatami,nazwaPlikuTymczasowegoZAdresatami),
       ID_ZALOGOWANEGO_UZYTKOWNIKA(idZalogowanegoUzytkownika)
 {
     adresaci = plikiZAdresatami.wczytajAdresatowZalogowanegoUzytkownikaZPliku(ID_ZALOGOWANEGO_UZYTKOWNIKA);

@@ -1,8 +1,9 @@
 #include "KsiazkaAdresowa.h"
 
-KsiazkaAdresowa::KsiazkaAdresowa(string nazwaPlikuZUzytkownikami,string nazwaPlikuZAdresatami)
+KsiazkaAdresowa::KsiazkaAdresowa(string nazwaPlikuZUzytkownikami,string nazwaPlikuZAdresatami,string nazwaPlikuTymczasowegoZAdresatami)
     : uzytkownikMenedzer(nazwaPlikuZUzytkownikami),
-      NAZWA_PLIKU_Z_ADRESATAMI(nazwaPlikuZAdresatami)
+      NAZWA_PLIKU_Z_ADRESATAMI(nazwaPlikuZAdresatami),
+    NAZWA_PLIKU_TYMCZASOWEGO_Z_ADRESATAMI(nazwaPlikuTymczasowegoZAdresatami)
 {
 }
 
@@ -27,7 +28,7 @@ void KsiazkaAdresowa::logowanieUzytkownika()
     uzytkownikMenedzer.logowanieUzytkownika();
     if(uzytkownikMenedzer.czyUzytkownikJestZalogowany())
     {
-        adresatMenedzer = new AdresatMenedzer(NAZWA_PLIKU_Z_ADRESATAMI,uzytkownikMenedzer.pobierzIdZalogowanegoUzytkownika());
+        adresatMenedzer = new AdresatMenedzer(NAZWA_PLIKU_Z_ADRESATAMI,NAZWA_PLIKU_TYMCZASOWEGO_Z_ADRESATAMI,uzytkownikMenedzer.pobierzIdZalogowanegoUzytkownika());
     }
 }
 
