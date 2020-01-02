@@ -45,6 +45,7 @@ vector <Uzytkownik> PlikiZUzytkownikami::wczytajUzytkownikowZPliku()
 {
     Uzytkownik uzytkownik;
     fstream plikTekstowy;
+    vector <Uzytkownik> uzytkownicy;
 
     string daneJednegoUzytkownikaOddzielonePionowymiKreskami = "";
 
@@ -97,7 +98,7 @@ Uzytkownik PlikiZUzytkownikami::pobierzDaneUzytkownika(string daneJednegoUzytkow
     return uzytkownik;
 }
 
-vector <Uzytkownik> PlikiZUzytkownikami::zmianaHaslaZalogowanegoUzytkownika(int idZalogowanegoUzytkownika)
+vector <Uzytkownik> PlikiZUzytkownikami::zmianaHaslaZalogowanegoUzytkownika(int idZalogowanegoUzytkownika,vector <Uzytkownik> uzytkownicy)
 {
     string noweHaslo = "";
     cout << "Podaj nowe haslo: ";
@@ -112,27 +113,28 @@ vector <Uzytkownik> PlikiZUzytkownikami::zmianaHaslaZalogowanegoUzytkownika(int 
             system("pause");
         }
     }
-    zapiszWszystkichUzytkownikowDoPliku();
+    zapiszWszystkichUzytkownikowDoPliku(uzytkownicy);
 
     return uzytkownicy;
 }
 
-void PlikiZUzytkownikami::zapiszWszystkichUzytkownikowDoPliku()
+void PlikiZUzytkownikami::zapiszWszystkichUzytkownikowDoPliku(vector <Uzytkownik> uzytkownicy)
 {
     fstream plikTekstowy;
     string liniaZDanymiUzytkownika = "";
+    vector <Uzytkownik>::iterator itrKoniec = --uzytkownicy.end();
 
     plikTekstowy.open(pobierzNazwePliku().c_str(), ios::out);
 
     if (plikTekstowy.good() == true)
     {
-        for (int i = 0; i < uzytkownicy.size(); i++)
+        for (vector <Uzytkownik>::iterator itr = uzytkownicy.begin(); itr != uzytkownicy.end(); itr++)
         {
-            liniaZDanymiUzytkownika = zamienDaneUzytkownikaNaLinieZDanymiOddzielonaPionowymiKreskami(uzytkownicy[i]);
+            liniaZDanymiUzytkownika = zamienDaneUzytkownikaNaLinieZDanymiOddzielonaPionowymiKreskami(*itr);
 
-            if (i == uzytkownicy.size() - 1)
+            if (itr == itrKoniec)
             {
-                plikTekstowy << liniaZDanymiUzytkownika;
+               plikTekstowy << liniaZDanymiUzytkownika;
             }
             else
             {

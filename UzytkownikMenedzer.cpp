@@ -74,7 +74,7 @@ void UzytkownikMenedzer::wypiszWszystkichUzytkownikow()
 
 void UzytkownikMenedzer::zmianaHaslaZalogowanegoUzytkownika()
 {
-    uzytkownicy = plikZUzytkownikami.zmianaHaslaZalogowanegoUzytkownika(idZalogowanegoUzytkownika);
+    uzytkownicy = plikZUzytkownikami.zmianaHaslaZalogowanegoUzytkownika(idZalogowanegoUzytkownika,uzytkownicy);
 }
 
 int UzytkownikMenedzer::logowanieUzytkownika()

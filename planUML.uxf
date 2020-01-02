@@ -172,7 +172,6 @@ UzytkownikMenedzer() :
     <panel_attributes>PlikZUzytkownikami
 --
 - NAZWA_PLIKU_Z_UZYTKOWNIKAMI : string
-- uzytkownicy : vector &lt;Uzytkownik&gt;
 --
 PlikiZUzytkownikami()
 + dopiszUzytkownikaDoPliku() : void
