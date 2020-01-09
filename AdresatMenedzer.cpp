@@ -30,8 +30,8 @@ Adresat AdresatMenedzer::podajDaneNowegoAdresata()
     Adresat adresat;
     string imie,nazwisko,numerTelefonu,email,adres;
 
-    adresat.ustawIdAdresata(plikiZAdresatami.pobierzIdOstatniegoAdresata() + 1);
-    adresat.ustawIdUzytkownika(ID_ZALOGOWANEGO_UZYTKOWNIKA);
+    adresat.setRecipientId(plikiZAdresatami.pobierzIdOstatniegoAdresata() + 1);
+    adresat.setUserId(ID_ZALOGOWANEGO_UZYTKOWNIKA);
 
     cout << "Podaj imie: ";
     imie = MetodyPomocnicze::wczytajLinie();
@@ -50,11 +50,11 @@ Adresat AdresatMenedzer::podajDaneNowegoAdresata()
     cout << "Podaj adres: ";
     adres = MetodyPomocnicze::wczytajLinie();
 
-    adresat.ustawImie(imie);
-    adresat.ustawNazwisko(nazwisko);
-    adresat.ustawNumerTelefonu(numerTelefonu);
-    adresat.ustawEmail(email);
-    adresat.ustawAdres(adres);
+    adresat.setName(imie);
+    adresat.setSurname(nazwisko);
+    adresat.setTelephone(numerTelefonu);
+    adresat.setEmail(email);
+    adresat.setAddress(adres);
 
     return adresat;
 }
@@ -71,12 +71,12 @@ void AdresatMenedzer::wypiszWszystkichAdresatow()
     {
         for(int i = 0; i<adresaci.size(); i++)
         {
-            cout << "ID: " << adresaci[i].pobierzIdAdresata() << endl;
-            cout << "Imie: " << adresaci[i].pobierzImie() << endl;
-            cout << "Nazwisko: " << adresaci[i].pobierzNazwisko() << endl;
-            cout << "Numer telefonu: " << adresaci[i].pobierzNumerTelefonu() << endl;
-            cout << "Email: " << adresaci[i].pobierzEmail() << endl;
-            cout << "Adres: " << adresaci[i].pobierzAdres() << endl << endl;
+            cout << "ID: " << adresaci[i].getRecipientId() << endl;
+            cout << "Imie: " << adresaci[i].getName() << endl;
+            cout << "Nazwisko: " << adresaci[i].getSurname() << endl;
+            cout << "Numer telefonu: " << adresaci[i].getTelephone() << endl;
+            cout << "Email: " << adresaci[i].getEmail() << endl;
+            cout << "Adres: " << adresaci[i].getAddress() << endl << endl;
         }
         system("pause");
     }
@@ -96,7 +96,7 @@ int AdresatMenedzer::usunAdresata()
 
     for (int i = 0; i < adresaci.size(); i++)
     {
-        if (adresaci[i].pobierzIdAdresata() == idUsuwanegoAdresata)
+        if (adresaci[i].getRecipientId() == idUsuwanegoAdresata)
         {
             czyIstniejeAdresat = true;
             cout << endl << "Potwierdz naciskajac klawisz 't': ";
@@ -148,7 +148,7 @@ void AdresatMenedzer::edytujAdresata()
 
     for (int i = 0; i < adresaci.size(); i++)
     {
-        if (adresaci[i].pobierzIdAdresata() == idEdytowanegoAdresata)
+        if (adresaci[i].getRecipientId() == idEdytowanegoAdresata)
         {
             czyIstniejeAdresat = true;
             wybor = wybierzOpcjeZMenuEdycja();
@@ -159,32 +159,32 @@ void AdresatMenedzer::edytujAdresata()
                 cout << "Podaj nowe imie: ";
                 nowaDana = MetodyPomocnicze::wczytajLinie();
                 nowaDana = MetodyPomocnicze::zamienPierwszaLitereNaDuzaAPozostaleNaMale(nowaDana);
-                adresaci[i].ustawImie(nowaDana);
+                adresaci[i].setName(nowaDana);
                 plikiZAdresatami.zaktualizujDaneEdytowanegoAdresata(adresaci[i]);
                 break;
             case '2':
                 cout << "Podaj nowe nazwisko: ";
                 nowaDana = MetodyPomocnicze::wczytajLinie();
                 nowaDana = MetodyPomocnicze::zamienPierwszaLitereNaDuzaAPozostaleNaMale(nowaDana);
-                adresaci[i].ustawNazwisko(nowaDana);
+                adresaci[i].setSurname(nowaDana);
                 plikiZAdresatami.zaktualizujDaneEdytowanegoAdresata(adresaci[i]);
                 break;
             case '3':
                 cout << "Podaj nowy numer telefonu: ";
                 nowaDana = MetodyPomocnicze::wczytajLinie();
-                adresaci[i].ustawNumerTelefonu(nowaDana);
+                adresaci[i].setTelephone(nowaDana);
                 plikiZAdresatami.zaktualizujDaneEdytowanegoAdresata(adresaci[i]);
                 break;
             case '4':
                 cout << "Podaj nowy email: ";
                 nowaDana = MetodyPomocnicze::wczytajLinie();
-                adresaci[i].ustawEmail(nowaDana);
+                adresaci[i].setEmail(nowaDana);
                 plikiZAdresatami.zaktualizujDaneEdytowanegoAdresata(adresaci[i]);
                 break;
             case '5':
                 cout << "Podaj nowy adres zamieszkania: ";
                 nowaDana = MetodyPomocnicze::wczytajLinie();
-                adresaci[i].ustawAdres(nowaDana);
+                adresaci[i].setAddress(nowaDana);
                 plikiZAdresatami.zaktualizujDaneEdytowanegoAdresata(adresaci[i]);
                 break;
             case '6':
@@ -238,7 +238,7 @@ void AdresatMenedzer::wyszukajAdresatowPoImieniu()
 
         for (vector <Adresat>::iterator  itr = adresaci.begin(); itr != adresaci.end(); itr++)
         {
-            if (itr -> pobierzImie() == imiePoszukiwanegoAdresata)
+            if (itr -> getName() == imiePoszukiwanegoAdresata)
             {
                 wyswietlDaneAdresata(*itr);
                 iloscAdresatow++;
@@ -256,12 +256,12 @@ void AdresatMenedzer::wyszukajAdresatowPoImieniu()
 
 void AdresatMenedzer::wyswietlDaneAdresata(Adresat adresat)
 {
-    cout << endl << "Id:                 " << adresat.pobierzIdAdresata() << endl;
-    cout << "Imie:               " << adresat.pobierzImie() << endl;
-    cout << "Nazwisko:           " << adresat.pobierzNazwisko() << endl;
-    cout << "Numer telefonu:     " << adresat.pobierzNumerTelefonu() << endl;
-    cout << "Email:              " << adresat.pobierzEmail() << endl;
-    cout << "Adres:              " << adresat.pobierzAdres() << endl;
+    cout << endl << "Id:                 " << adresat.getRecipientId() << endl;
+    cout << "Imie:               " << adresat.getName() << endl;
+    cout << "Nazwisko:           " << adresat.getSurname() << endl;
+    cout << "Numer telefonu:     " << adresat.getTelephone() << endl;
+    cout << "Email:              " << adresat.getEmail() << endl;
+    cout << "Adres:              " << adresat.getAddress() << endl;
 }
 
 void AdresatMenedzer::wyswietlIloscWyszukanychAdresatow(int iloscAdresatow)
@@ -288,7 +288,7 @@ void AdresatMenedzer::wyszukajAdresatowPoNazwisku()
 
         for (vector <Adresat>::iterator itr = adresaci.begin(); itr != adresaci.end(); itr++)
         {
-            if (itr -> pobierzNazwisko() == nazwiskoPoszukiwanegoAdresata)
+            if (itr -> getSurname() == nazwiskoPoszukiwanegoAdresata)
             {
                 wyswietlDaneAdresata(*itr);
                 iloscAdresatow++;

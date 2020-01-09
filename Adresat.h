@@ -7,25 +7,25 @@ using namespace std;
 
 class Adresat
 {
-    int id, idUzytkownika;
-    string imie, nazwisko, numerTelefonu, email, adres;
+    int id, userId;
+    string name, surname, telephone, email, address;
 
 public:
-    void ustawIdAdresata(int noweId);
-    void ustawIdUzytkownika(int noweId);
-    void ustawImie(string noweImie);
-    void ustawNazwisko(string noweNazwisko);
-    void ustawNumerTelefonu(string nowyNrTelefonu);
-    void ustawEmail(string nowyEmail);
-    void ustawAdres(string nowyAdres);
+    void setRecipientId(int id);
+    void setUserId(int userId);
+    void setName(string name);
+    void setSurname(string surname);
+    void setTelephone(string telephone);
+    void setEmail(string email);
+    void setAddress(string address);
 
-    int pobierzIdAdresata();
-    int pobierzidUzytkownika();
-    string pobierzImie();
-    string pobierzNazwisko();
-    string pobierzNumerTelefonu();
-    string pobierzEmail();
-    string pobierzAdres();
+    int getRecipientId();
+    int getUserId();
+    string getName();
+    string getSurname();
+    string getTelephone();
+    string getEmail();
+    string getAddress();
 };
 
 #endif // ADRESAT_H

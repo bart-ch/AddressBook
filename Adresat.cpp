@@ -1,61 +1,61 @@
 #include "Adresat.h"
 
-void Adresat::ustawIdAdresata(int noweId)
+void Adresat::setRecipientId(int id)
 {
-    id = noweId;
+    this->id = id;
 }
 
-void Adresat::ustawIdUzytkownika(int noweId)
+void Adresat::setUserId(int userId)
 {
-    idUzytkownika = noweId;
+    this->userId = userId;
 }
 
-void Adresat::ustawImie(string noweImie)
+void Adresat::setName(string name)
 {
-    imie = noweImie;
+    this->name = name;
 }
-void Adresat::ustawNazwisko(string noweNazwisko)
+void Adresat::setSurname(string surname)
 {
-    nazwisko = noweNazwisko;
+    this->surname = surname;
 }
-void Adresat::ustawNumerTelefonu(string nowyNrTelefonu)
+void Adresat::setTelephone(string telephone)
 {
-    numerTelefonu = nowyNrTelefonu;
+    this->telephone = telephone;
 }
-void Adresat::ustawEmail(string nowyEmail)
+void Adresat::setEmail(string email)
 {
-    email = nowyEmail;
+    this->email = email;
 }
-void Adresat::ustawAdres(string nowyAdres)
+void Adresat::setAddress(string address)
 {
-    adres = nowyAdres;
+    this->address = address;
 }
 
-int Adresat::pobierzIdAdresata()
+int Adresat::getRecipientId()
 {
     return id;
 }
-int Adresat::pobierzidUzytkownika()
+int Adresat::getUserId()
 {
-    return idUzytkownika;
+    return userId;
 }
-string Adresat::pobierzImie()
+string Adresat::getName()
 {
-    return imie;
+    return name;
 }
-string Adresat::pobierzNazwisko()
+string Adresat::getSurname()
 {
-    return nazwisko;
+    return surname;
 }
-string Adresat::pobierzNumerTelefonu()
+string Adresat::getTelephone()
 {
-    return numerTelefonu;
+    return telephone;
 }
-string Adresat::pobierzEmail()
+string Adresat::getEmail()
 {
     return email;
 }
-string Adresat::pobierzAdres()
+string Adresat::getAddress()
 {
-    return adres;
+    return address;
 }

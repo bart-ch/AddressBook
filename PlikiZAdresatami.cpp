@@ -38,13 +38,13 @@ string PlikiZAdresatami::zamienDaneAdresataNaLinieZDanymiOddzielonymiPionowymiKr
 {
     string liniaZDanymiAdresata = "";
 
-    liniaZDanymiAdresata += MetodyPomocnicze::konwerjsaIntNaString(adresat.pobierzIdAdresata()) + '|';
-    liniaZDanymiAdresata += MetodyPomocnicze::konwerjsaIntNaString(adresat.pobierzidUzytkownika()) + '|';
-    liniaZDanymiAdresata += adresat.pobierzImie() + '|';
-    liniaZDanymiAdresata += adresat.pobierzNazwisko() + '|';
-    liniaZDanymiAdresata += adresat.pobierzNumerTelefonu() + '|';
-    liniaZDanymiAdresata += adresat.pobierzEmail() + '|';
-    liniaZDanymiAdresata += adresat.pobierzAdres() + '|';
+    liniaZDanymiAdresata += MetodyPomocnicze::konwerjsaIntNaString(adresat.getRecipientId()) + '|';
+    liniaZDanymiAdresata += MetodyPomocnicze::konwerjsaIntNaString(adresat.getUserId()) + '|';
+    liniaZDanymiAdresata += adresat.getName() + '|';
+    liniaZDanymiAdresata += adresat.getSurname() + '|';
+    liniaZDanymiAdresata += adresat.getTelephone() + '|';
+    liniaZDanymiAdresata += adresat.getEmail() + '|';
+    liniaZDanymiAdresata += adresat.getAddress() + '|';
 
     return liniaZDanymiAdresata;
 }
@@ -115,25 +115,25 @@ Adresat PlikiZAdresatami::pobierzDaneAdresata(string daneAdresataOddzielonePiono
             switch(numerPojedynczejDanejAdresata)
             {
             case 1:
-                adresat.ustawIdAdresata(atoi(pojedynczaDanaAdresata.c_str()));
+                adresat.setRecipientId(atoi(pojedynczaDanaAdresata.c_str()));
                 break;
             case 2:
-                adresat.ustawIdUzytkownika(atoi(pojedynczaDanaAdresata.c_str()));
+                adresat.setUserId(atoi(pojedynczaDanaAdresata.c_str()));
                 break;
             case 3:
-                adresat.ustawImie(pojedynczaDanaAdresata);
+                adresat.setName(pojedynczaDanaAdresata);
                 break;
             case 4:
-                adresat.ustawNazwisko(pojedynczaDanaAdresata);
+                adresat.setSurname(pojedynczaDanaAdresata);
                 break;
             case 5:
-                adresat.ustawNumerTelefonu(pojedynczaDanaAdresata);
+                adresat.setTelephone(pojedynczaDanaAdresata);
                 break;
             case 6:
-                adresat.ustawEmail(pojedynczaDanaAdresata);
+                adresat.setEmail(pojedynczaDanaAdresata);
                 break;
             case 7:
-                adresat.ustawAdres(pojedynczaDanaAdresata);
+                adresat.setAddress(pojedynczaDanaAdresata);
                 break;
             }
             pojedynczaDanaAdresata = "";
@@ -251,13 +251,13 @@ void PlikiZAdresatami::zaktualizujDaneEdytowanegoAdresata(Adresat adresat)
     odczytywanyPlikTekstowy.open(pobierzNazwePliku().c_str(), ios::in);
     tymczasowyPlikTekstowy.open(NAZWA_PLIKU_TYMCZASOWEGO_Z_ADRESATAMI.c_str(), ios::out | ios::app);
 
-    if (odczytywanyPlikTekstowy.good() == true && adresat.pobierzIdAdresata() != 0)
+    if (odczytywanyPlikTekstowy.good() == true && adresat.getRecipientId() != 0)
     {
         while (getline(odczytywanyPlikTekstowy, daneJednegoAdresataOddzielonePionowymiKreskami))
         {
             wczytanaLinia = daneJednegoAdresataOddzielonePionowymiKreskami;
 
-            if (adresat.pobierzIdAdresata() == pobierzIdAdresataZDanychOddzielonychPionowymiKreskami(daneJednegoAdresataOddzielonePionowymiKreskami))
+            if (adresat.getRecipientId() == pobierzIdAdresataZDanychOddzielonychPionowymiKreskami(daneJednegoAdresataOddzielonePionowymiKreskami))
             {
                 liniaZDanymiAdresataOddzielonePionowymiKreskami = zamienDaneAdresataNaLinieZDanymiOddzielonymiPionowymiKreskami(adresat);
 
