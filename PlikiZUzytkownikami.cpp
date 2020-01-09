@@ -34,9 +34,9 @@ string PlikiZUzytkownikami::zamienDaneUzytkownikaNaLinieZDanymiOddzielonaPionowy
 {
     string liniaZDanymiUzytkownika = "";
 
-    liniaZDanymiUzytkownika += MetodyPomocnicze::konwerjsaIntNaString(uzytkownik.pobierzId())+ '|';
-    liniaZDanymiUzytkownika += uzytkownik.pobierzLogin() + '|';
-    liniaZDanymiUzytkownika += uzytkownik.pobierzHaslo() + '|';
+    liniaZDanymiUzytkownika += MetodyPomocnicze::konwerjsaIntNaString(uzytkownik.getId())+ '|';
+    liniaZDanymiUzytkownika += uzytkownik.getLogin() + '|';
+    liniaZDanymiUzytkownika += uzytkownik.getPassword() + '|';
 
     return liniaZDanymiUzytkownika;
 }
@@ -82,13 +82,13 @@ Uzytkownik PlikiZUzytkownikami::pobierzDaneUzytkownika(string daneJednegoUzytkow
             switch(numerPojedynczejDanejUzytkownika)
             {
             case 1:
-                uzytkownik.ustawId(atoi(pojedynczaDanaUzytkownika.c_str()));
+                uzytkownik.setId(atoi(pojedynczaDanaUzytkownika.c_str()));
                 break;
             case 2:
-                uzytkownik.ustawLogin(pojedynczaDanaUzytkownika);
+                uzytkownik.setLogin(pojedynczaDanaUzytkownika);
                 break;
             case 3:
-                uzytkownik.ustawHaslo(pojedynczaDanaUzytkownika);
+                uzytkownik.setPassword(pojedynczaDanaUzytkownika);
                 break;
             }
             pojedynczaDanaUzytkownika = "";
@@ -106,9 +106,9 @@ vector <Uzytkownik> PlikiZUzytkownikami::zmianaHaslaZalogowanegoUzytkownika(int 
 
     for (int i = 0; i < uzytkownicy.size(); i++)
     {
-        if (uzytkownicy[i].pobierzId() == idZalogowanegoUzytkownika)
+        if (uzytkownicy[i].getId() == idZalogowanegoUzytkownika)
         {
-            uzytkownicy[i].ustawHaslo(noweHaslo);
+            uzytkownicy[i].setPassword(noweHaslo);
             cout << "Haslo zostalo zmienione." << endl << endl;
             system("pause");
         }

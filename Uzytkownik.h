@@ -9,16 +9,16 @@ class Uzytkownik
 {
     int id;
     string login;
-    string haslo;
+    string password;
 
 public:
-    void ustawId(int noweId);
-    void ustawLogin(string nowyLogin);
-    void ustawHaslo(string noweHaslo);
+    void setId(int id);
+    void setLogin(string login);
+    void setPassword(string password);
 
-    int pobierzId();
-    string pobierzLogin();
-    string pobierzHaslo();
+    int getId();
+    string getLogin();
+    string getPassword();
 
 };
 
