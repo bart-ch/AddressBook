@@ -10,13 +10,13 @@ using namespace std;
 class MetodyPomocnicze
 {
 public:
-    static string konwerjsaIntNaString(int liczba);
-    static string zamienPierwszaLitereNaDuzaAPozostaleNaMale(string tekst);
-    static int konwersjaStringNaInt(string liczba);
-    static string pobierzLiczbe(string tekst, int pozycjaZnaku);
-    static char wczytajZnak();
-    static string wczytajLinie();
-    static int wczytajLiczbeCalkowita();
+    static string IntToStringConversion(int number);
+    static string replaceFirstLetterForUppercaseAndOtherLowercase(string text);
+    static int StringToIntConversion(string number);
+    static string getNumber(string text, int characterPosition);
+    static char getCharacter();
+    static string getSingleLine();
+    static int getInteger();
 };
 
 #endif

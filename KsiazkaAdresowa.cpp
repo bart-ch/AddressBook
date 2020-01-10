@@ -15,31 +15,31 @@ KsiazkaAdresowa::~KsiazkaAdresowa()
 
 void KsiazkaAdresowa::rejestracjaUzytkownika()
 {
-    uzytkownikMenedzer.rejestracjaUzytkownika();
+    uzytkownikMenedzer.registerAUser();
 }
 
 void KsiazkaAdresowa::wypiszWszystkichUzytkownikow()
 {
-    uzytkownikMenedzer.wypiszWszystkichUzytkownikow();
+    uzytkownikMenedzer.listAllUsers();
 }
 
 void KsiazkaAdresowa::logowanieUzytkownika()
 {
-    uzytkownikMenedzer.logowanieUzytkownika();
-    if(uzytkownikMenedzer.czyUzytkownikJestZalogowany())
+    uzytkownikMenedzer.logIn();
+    if(uzytkownikMenedzer.isUserLoggedIn())
     {
-        adresatMenedzer = new AdresatMenedzer(NAZWA_PLIKU_Z_ADRESATAMI,NAZWA_PLIKU_TYMCZASOWEGO_Z_ADRESATAMI,uzytkownikMenedzer.pobierzIdZalogowanegoUzytkownika());
+        adresatMenedzer = new AdresatMenedzer(NAZWA_PLIKU_Z_ADRESATAMI,NAZWA_PLIKU_TYMCZASOWEGO_Z_ADRESATAMI,uzytkownikMenedzer.getLoggedInUserId());
     }
 }
 
 void KsiazkaAdresowa::zmianaHaslaZalogowanegoUzytkownika()
 {
-    uzytkownikMenedzer.zmianaHaslaZalogowanegoUzytkownika();
+    uzytkownikMenedzer.changePasswordOfLoggedInUser();
 }
 
 void KsiazkaAdresowa::dodajAdresata()
 {
-    if(uzytkownikMenedzer.czyUzytkownikJestZalogowany())
+    if(uzytkownikMenedzer.isUserLoggedIn())
     {
         adresatMenedzer->addRecipient();
     }
@@ -52,54 +52,54 @@ void KsiazkaAdresowa::wypiszWszystkichAdresatow()
 
 void KsiazkaAdresowa::wyloguj()
 {
-    uzytkownikMenedzer.wyloguj();
+    uzytkownikMenedzer.logOut();
     delete adresatMenedzer;
     adresatMenedzer = NULL;
 }
 
 char KsiazkaAdresowa::wybierzOpcjeZMenuUzytkownika()
 {
-    char wybor;
+    char choice;
 
     system("cls");
-    cout << " >>> MENU UZYTKOWNIKA <<<" << endl;
+    cout << " >>> USER MENU <<<" << endl;
     cout << "---------------------------" << endl;
-    cout << "1. Dodaj adresata" << endl;
-    cout << "2. Wyszukaj po imieniu" << endl;
-    cout << "3. Wyszukaj po nazwisku" << endl;
-    cout << "4. Wyswietl adresatow" << endl;
-    cout << "5. Usun adresata" << endl;
-    cout << "6. Edytuj adresata" << endl;
+    cout << "1. Add recipient" << endl;
+    cout << "2. Search by name" << endl;
+    cout << "3. Search by surname" << endl;
+    cout << "4. Show all recipients" << endl;
+    cout << "5. Delete recipient" << endl;
+    cout << "6. Edit recipient" << endl;
     cout << "---------------------------" << endl;
-    cout << "7. Zmien haslo" << endl;
-    cout << "8. Wyloguj sie" << endl;
+    cout << "7. Change password" << endl;
+    cout << "8. Log out" << endl;
     cout << "---------------------------" << endl;
-    cout << "Twoj wybor: ";
-    wybor = MetodyPomocnicze::wczytajZnak();
+    cout << "Your choice: ";
+    choice = MetodyPomocnicze::getCharacter();
 
-    return wybor;
+    return choice;
 }
 
 char KsiazkaAdresowa::wybierzOpcjeZMenuGlownego()
 {
-    char wybor;
+    char choice;
 
     system("cls");
-    cout << "    >>> MENU  GLOWNE <<<" << endl;
+    cout << "    >>> MAIN MENU <<<" << endl;
     cout << "---------------------------" << endl;
-    cout << "1. Rejestracja" << endl;
-    cout << "2. Logowanie" << endl;
-    cout << "9. Koniec programu" << endl;
+    cout << "1. Register" << endl;
+    cout << "2. Log in" << endl;
+    cout << "9. Exit" << endl;
     cout << "---------------------------" << endl;
-    cout << "Twoj wybor: ";
-    wybor = MetodyPomocnicze::wczytajZnak();
+    cout << "Your choice: ";
+    choice = MetodyPomocnicze::getCharacter();
 
-    return wybor;
+    return choice;
 }
 
 bool KsiazkaAdresowa::czyUzytkownikJestZalogowany()
 {
-    if(uzytkownikMenedzer.czyUzytkownikJestZalogowany())
+    if(uzytkownikMenedzer.isUserLoggedIn())
         return true;
     else
         return false;

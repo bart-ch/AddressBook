@@ -34,7 +34,7 @@ string PlikiZUzytkownikami::convertUserDataToLineWithDataSeparatedByPipe(Uzytkow
 {
     string lineWithUserData = "";
 
-    lineWithUserData += MetodyPomocnicze::konwerjsaIntNaString(user.getId())+ '|';
+    lineWithUserData += MetodyPomocnicze::IntToStringConversion(user.getId())+ '|';
     lineWithUserData += user.getLogin() + '|';
     lineWithUserData += user.getPassword() + '|';
 
@@ -101,7 +101,7 @@ vector <Uzytkownik> PlikiZUzytkownikami::changePasswordOfLoggedInUser(int logged
 {
     string newPassword = "";
     cout << "Enter new password: ";
-    newPassword = MetodyPomocnicze::wczytajLinie();
+    newPassword = MetodyPomocnicze::getSingleLine();
 
     for (int i = 0; i < users.size(); i++)
     {

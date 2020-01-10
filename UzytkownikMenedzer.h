@@ -14,23 +14,23 @@ using namespace std;
 
 class UzytkownikMenedzer
 {
-    int idZalogowanegoUzytkownika;
-    vector <Uzytkownik> uzytkownicy;
-    PlikiZUzytkownikami plikZUzytkownikami;
+    int loggedInUserId;
+    vector <Uzytkownik> users;
+    PlikiZUzytkownikami usersFiles;
 
-    Uzytkownik podajDaneNowegoUzytkownika();
-    int pobierzIdNowegoUzytkownika();
-    bool czyIstniejeLogin(string login);
+    Uzytkownik enterNewUserData();
+    int getNewUserId();
+    bool doesLoginExist(string login);
 
 public:
     UzytkownikMenedzer(string);
-    void rejestracjaUzytkownika();
-    void wypiszWszystkichUzytkownikow();
-    int logowanieUzytkownika();
-    void zmianaHaslaZalogowanegoUzytkownika();
-    int pobierzIdZalogowanegoUzytkownika();
-    bool czyUzytkownikJestZalogowany();
-    void wyloguj();
+    void registerAUser();
+    void listAllUsers();
+    int logIn();
+    void changePasswordOfLoggedInUser();
+    int getLoggedInUserId();
+    bool isUserLoggedIn();
+    void logOut();
 };
 
 #endif

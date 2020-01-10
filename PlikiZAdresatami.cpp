@@ -38,8 +38,8 @@ string PlikiZAdresatami::changeRecipientDataOnLineWithDataSeparatedByPipe(Adresa
 {
     string lineWithRecipientData = "";
 
-    lineWithRecipientData += MetodyPomocnicze::konwerjsaIntNaString(recipient.getRecipientId()) + '|';
-    lineWithRecipientData += MetodyPomocnicze::konwerjsaIntNaString(recipient.getUserId()) + '|';
+    lineWithRecipientData += MetodyPomocnicze::IntToStringConversion(recipient.getRecipientId()) + '|';
+    lineWithRecipientData += MetodyPomocnicze::IntToStringConversion(recipient.getUserId()) + '|';
     lineWithRecipientData += recipient.getName() + '|';
     lineWithRecipientData += recipient.getSurname() + '|';
     lineWithRecipientData += recipient.getTelephone() + '|';
@@ -85,7 +85,7 @@ vector <Adresat> PlikiZAdresatami::loadLoggedUserRecipientsFromFile(int loggedUs
 int PlikiZAdresatami::getUserIdFromDataSepararatedByPipe(string userDataSeparatedByPipe)
 {
     int userIdStartPosition = userDataSeparatedByPipe.find_first_of('|') + 1;
-    int userId = MetodyPomocnicze::konwersjaStringNaInt(MetodyPomocnicze::pobierzLiczbe(userDataSeparatedByPipe, userIdStartPosition));
+    int userId = MetodyPomocnicze::StringToIntConversion(MetodyPomocnicze::getNumber(userDataSeparatedByPipe, userIdStartPosition));
 
     return userId;
 }
@@ -93,7 +93,7 @@ int PlikiZAdresatami::getUserIdFromDataSepararatedByPipe(string userDataSeparate
 int PlikiZAdresatami::getRecipientIdFromDataSepararatedByPipe(string recipientDataSeparatedByPipe)
 {
     int recipientIdStartPosition = 0;
-    int recipientId = MetodyPomocnicze::konwersjaStringNaInt(MetodyPomocnicze::pobierzLiczbe(recipientDataSeparatedByPipe, recipientIdStartPosition));
+    int recipientId = MetodyPomocnicze::StringToIntConversion(MetodyPomocnicze::getNumber(recipientDataSeparatedByPipe, recipientIdStartPosition));
     return recipientId;
 }
 

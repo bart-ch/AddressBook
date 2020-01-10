@@ -34,21 +34,21 @@ Adresat AdresatMenedzer::enterNewRecipientData()
     recipient.setUserId(LOGGED_USER_ID);
 
     cout << "Enter name: ";
-    name = MetodyPomocnicze::wczytajLinie();
-    name = MetodyPomocnicze::zamienPierwszaLitereNaDuzaAPozostaleNaMale(name);
+    name = MetodyPomocnicze::getSingleLine();
+    name = MetodyPomocnicze::replaceFirstLetterForUppercaseAndOtherLowercase(name);
 
     cout << "Enter surname: ";
-    surname = MetodyPomocnicze::wczytajLinie();
-    surname = MetodyPomocnicze::zamienPierwszaLitereNaDuzaAPozostaleNaMale(surname);
+    surname = MetodyPomocnicze::getSingleLine();
+    surname = MetodyPomocnicze::replaceFirstLetterForUppercaseAndOtherLowercase(surname);
 
     cout << "Enter phone number: ";
-    phoneNumber = MetodyPomocnicze::wczytajLinie();
+    phoneNumber = MetodyPomocnicze::getSingleLine();
 
     cout << "Enter email address: ";
-    email = MetodyPomocnicze::wczytajLinie();
+    email = MetodyPomocnicze::getSingleLine();
 
     cout << "Enter address: ";
-    address = MetodyPomocnicze::wczytajLinie();
+    address = MetodyPomocnicze::getSingleLine();
 
     recipient.setName(name);
     recipient.setSurname(surname);
@@ -90,7 +90,7 @@ int AdresatMenedzer::deleteRecipient()
     cout << ">>> DELETE RECIPIENT MENU <<<" << endl << endl;
     deletedRecipientId = enterRecipientId();
 
-    char sign;
+    char choice;
     bool doesRecipientExist = false;
 
     for (int i = 0; i < recipients.size(); i++)
@@ -99,8 +99,8 @@ int AdresatMenedzer::deleteRecipient()
         {
             doesRecipientExist = true;
             cout << endl << "To confirm press 't': ";
-            sign = MetodyPomocnicze::wczytajZnak();
-            if (sign == 't')
+            choice = MetodyPomocnicze::getCharacter();
+            if (choice == 't')
             {
                 recipientsFiles.removeRecipientFromFile(deletedRecipientId);
                 recipients.erase(recipients.begin()+ i);
@@ -128,7 +128,7 @@ int AdresatMenedzer::enterRecipientId()
 {
     int recipientId = 0;
     cout << "Enter recipient ID: ";
-    recipientId  = MetodyPomocnicze::wczytajLiczbeCalkowita();
+    recipientId  = MetodyPomocnicze::getInteger();
     return recipientId;
 }
 
@@ -155,33 +155,33 @@ void AdresatMenedzer::editRecipient()
             {
             case '1':
                 cout << "Enter new name: ";
-                newSingleData = MetodyPomocnicze::wczytajLinie();
-                newSingleData = MetodyPomocnicze::zamienPierwszaLitereNaDuzaAPozostaleNaMale(newSingleData);
+                newSingleData = MetodyPomocnicze::getSingleLine();
+                newSingleData = MetodyPomocnicze::replaceFirstLetterForUppercaseAndOtherLowercase(newSingleData);
                 recipients[i].setName(newSingleData);
                 recipientsFiles.updateDataOfEditedRecipient(recipients[i]);
                 break;
             case '2':
                 cout << "Enter new surname: ";
-                newSingleData = MetodyPomocnicze::wczytajLinie();
-                newSingleData = MetodyPomocnicze::zamienPierwszaLitereNaDuzaAPozostaleNaMale(newSingleData);
+                newSingleData = MetodyPomocnicze::getSingleLine();
+                newSingleData = MetodyPomocnicze::replaceFirstLetterForUppercaseAndOtherLowercase(newSingleData);
                 recipients[i].setSurname(newSingleData);
                 recipientsFiles.updateDataOfEditedRecipient(recipients[i]);
                 break;
             case '3':
                 cout << "Enter new phone number: ";
-                newSingleData = MetodyPomocnicze::wczytajLinie();
+                newSingleData = MetodyPomocnicze::getSingleLine();
                 recipients[i].setTelephone(newSingleData);
                 recipientsFiles.updateDataOfEditedRecipient(recipients[i]);
                 break;
             case '4':
                 cout << "Enter new email address: ";
-                newSingleData = MetodyPomocnicze::wczytajLinie();
+                newSingleData = MetodyPomocnicze::getSingleLine();
                 recipients[i].setEmail(newSingleData);
                 recipientsFiles.updateDataOfEditedRecipient(recipients[i]);
                 break;
             case '5':
                 cout << "Enter new address: ";
-                newSingleData = MetodyPomocnicze::wczytajLinie();
+                newSingleData = MetodyPomocnicze::getSingleLine();
                 recipients[i].setAddress(newSingleData);
                 recipientsFiles.updateDataOfEditedRecipient(recipients[i]);
                 break;
@@ -203,7 +203,7 @@ void AdresatMenedzer::editRecipient()
 
 char AdresatMenedzer::selectChoiceFromEditMenu()
 {
-    char sign;
+    char choice;
 
     cout << endl << "   >>> EDIT MENU <<<" << endl;
     cout << "---------------------------" << endl;
@@ -215,9 +215,9 @@ char AdresatMenedzer::selectChoiceFromEditMenu()
     cout << "5 - Address" << endl;
     cout << "6 - Return " << endl;
     cout << endl << "Your choice: ";
-    sign = MetodyPomocnicze::wczytajZnak();
+    choice = MetodyPomocnicze::getCharacter();
 
-    return sign;
+    return choice;
 }
 
 void AdresatMenedzer::searchRecipientsByName()
@@ -231,8 +231,8 @@ void AdresatMenedzer::searchRecipientsByName()
         cout << ">>> SEARCHING BY NAME <<<" << endl << endl;
 
         cout << "Enter the name you are looking for: ";
-        searchedName = MetodyPomocnicze::wczytajLinie();
-        searchedName = MetodyPomocnicze::zamienPierwszaLitereNaDuzaAPozostaleNaMale(searchedName);
+        searchedName = MetodyPomocnicze::getSingleLine();
+        searchedName = MetodyPomocnicze::replaceFirstLetterForUppercaseAndOtherLowercase(searchedName);
 
         for (vector <Adresat>::iterator  itr = recipients.begin(); itr != recipients.end(); itr++)
         {
@@ -278,11 +278,11 @@ void AdresatMenedzer::searchRecipientsBySurname()
     system("cls");
     if (!recipients.empty())
     {
-        cout << ">>> SEARHING BY SURNAME <<<" << endl << endl;
+        cout << ">>> SEARCHING BY SURNAME <<<" << endl << endl;
 
         cout << "Enter the surname you are looking for: : ";
-        searchedSurname = MetodyPomocnicze::wczytajLinie();
-        searchedSurname = MetodyPomocnicze::zamienPierwszaLitereNaDuzaAPozostaleNaMale(searchedSurname);
+        searchedSurname = MetodyPomocnicze::getSingleLine();
+        searchedSurname = MetodyPomocnicze::replaceFirstLetterForUppercaseAndOtherLowercase(searchedSurname);
 
         for (vector <Adresat>::iterator itr = recipients.begin(); itr != recipients.end(); itr++)
         {

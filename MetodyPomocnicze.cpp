@@ -1,79 +1,79 @@
 #include "MetodyPomocnicze.h"
 
-string MetodyPomocnicze::konwerjsaIntNaString(int liczba)
+string MetodyPomocnicze::IntToStringConversion(int number)
 {
     ostringstream ss;
-    ss << liczba;
+    ss << number;
     string str = ss.str();
     return str;
 }
 
-string MetodyPomocnicze::zamienPierwszaLitereNaDuzaAPozostaleNaMale(string tekst)
+string MetodyPomocnicze::replaceFirstLetterForUppercaseAndOtherLowercase(string text)
 {
-    if (!tekst.empty())
+    if (!text.empty())
     {
-        transform(tekst.begin(), tekst.end(), tekst.begin(), ::tolower);
-        tekst[0] = toupper(tekst[0]);
+        transform(text.begin(), text.end(), text.begin(), ::tolower);
+        text[0] = toupper(text[0]);
     }
-    return tekst;
+    return text;
 }
 
-int MetodyPomocnicze::konwersjaStringNaInt(string liczba)
+int MetodyPomocnicze::StringToIntConversion(string number)
 {
     int liczbaInt;
-    istringstream iss(liczba);
+    istringstream iss(number);
     iss >> liczbaInt;
 
     return liczbaInt;
 }
 
-string MetodyPomocnicze::pobierzLiczbe(string tekst, int pozycjaZnaku)
+string MetodyPomocnicze::getNumber(string text, int characterPosition)
 {
     string liczba = "";
-    while(isdigit(tekst[pozycjaZnaku]) == true)
+    while(isdigit(text[characterPosition]) == true)
     {
-        liczba += tekst[pozycjaZnaku];
-        pozycjaZnaku ++;
+        liczba += text[characterPosition];
+        characterPosition ++;
     }
     return liczba;
 }
 
-char MetodyPomocnicze::wczytajZnak()
+char MetodyPomocnicze::getCharacter()
 {
-    string wejscie = "";
-    char znak  = {0};
+    string input = "";
+    char sign  = {0};
 
     while (true)
     {
-        getline(cin, wejscie);
+        getline(cin, input);
 
-        if (wejscie.length() == 1)
+        if (input.length() == 1)
         {
-            znak = wejscie[0];
+            sign = input[0];
             break;
         }
-        cout << "To nie jest pojedynczy znak. Wpisz ponownie." << endl;
+        cout << "Must be a single character. Please reenter." << endl;
     }
-    return znak;
+    return sign;
 }
 
-string MetodyPomocnicze::wczytajLinie()
+string MetodyPomocnicze::getSingleLine()
 {
-    string wejscie = "";
-    getline(cin, wejscie);
-    return wejscie;
+    string input = "";
+    getline(cin, input);
+    return input;
 }
 
-int MetodyPomocnicze::wczytajLiczbeCalkowita()
+int MetodyPomocnicze::getInteger()
 {
-    string wejscie = "";
+    string input = "";
     int liczba = 0;
 
     while (true)
     {
-        getline(cin, wejscie);
+        getline(cin, input);
 
-        stringstream myStream(wejscie);
+        stringstream myStream(input);
         if (myStream >> liczba)
             break;
         cout << "To nie jest liczba. Wpisz ponownie. " << endl;
