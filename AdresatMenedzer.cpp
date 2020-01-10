@@ -4,7 +4,7 @@ AdresatMenedzer::AdresatMenedzer(string nazwaPlikuZAdresatami, string nazwaPliku
     : plikiZAdresatami(nazwaPlikuZAdresatami,nazwaPlikuTymczasowegoZAdresatami),
       ID_ZALOGOWANEGO_UZYTKOWNIKA(idZalogowanegoUzytkownika)
 {
-    adresaci = plikiZAdresatami.wczytajAdresatowZalogowanegoUzytkownikaZPliku(ID_ZALOGOWANEGO_UZYTKOWNIKA);
+    adresaci = plikiZAdresatami.loadLoggedUserRecipientsFromFile(ID_ZALOGOWANEGO_UZYTKOWNIKA);
 }
 
 void AdresatMenedzer::dodajAdresata()
@@ -16,7 +16,7 @@ void AdresatMenedzer::dodajAdresata()
     adresat = podajDaneNowegoAdresata();
 
     adresaci.push_back(adresat);
-    if(plikiZAdresatami.dopiszAdresataDoPliku(adresat))
+    if(plikiZAdresatami.appendRecipientToFile(adresat))
         cout << "Nowy adresat zostal dodany" << endl;
     else
         cout << "Blad. Nie udalo sie dodac nowego adresata do pliku." << endl;
@@ -30,7 +30,7 @@ Adresat AdresatMenedzer::podajDaneNowegoAdresata()
     Adresat adresat;
     string imie,nazwisko,numerTelefonu,email,adres;
 
-    adresat.setRecipientId(plikiZAdresatami.pobierzIdOstatniegoAdresata() + 1);
+    adresat.setRecipientId(plikiZAdresatami.getlastRecipientId() + 1);
     adresat.setUserId(ID_ZALOGOWANEGO_UZYTKOWNIKA);
 
     cout << "Podaj imie: ";
@@ -103,7 +103,7 @@ int AdresatMenedzer::usunAdresata()
             znak = MetodyPomocnicze::wczytajZnak();
             if (znak == 't')
             {
-                plikiZAdresatami.usunWybranegoAdresataZPliku(idUsuwanegoAdresata);
+                plikiZAdresatami.removeRecipientFromFile(idUsuwanegoAdresata);
                 adresaci.erase(adresaci.begin()+ i);
                 cout << endl << endl << "Szukany adresat zostal USUNIETY" << endl << endl;
                 system("pause");
@@ -160,32 +160,32 @@ void AdresatMenedzer::edytujAdresata()
                 nowaDana = MetodyPomocnicze::wczytajLinie();
                 nowaDana = MetodyPomocnicze::zamienPierwszaLitereNaDuzaAPozostaleNaMale(nowaDana);
                 adresaci[i].setName(nowaDana);
-                plikiZAdresatami.zaktualizujDaneEdytowanegoAdresata(adresaci[i]);
+                plikiZAdresatami.updateDataOfEditedRecipient(adresaci[i]);
                 break;
             case '2':
                 cout << "Podaj nowe nazwisko: ";
                 nowaDana = MetodyPomocnicze::wczytajLinie();
                 nowaDana = MetodyPomocnicze::zamienPierwszaLitereNaDuzaAPozostaleNaMale(nowaDana);
                 adresaci[i].setSurname(nowaDana);
-                plikiZAdresatami.zaktualizujDaneEdytowanegoAdresata(adresaci[i]);
+                plikiZAdresatami.updateDataOfEditedRecipient(adresaci[i]);
                 break;
             case '3':
                 cout << "Podaj nowy numer telefonu: ";
                 nowaDana = MetodyPomocnicze::wczytajLinie();
                 adresaci[i].setTelephone(nowaDana);
-                plikiZAdresatami.zaktualizujDaneEdytowanegoAdresata(adresaci[i]);
+                plikiZAdresatami.updateDataOfEditedRecipient(adresaci[i]);
                 break;
             case '4':
                 cout << "Podaj nowy email: ";
                 nowaDana = MetodyPomocnicze::wczytajLinie();
                 adresaci[i].setEmail(nowaDana);
-                plikiZAdresatami.zaktualizujDaneEdytowanegoAdresata(adresaci[i]);
+                plikiZAdresatami.updateDataOfEditedRecipient(adresaci[i]);
                 break;
             case '5':
                 cout << "Podaj nowy adres zamieszkania: ";
                 nowaDana = MetodyPomocnicze::wczytajLinie();
                 adresaci[i].setAddress(nowaDana);
-                plikiZAdresatami.zaktualizujDaneEdytowanegoAdresata(adresaci[i]);
+                plikiZAdresatami.updateDataOfEditedRecipient(adresaci[i]);
                 break;
             case '6':
                 cout << endl << "Powrot do menu uzytkownika" << endl << endl;

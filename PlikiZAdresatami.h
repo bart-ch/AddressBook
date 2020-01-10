@@ -13,25 +13,25 @@ using namespace std;
 
 class PlikiZAdresatami :public PlikTekstowy
 {
-    const string NAZWA_PLIKU_TYMCZASOWEGO_Z_ADRESATAMI;
-    int idOstatniegoAdresata;
+    const string TEMPORARY_RECIPIENTS_FILE_NAME;
+    int lastRecipientId;
 
-    string zamienDaneAdresataNaLinieZDanymiOddzielonymiPionowymiKreskami(Adresat adresat);
-    int pobierzIdUzytkownikaZDanychOddzielonychPionowymiKreskami(string daneJednegoAdresataOddzielonePionowymiKreskami);
-    Adresat pobierzDaneAdresata(string daneAdresataOddzielonePionowymiKreskami);
-    int pobierzIdAdresataZDanychOddzielonychPionowymiKreskami(string daneJednegoAdresataOddzielonePionowymiKreskami);
-    void usunPlik(string nazwaPlikuZRozszerzeniem);
-    void zmienNazwePliku(string staraNazwa, string nowaNazwa);
-    int podajIdOstatniegoAdresataPoUsunieciuWybranegoAdresata(int idUsuwanegoAdresata);
-    int pobierzZPlikuIdOstatniegoAdresata();
+    string changeRecipientDataOnLineWithDataSeparatedByPipe(Adresat recipient);
+    int getUserIdFromDataSepararatedByPipe(string userDataSeparatedByPipe);
+    Adresat getRecipientData(string recipientDataSeparatedByPipe);
+    int getRecipientIdFromDataSepararatedByPipe(string recipientDataSeparatedByPipe);
+    void removeFile(string nazwaPlikuZRozszerzeniem);
+    void changeFileName(string staraNazwa, string nowaNazwa);
+    int giveLastRecipientIdafterRemovingRecipient(int idUsuwanegoAdresata);
+    int getLastRecipientIdFromFile();
 
 public:
     PlikiZAdresatami(string,string);
-    bool dopiszAdresataDoPliku(Adresat adresat);
-    vector <Adresat> wczytajAdresatowZalogowanegoUzytkownikaZPliku(int idZalogowanegoUzytkownika);
-    int pobierzIdOstatniegoAdresata();
-    int usunWybranegoAdresataZPliku(int idUsuwanegoAdresata);
-    void zaktualizujDaneEdytowanegoAdresata(Adresat adresat);
+    bool appendRecipientToFile(Adresat recipient);
+    vector <Adresat> loadLoggedUserRecipientsFromFile(int loggedUserId);
+    int getlastRecipientId();
+    int removeRecipientFromFile(int idUsuwanegoAdresata);
+    void updateDataOfEditedRecipient(Adresat adresat);
 };
 
 #endif
