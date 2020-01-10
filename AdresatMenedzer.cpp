@@ -91,13 +91,13 @@ int AdresatMenedzer::deleteRecipient()
     deletedRecipientId = enterRecipientId();
 
     char sign;
-    bool isRecipientExists = false;
+    bool doesRecipientExist = false;
 
     for (int i = 0; i < recipients.size(); i++)
     {
         if (recipients[i].getRecipientId() == deletedRecipientId)
         {
-            isRecipientExists = true;
+            doesRecipientExist = true;
             cout << endl << "To confirm press 't': ";
             sign = MetodyPomocnicze::wczytajZnak();
             if (sign == 't')
@@ -116,7 +116,7 @@ int AdresatMenedzer::deleteRecipient()
             }
         }
     }
-    if (isRecipientExists == false)
+    if (doesRecipientExist == false)
     {
         cout << endl << "The recipient does not exist." << endl << endl;
         system("pause");
@@ -138,7 +138,7 @@ void AdresatMenedzer::editRecipient()
     string newSingleData = "";
     int editedRecipientId = 0;
 
-    cout << ">>> EDIT RECIPIENT MENU <<<" << endl << endl;
+    cout << ">>> EDIT RECIPIENT <<<" << endl << endl;
     editedRecipientId = enterRecipientId();
 
     char sign;
@@ -149,7 +149,7 @@ void AdresatMenedzer::editRecipient()
         if (recipients[i].getRecipientId() == editedRecipientId)
         {
             doesRecipientExist = true;
-            sign = wybierzOpcjeZMenuEdycja();
+            sign = selectChoiceFromEditMenu();
 
             switch (sign)
             {
@@ -196,107 +196,107 @@ void AdresatMenedzer::editRecipient()
     }
     if (doesRecipientExist == false)
     {
-        cout << endl << "Nie ma takiego adresata." << endl << endl;
+        cout << endl << "Wrong ID number." << endl << endl;
     }
     system("pause");
 }
 
-char AdresatMenedzer::wybierzOpcjeZMenuEdycja()
+char AdresatMenedzer::selectChoiceFromEditMenu()
 {
     char sign;
 
-    cout << endl << "   >>> MENU  EDYCJA <<<" << endl;
+    cout << endl << "   >>> EDIT MENU <<<" << endl;
     cout << "---------------------------" << endl;
-    cout << "Ktore dane zaktualizowac: " << endl;
-    cout << "1 - Imie" << endl;
-    cout << "2 - Nazwisko" << endl;
-    cout << "3 - Numer telefonu" << endl;
+    cout << "What would you like to edit: " << endl;
+    cout << "1 - Name" << endl;
+    cout << "2 - Surname" << endl;
+    cout << "3 - Phone number" << endl;
     cout << "4 - Email" << endl;
-    cout << "5 - Adres" << endl;
-    cout << "6 - Powrot " << endl;
-    cout << endl << "Twoj wybor: ";
+    cout << "5 - Address" << endl;
+    cout << "6 - Return " << endl;
+    cout << endl << "Your choice: ";
     sign = MetodyPomocnicze::wczytajZnak();
 
     return sign;
 }
 
-void AdresatMenedzer::wyszukajAdresatowPoImieniu()
+void AdresatMenedzer::searchRecipientsByName()
 {
-    string imiePoszukiwanegoAdresata = "";
-    int iloscAdresatow = 0;
+    string searchedName = "";
+    int recipientsNumber = 0;
 
     system("cls");
     if (!recipients.empty())
     {
-        cout << ">>> WYSZUKIWANIE ADRESATOW O IMIENIU <<<" << endl << endl;
+        cout << ">>> SEARCHING BY NAME <<<" << endl << endl;
 
-        cout << "Wyszukaj adresatow o imieniu: ";
-        imiePoszukiwanegoAdresata = MetodyPomocnicze::wczytajLinie();
-        imiePoszukiwanegoAdresata = MetodyPomocnicze::zamienPierwszaLitereNaDuzaAPozostaleNaMale(imiePoszukiwanegoAdresata);
+        cout << "Enter the name you are looking for: ";
+        searchedName = MetodyPomocnicze::wczytajLinie();
+        searchedName = MetodyPomocnicze::zamienPierwszaLitereNaDuzaAPozostaleNaMale(searchedName);
 
         for (vector <Adresat>::iterator  itr = recipients.begin(); itr != recipients.end(); itr++)
         {
-            if (itr -> getName() == imiePoszukiwanegoAdresata)
+            if (itr -> getName() == searchedName)
             {
-                wyswietlDaneAdresata(*itr);
-                iloscAdresatow++;
+                showRecipientData(*itr);
+                recipientsNumber++;
             }
         }
-        wyswietlIloscWyszukanychAdresatow(iloscAdresatow);
+        showNumberOfFoundRecipients(recipientsNumber);
     }
     else
     {
-        cout << endl << "Ksiazka adresowa jest pusta" << endl << endl;
+        cout << endl << "Address book is empty." << endl << endl;
     }
     cout << endl;
     system("pause");
 }
 
-void AdresatMenedzer::wyswietlDaneAdresata(Adresat adresat)
+void AdresatMenedzer::showRecipientData(Adresat recipient)
 {
-    cout << endl << "Id:                 " << adresat.getRecipientId() << endl;
-    cout << "Imie:               " << adresat.getName() << endl;
-    cout << "Nazwisko:           " << adresat.getSurname() << endl;
-    cout << "Numer telefonu:     " << adresat.getTelephone() << endl;
-    cout << "Email:              " << adresat.getEmail() << endl;
-    cout << "Adres:              " << adresat.getAddress() << endl;
+    cout << endl << "Id:                 " << recipient.getRecipientId() << endl;
+    cout << "Name:               " << recipient.getName() << endl;
+    cout << "Surname:           " << recipient.getSurname() << endl;
+    cout << "Phone number:     " << recipient.getTelephone() << endl;
+    cout << "Email:              " << recipient.getEmail() << endl;
+    cout << "Address:              " << recipient.getAddress() << endl;
 }
 
-void AdresatMenedzer::wyswietlIloscWyszukanychAdresatow(int iloscAdresatow)
+void AdresatMenedzer::showNumberOfFoundRecipients(int recipientsNumber)
 {
-    if (iloscAdresatow == 0)
-        cout << endl << "W ksiazce adresowej nie ma adresatow z tymi danymi." << endl;
+    if (recipientsNumber == 0)
+        cout << endl << "No recipients with the data." << endl;
     else
-        cout << endl << "Ilosc adresatow w ksiazce adresowej wynosi: " << iloscAdresatow << endl << endl;
+        cout << endl << "The number of recipients is: " << recipientsNumber << endl << endl;
 }
 
-void AdresatMenedzer::wyszukajAdresatowPoNazwisku()
+void AdresatMenedzer::searchRecipientsBySurname()
 {
-    string nazwiskoPoszukiwanegoAdresata;
-    int iloscAdresatow = 0;
+    string searchedSurname;
+    int recipientsNumber = 0;
 
     system("cls");
     if (!recipients.empty())
     {
-        cout << ">>> WYSZUKIWANIE ADRESATOW O NAZWISKU <<<" << endl << endl;
+        cout << ">>> SEARHING BY SURNAME <<<" << endl << endl;
 
-        cout << "Wyszukaj adresatow o nazwisku: ";
-        nazwiskoPoszukiwanegoAdresata = MetodyPomocnicze::wczytajLinie();
-        nazwiskoPoszukiwanegoAdresata = MetodyPomocnicze::zamienPierwszaLitereNaDuzaAPozostaleNaMale(nazwiskoPoszukiwanegoAdresata);
+        cout << "Enter the surname you are looking for: : ";
+        searchedSurname = MetodyPomocnicze::wczytajLinie();
+        searchedSurname = MetodyPomocnicze::zamienPierwszaLitereNaDuzaAPozostaleNaMale(searchedSurname);
 
         for (vector <Adresat>::iterator itr = recipients.begin(); itr != recipients.end(); itr++)
         {
-            if (itr -> getSurname() == nazwiskoPoszukiwanegoAdresata)
+            if (itr -> getSurname() == searchedSurname)
             {
-                wyswietlDaneAdresata(*itr);
-                iloscAdresatow++;
+                showRecipientData(*itr);
+                recipientsNumber++;
             }
         }
-         wyswietlIloscWyszukanychAdresatow(iloscAdresatow);
+        showNumberOfFoundRecipients(recipientsNumber);
     }
     else
     {
-        cout << endl << "Ksiazka adresowa jest pusta." << endl << endl;
+        cout << endl << "Address book is empty." << endl << endl;
     }
     cout << endl;
     system("pause");

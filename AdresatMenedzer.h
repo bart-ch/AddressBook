@@ -13,9 +13,9 @@ class AdresatMenedzer
 
     Adresat enterNewRecipientData();
     int enterRecipientId();
-    char wybierzOpcjeZMenuEdycja();
-    void wyswietlDaneAdresata(Adresat adresat);
-    void wyswietlIloscWyszukanychAdresatow(int iloscAdresatow);
+    char selectChoiceFromEditMenu();
+    void showRecipientData(Adresat recipient);
+    void showNumberOfFoundRecipients(int iloscAdresatow);
 
 public:
 
@@ -24,8 +24,8 @@ public:
     void listAllRecipients();
     int deleteRecipient();
     void editRecipient();
-    void wyszukajAdresatowPoImieniu();
-    void wyszukajAdresatowPoNazwisku();
+    void searchRecipientsByName();
+    void searchRecipientsBySurname();
 };
 
 #endif // ADRESATMENEDZER_H

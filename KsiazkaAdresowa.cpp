@@ -117,12 +117,12 @@ void KsiazkaAdresowa::edytujAdresata()
 
 void KsiazkaAdresowa::wyszukajAdresatowPoImieniu()
 {
-    adresatMenedzer->wyszukajAdresatowPoImieniu();
+    adresatMenedzer->searchRecipientsByName();
 }
 
 void KsiazkaAdresowa::wyszukajAdresatowPoNazwisku()
 {
-    adresatMenedzer->wyszukajAdresatowPoNazwisku();
+    adresatMenedzer->searchRecipientsBySurname();
 }
 
 
