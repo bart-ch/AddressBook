@@ -4,7 +4,7 @@ using namespace std;
 
 PlikiZAdresatami::PlikiZAdresatami(string fileName,string temporaryFileName)
     :   PlikTekstowy(fileName),
-    TEMPORARY_RECIPIENTS_FILE_NAME(temporaryFileName)
+        TEMPORARY_RECIPIENTS_FILE_NAME(temporaryFileName)
 {
     lastRecipientId = 0;
 }
@@ -147,70 +147,69 @@ int PlikiZAdresatami::getlastRecipientId()
     return lastRecipientId;
 }
 
-int PlikiZAdresatami::removeRecipientFromFile(int idUsuwanegoAdresata)
+int PlikiZAdresatami::removeRecipientFromFile(int recipientId)
 {
-    fstream odczytywanyPlikTekstowy, tymczasowyPlikTekstowy;
+    fstream baseTextFile, temporaryTextFile;
     string recipientDataSeparatedByPipe = "";
-    int numerWczytanejLinii = 1;
-    int numerUsuwanejLinii = 0;
-    string wczytanaLinia = "";
-    odczytywanyPlikTekstowy.open(getFileName().c_str(), ios::in);
-    tymczasowyPlikTekstowy.open(TEMPORARY_RECIPIENTS_FILE_NAME.c_str(), ios::out | ios::app);
+    int loadedLineNumber = 1;
+    int removedLineNumber = 0;
+    string loadedLine = "";
+    baseTextFile.open(getFileName().c_str(), ios::in);
+    temporaryTextFile.open(TEMPORARY_RECIPIENTS_FILE_NAME.c_str(), ios::out | ios::app);
 
-
-    if (odczytywanyPlikTekstowy.good() == true && idUsuwanegoAdresata != 0)
+    if (baseTextFile.good() == true && recipientId != 0)
     {
-        while(getline(odczytywanyPlikTekstowy, recipientDataSeparatedByPipe))
+        while(getline(baseTextFile, recipientDataSeparatedByPipe))
         {
-            wczytanaLinia = recipientDataSeparatedByPipe;
+            loadedLine = recipientDataSeparatedByPipe;
 
-            if(idUsuwanegoAdresata == getRecipientIdFromDataSepararatedByPipe(recipientDataSeparatedByPipe))
+            if(recipientId == getRecipientIdFromDataSepararatedByPipe(recipientDataSeparatedByPipe))
             {
-                numerUsuwanejLinii = numerWczytanejLinii;
+                removedLineNumber = loadedLineNumber;
             }
 
-            if (numerWczytanejLinii == numerUsuwanejLinii) {}
-            else if (numerWczytanejLinii == 1 && numerWczytanejLinii != numerUsuwanejLinii)
-                tymczasowyPlikTekstowy << wczytanaLinia;
-            else if (numerWczytanejLinii == 2 && numerUsuwanejLinii == 1)
-                tymczasowyPlikTekstowy << wczytanaLinia;
-            else if (numerWczytanejLinii > 2 && numerUsuwanejLinii == 1)
-                tymczasowyPlikTekstowy << endl << wczytanaLinia;
-            else if (numerWczytanejLinii > 1 && numerUsuwanejLinii != 1)
-                tymczasowyPlikTekstowy << endl << wczytanaLinia;
-            numerWczytanejLinii++;
+            if (loadedLineNumber == removedLineNumber) {}
+            else if (loadedLineNumber == 1 && loadedLineNumber != removedLineNumber)
+                temporaryTextFile << loadedLine;
+            else if (loadedLineNumber == 2 && removedLineNumber == 1)
+                temporaryTextFile << loadedLine;
+            else if (loadedLineNumber > 2 && removedLineNumber == 1)
+                temporaryTextFile << endl << loadedLine;
+            else if (loadedLineNumber > 1 && removedLineNumber != 1)
+                temporaryTextFile << endl << loadedLine;
+            loadedLineNumber++;
         }
     }
 
-    odczytywanyPlikTekstowy.close();
-    tymczasowyPlikTekstowy.close();
+    baseTextFile.close();
+    temporaryTextFile.close();
 
     removeFile(getFileName());
     changeFileName(TEMPORARY_RECIPIENTS_FILE_NAME, getFileName());
 
-    lastRecipientId = giveLastRecipientIdafterRemovingRecipient(idUsuwanegoAdresata);
+    lastRecipientId = giveLastRecipientIdAfterRemovingRecipient(recipientId);
 
     return lastRecipientId;
 
 }
 
-void PlikiZAdresatami::removeFile(string nazwaPlikuZRozszerzeniem)
+void PlikiZAdresatami::removeFile(string fileNameWithExtension)
 {
-    if (remove(nazwaPlikuZRozszerzeniem.c_str()) == 0) {}
+    if (remove(fileNameWithExtension.c_str()) == 0) {}
     else
-        cout << "Nie udalo sie usunac pliku " << nazwaPlikuZRozszerzeniem << endl;
+        cout << "Failed to delete the file " << fileNameWithExtension << endl;
 }
 
-void PlikiZAdresatami::changeFileName(string staraNazwa, string nowaNazwa)
+void PlikiZAdresatami::changeFileName(string oldName, string newName)
 {
-    if (rename(staraNazwa.c_str(), nowaNazwa.c_str()) == 0) {}
+    if (rename(oldName.c_str(), newName.c_str()) == 0) {}
     else
-        cout << "Nazwa pliku nie zostala zmieniona." << staraNazwa << endl;
+        cout << "Name of the file could not be changed." << oldName << endl;
 }
 
-int PlikiZAdresatami::giveLastRecipientIdafterRemovingRecipient(int idUsuwanegoAdresata)
+int PlikiZAdresatami::giveLastRecipientIdAfterRemovingRecipient(int removedRecipientId)
 {
-    if (idUsuwanegoAdresata == lastRecipientId)
+    if (removedRecipientId == lastRecipientId)
         return getLastRecipientIdFromFile();
     else
         return lastRecipientId;
@@ -230,7 +229,7 @@ int PlikiZAdresatami::getLastRecipientIdFromFile()
         textFile.close();
     }
     else
-        cout << "Nie udalo sie otworzyc pliku i wczytac danych." << endl;
+        cout << "Could not open a file and load data." << endl;
 
     if (lastRecipientInFileData != "")
     {
@@ -239,43 +238,43 @@ int PlikiZAdresatami::getLastRecipientIdFromFile()
     return lastRecipientId;
 }
 
-void PlikiZAdresatami::updateDataOfEditedRecipient(Adresat adresat)
+void PlikiZAdresatami::updateDataOfEditedRecipient(Adresat recipient)
 {
-    fstream odczytywanyPlikTekstowy, tymczasowyPlikTekstowy;
-    string wczytanaLinia = "";
+    fstream baseTextFile, temporaryTextFile;
+    string loadedLine = "";
     string recipientDataSeparatedByPipe = "";
-    string liniaZDanymiAdresataOddzielonePionowymiKreskami = "";
-    int numerWczytanejLinii = 1;
+    string recipientDataInLineSeparatedByPipe = "";
+    int loadedLineNumber = 1;
 
-    odczytywanyPlikTekstowy.open(getFileName().c_str(), ios::in);
-    tymczasowyPlikTekstowy.open(TEMPORARY_RECIPIENTS_FILE_NAME.c_str(), ios::out | ios::app);
+    baseTextFile.open(getFileName().c_str(), ios::in);
+    temporaryTextFile.open(TEMPORARY_RECIPIENTS_FILE_NAME.c_str(), ios::out | ios::app);
 
-    if (odczytywanyPlikTekstowy.good() == true && adresat.getRecipientId() != 0)
+    if (baseTextFile.good() == true && recipient.getRecipientId() != 0)
     {
-        while (getline(odczytywanyPlikTekstowy, recipientDataSeparatedByPipe))
+        while (getline(baseTextFile, recipientDataSeparatedByPipe))
         {
-            wczytanaLinia = recipientDataSeparatedByPipe;
+            loadedLine = recipientDataSeparatedByPipe;
 
-            if (adresat.getRecipientId() == getRecipientIdFromDataSepararatedByPipe(recipientDataSeparatedByPipe))
+            if (recipient.getRecipientId() == getRecipientIdFromDataSepararatedByPipe(recipientDataSeparatedByPipe))
             {
-                liniaZDanymiAdresataOddzielonePionowymiKreskami = changeRecipientDataOnLineWithDataSeparatedByPipe(adresat);
+                recipientDataInLineSeparatedByPipe = changeRecipientDataOnLineWithDataSeparatedByPipe(recipient);
 
-                if (numerWczytanejLinii == 1)
-                    tymczasowyPlikTekstowy << liniaZDanymiAdresataOddzielonePionowymiKreskami;
-                else if (numerWczytanejLinii > 1)
-                    tymczasowyPlikTekstowy << endl << liniaZDanymiAdresataOddzielonePionowymiKreskami;
+                if (loadedLineNumber == 1)
+                    temporaryTextFile << recipientDataInLineSeparatedByPipe;
+                else if (loadedLineNumber > 1)
+                    temporaryTextFile << endl << recipientDataInLineSeparatedByPipe;
             }
             else
             {
-                if (numerWczytanejLinii == 1)
-                    tymczasowyPlikTekstowy << wczytanaLinia;
-                else if (numerWczytanejLinii > 1)
-                    tymczasowyPlikTekstowy << endl << wczytanaLinia;
+                if (loadedLineNumber == 1)
+                    temporaryTextFile << loadedLine;
+                else if (loadedLineNumber > 1)
+                    temporaryTextFile << endl << loadedLine;
             }
-            numerWczytanejLinii++;
+            loadedLineNumber++;
         }
-        odczytywanyPlikTekstowy.close();
-        tymczasowyPlikTekstowy.close();
+        baseTextFile.close();
+        temporaryTextFile.close();
 
         removeFile(getFileName());
         changeFileName(TEMPORARY_RECIPIENTS_FILE_NAME, getFileName());

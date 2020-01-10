@@ -20,9 +20,9 @@ class PlikiZAdresatami :public PlikTekstowy
     int getUserIdFromDataSepararatedByPipe(string userDataSeparatedByPipe);
     Adresat getRecipientData(string recipientDataSeparatedByPipe);
     int getRecipientIdFromDataSepararatedByPipe(string recipientDataSeparatedByPipe);
-    void removeFile(string nazwaPlikuZRozszerzeniem);
-    void changeFileName(string staraNazwa, string nowaNazwa);
-    int giveLastRecipientIdafterRemovingRecipient(int idUsuwanegoAdresata);
+    void removeFile(string fileNameWithExtension);
+    void changeFileName(string oldName, string newName);
+    int giveLastRecipientIdAfterRemovingRecipient(int removedRecipientId);
     int getLastRecipientIdFromFile();
 
 public:
@@ -30,7 +30,7 @@ public:
     bool appendRecipientToFile(Adresat recipient);
     vector <Adresat> loadLoggedUserRecipientsFromFile(int loggedUserId);
     int getlastRecipientId();
-    int removeRecipientFromFile(int idUsuwanegoAdresata);
+    int removeRecipientFromFile(int recipientId);
     void updateDataOfEditedRecipient(Adresat adresat);
 };
 
