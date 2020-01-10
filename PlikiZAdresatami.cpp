@@ -19,7 +19,7 @@ bool PlikiZAdresatami::appendRecipientToFile(Adresat recipient)
     {
         lineWithRecipientData = changeRecipientDataOnLineWithDataSeparatedByPipe(recipient);
 
-        if (ifFileEmpty() == true)
+        if (isFileEmpty() == true)
         {
             textFile << lineWithRecipientData;
         }
@@ -100,43 +100,43 @@ int PlikiZAdresatami::getRecipientIdFromDataSepararatedByPipe(string recipientDa
 Adresat PlikiZAdresatami::getRecipientData(string recipientDataSeparatedByPipe)
 {
     Adresat recipient;
-    string singleRecipientData = "";
-    int numberOfSingleRecipientData = 1;
+    string separatedRecipientData = "";
+    int numberOfSeparatedRecipientData = 1;
 
     for (int signPosition = 0; signPosition < recipientDataSeparatedByPipe.length(); signPosition++)
     {
         if (recipientDataSeparatedByPipe[signPosition] != '|')
         {
-            singleRecipientData += recipientDataSeparatedByPipe[signPosition];
+            separatedRecipientData += recipientDataSeparatedByPipe[signPosition];
         }
         else
         {
-            switch(numberOfSingleRecipientData)
+            switch(numberOfSeparatedRecipientData)
             {
             case 1:
-                recipient.setRecipientId(atoi(singleRecipientData.c_str()));
+                recipient.setRecipientId(atoi(separatedRecipientData.c_str()));
                 break;
             case 2:
-                recipient.setUserId(atoi(singleRecipientData.c_str()));
+                recipient.setUserId(atoi(separatedRecipientData.c_str()));
                 break;
             case 3:
-                recipient.setName(singleRecipientData);
+                recipient.setName(separatedRecipientData);
                 break;
             case 4:
-                recipient.setSurname(singleRecipientData);
+                recipient.setSurname(separatedRecipientData);
                 break;
             case 5:
-                recipient.setTelephone(singleRecipientData);
+                recipient.setTelephone(separatedRecipientData);
                 break;
             case 6:
-                recipient.setEmail(singleRecipientData);
+                recipient.setEmail(separatedRecipientData);
                 break;
             case 7:
-                recipient.setAddress(singleRecipientData);
+                recipient.setAddress(separatedRecipientData);
                 break;
             }
-            singleRecipientData = "";
-            numberOfSingleRecipientData++;
+            separatedRecipientData = "";
+            numberOfSeparatedRecipientData++;
         }
     }
     return recipient;

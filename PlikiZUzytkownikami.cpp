@@ -1,151 +1,150 @@
 #include "PlikiZUzytkownikami.h"
 
 
-PlikiZUzytkownikami::PlikiZUzytkownikami(string nazwaPliku)
-    :  PlikTekstowy(nazwaPliku)
+PlikiZUzytkownikami::PlikiZUzytkownikami(string fileName)
+    :  PlikTekstowy(fileName)
 {
 }
 
-void PlikiZUzytkownikami::dopiszUzytkownikaDoPliku(Uzytkownik uzytkownik)
+void PlikiZUzytkownikami::addUserToFile(Uzytkownik user)
 {
-    fstream plikTekstowy;
-    string liniaZDanymiUzytkownika = "";
-    plikTekstowy.open(getFileName().c_str(), ios::app);
+    fstream textFile;
+    string lineWithUserData = "";
+    textFile.open(getFileName().c_str(), ios::app);
 
-    if (plikTekstowy.good() == true)
+    if (textFile.good() == true)
     {
-        liniaZDanymiUzytkownika = zamienDaneUzytkownikaNaLinieZDanymiOddzielonaPionowymiKreskami(uzytkownik);
+        lineWithUserData = convertUserDataToLineWithDataSeparatedByPipe(user);
 
-        if (ifFileEmpty() == true)
+        if (isFileEmpty() == true)
         {
-            plikTekstowy << liniaZDanymiUzytkownika;
+            textFile << lineWithUserData;
         }
         else
         {
-            plikTekstowy << endl << liniaZDanymiUzytkownika;
+            textFile << endl << lineWithUserData;
         }
     }
     else
-        cout << "Nie udalo sie otworzyc pliku " << getFileName() << " i zapisac w nim danych." << endl;
-    plikTekstowy.close();
+        cout << "Failed to open " << getFileName() << " and save the data." << endl;
+    textFile.close();
 }
 
-string PlikiZUzytkownikami::zamienDaneUzytkownikaNaLinieZDanymiOddzielonaPionowymiKreskami(Uzytkownik uzytkownik)
+string PlikiZUzytkownikami::convertUserDataToLineWithDataSeparatedByPipe(Uzytkownik user)
 {
-    string liniaZDanymiUzytkownika = "";
+    string lineWithUserData = "";
 
-    liniaZDanymiUzytkownika += MetodyPomocnicze::konwerjsaIntNaString(uzytkownik.getId())+ '|';
-    liniaZDanymiUzytkownika += uzytkownik.getLogin() + '|';
-    liniaZDanymiUzytkownika += uzytkownik.getPassword() + '|';
+    lineWithUserData += MetodyPomocnicze::konwerjsaIntNaString(user.getId())+ '|';
+    lineWithUserData += user.getLogin() + '|';
+    lineWithUserData += user.getPassword() + '|';
 
-    return liniaZDanymiUzytkownika;
+    return lineWithUserData;
 }
 
-vector <Uzytkownik> PlikiZUzytkownikami::wczytajUzytkownikowZPliku()
+vector <Uzytkownik> PlikiZUzytkownikami::loadUsersFromFile()
 {
-    Uzytkownik uzytkownik;
-    fstream plikTekstowy;
-    vector <Uzytkownik> uzytkownicy;
+    Uzytkownik user;
+    fstream textFile;
+    vector <Uzytkownik> users;
 
-    string daneJednegoUzytkownikaOddzielonePionowymiKreskami = "";
+    string userDataSeparatedByPipe = "";
 
-    plikTekstowy.open(getFileName().c_str(), ios::in);
+    textFile.open(getFileName().c_str(), ios::in);
 
-    if (plikTekstowy.good() == true)
+    if (textFile.good() == true)
     {
-        while (getline(plikTekstowy, daneJednegoUzytkownikaOddzielonePionowymiKreskami))
+        while (getline(textFile, userDataSeparatedByPipe))
         {
-            uzytkownik = pobierzDaneUzytkownika(daneJednegoUzytkownikaOddzielonePionowymiKreskami);
-            uzytkownicy.push_back(uzytkownik);
+            user = getUserData(userDataSeparatedByPipe);
+            users.push_back(user);
         }
-
     }
-    plikTekstowy.close();
+    textFile.close();
 
-    return uzytkownicy;
+    return users;
 }
 
-Uzytkownik PlikiZUzytkownikami::pobierzDaneUzytkownika(string daneJednegoUzytkownikaOddzielonePionowymiKreskami)
+Uzytkownik PlikiZUzytkownikami::getUserData(string userDataSeparatedByPipe)
 {
-    Uzytkownik uzytkownik;
-    string pojedynczaDanaUzytkownika = "";
-    int numerPojedynczejDanejUzytkownika = 1;
+    Uzytkownik user;
+    string separatedUserData = "";
+    int numberOfSeparatedUserData = 1;
 
-    for (int pozycjaZnaku = 0; pozycjaZnaku < daneJednegoUzytkownikaOddzielonePionowymiKreskami.length(); pozycjaZnaku++)
+    for (int signPosition = 0; signPosition < userDataSeparatedByPipe.length(); signPosition++)
     {
-        if (daneJednegoUzytkownikaOddzielonePionowymiKreskami[pozycjaZnaku] != '|')
+        if (userDataSeparatedByPipe[signPosition] != '|')
         {
-            pojedynczaDanaUzytkownika += daneJednegoUzytkownikaOddzielonePionowymiKreskami[pozycjaZnaku];
+            separatedUserData += userDataSeparatedByPipe[signPosition];
         }
         else
         {
-            switch(numerPojedynczejDanejUzytkownika)
+            switch(numberOfSeparatedUserData)
             {
             case 1:
-                uzytkownik.setId(atoi(pojedynczaDanaUzytkownika.c_str()));
+                user.setId(atoi(separatedUserData.c_str()));
                 break;
             case 2:
-                uzytkownik.setLogin(pojedynczaDanaUzytkownika);
+                user.setLogin(separatedUserData);
                 break;
             case 3:
-                uzytkownik.setPassword(pojedynczaDanaUzytkownika);
+                user.setPassword(separatedUserData);
                 break;
             }
-            pojedynczaDanaUzytkownika = "";
-            numerPojedynczejDanejUzytkownika++;
+            separatedUserData = "";
+            numberOfSeparatedUserData++;
         }
     }
-    return uzytkownik;
+    return user;
 }
 
-vector <Uzytkownik> PlikiZUzytkownikami::zmianaHaslaZalogowanegoUzytkownika(int idZalogowanegoUzytkownika,vector <Uzytkownik> uzytkownicy)
+vector <Uzytkownik> PlikiZUzytkownikami::changePasswordOfLoggedInUser(int loggedInUserId,vector <Uzytkownik> users)
 {
-    string noweHaslo = "";
-    cout << "Podaj nowe haslo: ";
-    noweHaslo = MetodyPomocnicze::wczytajLinie();
+    string newPassword = "";
+    cout << "Enter new password: ";
+    newPassword = MetodyPomocnicze::wczytajLinie();
 
-    for (int i = 0; i < uzytkownicy.size(); i++)
+    for (int i = 0; i < users.size(); i++)
     {
-        if (uzytkownicy[i].getId() == idZalogowanegoUzytkownika)
+        if (users[i].getId() == loggedInUserId)
         {
-            uzytkownicy[i].setPassword(noweHaslo);
-            cout << "Haslo zostalo zmienione." << endl << endl;
+            users[i].setPassword(newPassword);
+            cout << "The password has been changed." << endl << endl;
             system("pause");
         }
     }
-    zapiszWszystkichUzytkownikowDoPliku(uzytkownicy);
+    saveAllUsersToFile(users);
 
-    return uzytkownicy;
+    return users;
 }
 
-void PlikiZUzytkownikami::zapiszWszystkichUzytkownikowDoPliku(vector <Uzytkownik> uzytkownicy)
+void PlikiZUzytkownikami::saveAllUsersToFile(vector <Uzytkownik> users)
 {
-    fstream plikTekstowy;
-    string liniaZDanymiUzytkownika = "";
-    vector <Uzytkownik>::iterator itrKoniec = --uzytkownicy.end();
+    fstream textFile;
+    string lineWithUserData = "";
+    vector <Uzytkownik>::iterator itrEnd = --users.end();
 
-    plikTekstowy.open(getFileName().c_str(), ios::out);
+    textFile.open(getFileName().c_str(), ios::out);
 
-    if (plikTekstowy.good() == true)
+    if (textFile.good() == true)
     {
-        for (vector <Uzytkownik>::iterator itr = uzytkownicy.begin(); itr != uzytkownicy.end(); itr++)
+        for (vector <Uzytkownik>::iterator itr = users.begin(); itr != users.end(); itr++)
         {
-            liniaZDanymiUzytkownika = zamienDaneUzytkownikaNaLinieZDanymiOddzielonaPionowymiKreskami(*itr);
+            lineWithUserData = convertUserDataToLineWithDataSeparatedByPipe(*itr);
 
-            if (itr == itrKoniec)
+            if (itr == itrEnd)
             {
-               plikTekstowy << liniaZDanymiUzytkownika;
+                textFile << lineWithUserData;
             }
             else
             {
-                plikTekstowy << liniaZDanymiUzytkownika << endl;
+                textFile << lineWithUserData << endl;
             }
-            liniaZDanymiUzytkownika = "";
+            lineWithUserData = "";
         }
     }
     else
     {
-        cout << "Nie mozna otworzyc pliku " << getFileName() << endl;
+        cout << "Failed to open a file." << getFileName() << endl;
     }
-    plikTekstowy.close();
+    textFile.close();
 }

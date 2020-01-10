@@ -1,6 +1,6 @@
 #include "PlikTekstowy.h"
 
-bool PlikTekstowy::ifFileEmpty()
+bool PlikTekstowy::isFileEmpty()
 {
     bool isEmpty = true;
     fstream textFile;

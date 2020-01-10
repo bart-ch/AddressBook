@@ -18,7 +18,7 @@ public:
     }
 
     string getFileName();
-    bool ifFileEmpty();
+    bool isFileEmpty();
 };
 
 #endif

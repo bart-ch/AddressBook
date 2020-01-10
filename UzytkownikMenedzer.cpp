@@ -4,7 +4,7 @@ UzytkownikMenedzer::UzytkownikMenedzer(string nazwaPlikuZUzytkownikami)
     : plikZUzytkownikami(nazwaPlikuZUzytkownikami)
 {
     idZalogowanegoUzytkownika = 0;
-    uzytkownicy = plikZUzytkownikami.wczytajUzytkownikowZPliku();
+    uzytkownicy = plikZUzytkownikami.loadUsersFromFile();
 }
 
 void UzytkownikMenedzer::rejestracjaUzytkownika()
@@ -12,7 +12,7 @@ void UzytkownikMenedzer::rejestracjaUzytkownika()
     Uzytkownik uzytkownik = podajDaneNowegoUzytkownika();
 
     uzytkownicy.push_back(uzytkownik);
-    plikZUzytkownikami.dopiszUzytkownikaDoPliku(uzytkownik);
+    plikZUzytkownikami.addUserToFile(uzytkownik);
 
     cout << endl << "Konto zalozono pomyslnie" << endl << endl;
     system("pause");
@@ -74,7 +74,7 @@ void UzytkownikMenedzer::wypiszWszystkichUzytkownikow()
 
 void UzytkownikMenedzer::zmianaHaslaZalogowanegoUzytkownika()
 {
-    uzytkownicy = plikZUzytkownikami.zmianaHaslaZalogowanegoUzytkownika(idZalogowanegoUzytkownika,uzytkownicy);
+    uzytkownicy = plikZUzytkownikami.changePasswordOfLoggedInUser(idZalogowanegoUzytkownika,uzytkownicy);
 }
 
 int UzytkownikMenedzer::logowanieUzytkownika()

@@ -14,17 +14,15 @@ using namespace std;
 
 class PlikiZUzytkownikami :public PlikTekstowy
 {
-    const string NAZWA_PLIKU_Z_UZYTKOWNIKAMI;
-
-    string zamienDaneUzytkownikaNaLinieZDanymiOddzielonaPionowymiKreskami(Uzytkownik uzytkownik);
-    Uzytkownik pobierzDaneUzytkownika(string daneJednegoUzytkownikaOddzielonePionowymiKreskami);
-    void zapiszWszystkichUzytkownikowDoPliku(vector <Uzytkownik> uzytkownicy);
+    string convertUserDataToLineWithDataSeparatedByPipe(Uzytkownik user);
+    Uzytkownik getUserData(string userDataSeparatedByPipe);
+    void saveAllUsersToFile(vector <Uzytkownik> users);
 
 public:
     PlikiZUzytkownikami(string);
-    void dopiszUzytkownikaDoPliku(Uzytkownik uzytkownik);
-    vector <Uzytkownik> wczytajUzytkownikowZPliku();
-    vector <Uzytkownik> zmianaHaslaZalogowanegoUzytkownika(int idZalogowanegoUzytkownika,vector <Uzytkownik> uzytkownicy);
+    void addUserToFile(Uzytkownik user);
+    vector <Uzytkownik> loadUsersFromFile();
+    vector <Uzytkownik> changePasswordOfLoggedInUser(int idZalogowanegoUzytkownika,vector <Uzytkownik> users);
 };
 
 #endif
