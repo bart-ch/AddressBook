@@ -7,23 +7,23 @@
 
 class AdresatMenedzer
 {
-    const int ID_ZALOGOWANEGO_UZYTKOWNIKA;
-    vector <Adresat> adresaci;
-    PlikiZAdresatami plikiZAdresatami;
+    const int LOGGED_USER_ID;
+    vector <Adresat> recipients;
+    PlikiZAdresatami recipientsFiles;
 
-    Adresat podajDaneNowegoAdresata();
-    int podajIdWybranegoAdresata();
+    Adresat enterNewRecipientData();
+    int enterRecipientId();
     char wybierzOpcjeZMenuEdycja();
     void wyswietlDaneAdresata(Adresat adresat);
     void wyswietlIloscWyszukanychAdresatow(int iloscAdresatow);
 
 public:
 
-    AdresatMenedzer(string nazwaPlikuZAdresatami, string nazwaPlikuTymczasowegoZAdresatami, int idZalogowanegoUzytkownika);
-    void dodajAdresata();
-    void wypiszWszystkichAdresatow();
-    int usunAdresata();
-    void edytujAdresata();
+    AdresatMenedzer(string recipientTextFile, string temporaryRecipientTextFile, int loggedUserId);
+    void addRecipient();
+    void listAllRecipients();
+    int deleteRecipient();
+    void editRecipient();
     void wyszukajAdresatowPoImieniu();
     void wyszukajAdresatowPoNazwisku();
 };

@@ -1,202 +1,200 @@
 #include "AdresatMenedzer.h"
 
-AdresatMenedzer::AdresatMenedzer(string nazwaPlikuZAdresatami, string nazwaPlikuTymczasowegoZAdresatami, int idZalogowanegoUzytkownika)
-    : plikiZAdresatami(nazwaPlikuZAdresatami,nazwaPlikuTymczasowegoZAdresatami),
-      ID_ZALOGOWANEGO_UZYTKOWNIKA(idZalogowanegoUzytkownika)
+AdresatMenedzer::AdresatMenedzer(string recipientTextFile, string temporaryRecipientTextFile, int loggedUserId)
+    : recipientsFiles(recipientTextFile,temporaryRecipientTextFile),
+      LOGGED_USER_ID(loggedUserId)
 {
-    adresaci = plikiZAdresatami.loadLoggedUserRecipientsFromFile(ID_ZALOGOWANEGO_UZYTKOWNIKA);
+    recipients = recipientsFiles.loadLoggedUserRecipientsFromFile(LOGGED_USER_ID);
 }
 
-void AdresatMenedzer::dodajAdresata()
+void AdresatMenedzer::addRecipient()
 {
-    Adresat adresat;
+    Adresat recipient;
 
     system("cls");
-    cout << " >>> DODAWANIE NOWEGO ADRESATA <<<" << endl << endl;
-    adresat = podajDaneNowegoAdresata();
+    cout << " >>> NEW RECIPIENT MENU <<<" << endl << endl;
+    recipient = enterNewRecipientData();
 
-    adresaci.push_back(adresat);
-    if(plikiZAdresatami.appendRecipientToFile(adresat))
-        cout << "Nowy adresat zostal dodany" << endl;
+    recipients.push_back(recipient);
+    if(recipientsFiles.appendRecipientToFile(recipient))
+        cout << "New recipient has been added." << endl;
     else
-        cout << "Blad. Nie udalo sie dodac nowego adresata do pliku." << endl;
+        cout << "Failed to append new recipient to file." << endl;
 
     system("Pause");
 
 }
 
-Adresat AdresatMenedzer::podajDaneNowegoAdresata()
+Adresat AdresatMenedzer::enterNewRecipientData()
 {
-    Adresat adresat;
-    string imie,nazwisko,numerTelefonu,email,adres;
+    Adresat recipient;
+    string name,surname,phoneNumber,email,address;
 
-    adresat.setRecipientId(plikiZAdresatami.getlastRecipientId() + 1);
-    adresat.setUserId(ID_ZALOGOWANEGO_UZYTKOWNIKA);
+    recipient.setRecipientId(recipientsFiles.getlastRecipientId() + 1);
+    recipient.setUserId(LOGGED_USER_ID);
 
-    cout << "Podaj imie: ";
-    imie = MetodyPomocnicze::wczytajLinie();
-    imie = MetodyPomocnicze::zamienPierwszaLitereNaDuzaAPozostaleNaMale(imie);
+    cout << "Enter name: ";
+    name = MetodyPomocnicze::wczytajLinie();
+    name = MetodyPomocnicze::zamienPierwszaLitereNaDuzaAPozostaleNaMale(name);
 
-    cout << "Podaj nazwisko: ";
-    nazwisko = MetodyPomocnicze::wczytajLinie();
-    nazwisko = MetodyPomocnicze::zamienPierwszaLitereNaDuzaAPozostaleNaMale(nazwisko);
+    cout << "Enter surname: ";
+    surname = MetodyPomocnicze::wczytajLinie();
+    surname = MetodyPomocnicze::zamienPierwszaLitereNaDuzaAPozostaleNaMale(surname);
 
-    cout << "Podaj numer telefonu: ";
-    numerTelefonu = MetodyPomocnicze::wczytajLinie();
+    cout << "Enter phone number: ";
+    phoneNumber = MetodyPomocnicze::wczytajLinie();
 
-    cout << "Podaj email: ";
+    cout << "Enter email address: ";
     email = MetodyPomocnicze::wczytajLinie();
 
-    cout << "Podaj adres: ";
-    adres = MetodyPomocnicze::wczytajLinie();
+    cout << "Enter address: ";
+    address = MetodyPomocnicze::wczytajLinie();
 
-    adresat.setName(imie);
-    adresat.setSurname(nazwisko);
-    adresat.setTelephone(numerTelefonu);
-    adresat.setEmail(email);
-    adresat.setAddress(adres);
+    recipient.setName(name);
+    recipient.setSurname(surname);
+    recipient.setTelephone(phoneNumber);
+    recipient.setEmail(email);
+    recipient.setAddress(address);
 
-    return adresat;
+    return recipient;
 }
 
-void AdresatMenedzer::wypiszWszystkichAdresatow()
+void AdresatMenedzer::listAllRecipients()
 {
-    if(adresaci.empty() == true)
+    if(recipients.empty() == true)
     {
-        cout << "Ksiazka adresowa jest pusta." << endl;
+        cout << "Address book is empty." << endl;
         system("pause");
         return;
     }
     else
     {
-        for(int i = 0; i<adresaci.size(); i++)
+        for(int i = 0; i < recipients.size(); i++)
         {
-            cout << "ID: " << adresaci[i].getRecipientId() << endl;
-            cout << "Imie: " << adresaci[i].getName() << endl;
-            cout << "Nazwisko: " << adresaci[i].getSurname() << endl;
-            cout << "Numer telefonu: " << adresaci[i].getTelephone() << endl;
-            cout << "Email: " << adresaci[i].getEmail() << endl;
-            cout << "Adres: " << adresaci[i].getAddress() << endl << endl;
+            cout << "ID: " << recipients[i].getRecipientId() << endl;
+            cout << "Name: " << recipients[i].getName() << endl;
+            cout << "Surname: " << recipients[i].getSurname() << endl;
+            cout << "Phone number: " << recipients[i].getTelephone() << endl;
+            cout << "Email address: " << recipients[i].getEmail() << endl;
+            cout << "Address: " << recipients[i].getAddress() << endl << endl;
         }
         system("pause");
     }
 }
 
-int AdresatMenedzer::usunAdresata()
+int AdresatMenedzer::deleteRecipient()
 {
-    int idUsuwanegoAdresata = 0;
-    int numerLiniiUsuwanegoAdresata = 0;
+    int deletedRecipientId = 0;
 
     system("cls");
-    cout << ">>> USUWANIE WYBRANEGO ADRESATA <<<" << endl << endl;
-    idUsuwanegoAdresata = podajIdWybranegoAdresata();
+    cout << ">>> DELETE RECIPIENT MENU <<<" << endl << endl;
+    deletedRecipientId = enterRecipientId();
 
-    char znak;
-    bool czyIstniejeAdresat = false;
+    char sign;
+    bool isRecipientExists = false;
 
-    for (int i = 0; i < adresaci.size(); i++)
+    for (int i = 0; i < recipients.size(); i++)
     {
-        if (adresaci[i].getRecipientId() == idUsuwanegoAdresata)
+        if (recipients[i].getRecipientId() == deletedRecipientId)
         {
-            czyIstniejeAdresat = true;
-            cout << endl << "Potwierdz naciskajac klawisz 't': ";
-            znak = MetodyPomocnicze::wczytajZnak();
-            if (znak == 't')
+            isRecipientExists = true;
+            cout << endl << "To confirm press 't': ";
+            sign = MetodyPomocnicze::wczytajZnak();
+            if (sign == 't')
             {
-                plikiZAdresatami.removeRecipientFromFile(idUsuwanegoAdresata);
-                adresaci.erase(adresaci.begin()+ i);
-                cout << endl << endl << "Szukany adresat zostal USUNIETY" << endl << endl;
+                recipientsFiles.removeRecipientFromFile(deletedRecipientId);
+                recipients.erase(recipients.begin()+ i);
+                cout << endl << endl << "The recipient has been DELETED" << endl << endl;
                 system("pause");
-                return idUsuwanegoAdresata;
+                return deletedRecipientId;
             }
             else
             {
-                cout << endl << endl << "Wybrany adresat NIE zostal usuniety" << endl << endl;
+                cout << endl << endl << "Failed to delete the recipient" << endl << endl;
                 system("pause");
                 return 0;
             }
         }
     }
-    if (czyIstniejeAdresat == false)
+    if (isRecipientExists == false)
     {
-        cout << endl << "Nie ma takiego adresata w ksiazce adresowej" << endl << endl;
+        cout << endl << "The recipient does not exist." << endl << endl;
         system("pause");
     }
     return 0;
 }
 
-int AdresatMenedzer::podajIdWybranegoAdresata()
+int AdresatMenedzer::enterRecipientId()
 {
-    int idWybranegoAdresata = 0;
-    cout << "Podaj numer ID Adresata: ";
-    idWybranegoAdresata  = MetodyPomocnicze::wczytajLiczbeCalkowita();
-    return idWybranegoAdresata;
+    int recipientId = 0;
+    cout << "Enter recipient ID: ";
+    recipientId  = MetodyPomocnicze::wczytajLiczbeCalkowita();
+    return recipientId;
 }
 
-void AdresatMenedzer::edytujAdresata()
+void AdresatMenedzer::editRecipient()
 {
     system("cls");
-    string nowaDana = "";
-    int idEdytowanegoAdresata = 0;
-    string liniaZDanymiAdresata = "";
+    string newSingleData = "";
+    int editedRecipientId = 0;
 
-    cout << ">>> EDYCJA WYBRANEGO ADRESATA <<<" << endl << endl;
-    idEdytowanegoAdresata = podajIdWybranegoAdresata();
+    cout << ">>> EDIT RECIPIENT MENU <<<" << endl << endl;
+    editedRecipientId = enterRecipientId();
 
-    char wybor;
-    bool czyIstniejeAdresat = false;
+    char sign;
+    bool doesRecipientExist = false;
 
-    for (int i = 0; i < adresaci.size(); i++)
+    for (int i = 0; i < recipients.size(); i++)
     {
-        if (adresaci[i].getRecipientId() == idEdytowanegoAdresata)
+        if (recipients[i].getRecipientId() == editedRecipientId)
         {
-            czyIstniejeAdresat = true;
-            wybor = wybierzOpcjeZMenuEdycja();
+            doesRecipientExist = true;
+            sign = wybierzOpcjeZMenuEdycja();
 
-            switch (wybor)
+            switch (sign)
             {
             case '1':
-                cout << "Podaj nowe imie: ";
-                nowaDana = MetodyPomocnicze::wczytajLinie();
-                nowaDana = MetodyPomocnicze::zamienPierwszaLitereNaDuzaAPozostaleNaMale(nowaDana);
-                adresaci[i].setName(nowaDana);
-                plikiZAdresatami.updateDataOfEditedRecipient(adresaci[i]);
+                cout << "Enter new name: ";
+                newSingleData = MetodyPomocnicze::wczytajLinie();
+                newSingleData = MetodyPomocnicze::zamienPierwszaLitereNaDuzaAPozostaleNaMale(newSingleData);
+                recipients[i].setName(newSingleData);
+                recipientsFiles.updateDataOfEditedRecipient(recipients[i]);
                 break;
             case '2':
-                cout << "Podaj nowe nazwisko: ";
-                nowaDana = MetodyPomocnicze::wczytajLinie();
-                nowaDana = MetodyPomocnicze::zamienPierwszaLitereNaDuzaAPozostaleNaMale(nowaDana);
-                adresaci[i].setSurname(nowaDana);
-                plikiZAdresatami.updateDataOfEditedRecipient(adresaci[i]);
+                cout << "Enter new surname: ";
+                newSingleData = MetodyPomocnicze::wczytajLinie();
+                newSingleData = MetodyPomocnicze::zamienPierwszaLitereNaDuzaAPozostaleNaMale(newSingleData);
+                recipients[i].setSurname(newSingleData);
+                recipientsFiles.updateDataOfEditedRecipient(recipients[i]);
                 break;
             case '3':
-                cout << "Podaj nowy numer telefonu: ";
-                nowaDana = MetodyPomocnicze::wczytajLinie();
-                adresaci[i].setTelephone(nowaDana);
-                plikiZAdresatami.updateDataOfEditedRecipient(adresaci[i]);
+                cout << "Enter new phone number: ";
+                newSingleData = MetodyPomocnicze::wczytajLinie();
+                recipients[i].setTelephone(newSingleData);
+                recipientsFiles.updateDataOfEditedRecipient(recipients[i]);
                 break;
             case '4':
-                cout << "Podaj nowy email: ";
-                nowaDana = MetodyPomocnicze::wczytajLinie();
-                adresaci[i].setEmail(nowaDana);
-                plikiZAdresatami.updateDataOfEditedRecipient(adresaci[i]);
+                cout << "Enter new email address: ";
+                newSingleData = MetodyPomocnicze::wczytajLinie();
+                recipients[i].setEmail(newSingleData);
+                recipientsFiles.updateDataOfEditedRecipient(recipients[i]);
                 break;
             case '5':
-                cout << "Podaj nowy adres zamieszkania: ";
-                nowaDana = MetodyPomocnicze::wczytajLinie();
-                adresaci[i].setAddress(nowaDana);
-                plikiZAdresatami.updateDataOfEditedRecipient(adresaci[i]);
+                cout << "Enter new address: ";
+                newSingleData = MetodyPomocnicze::wczytajLinie();
+                recipients[i].setAddress(newSingleData);
+                recipientsFiles.updateDataOfEditedRecipient(recipients[i]);
                 break;
             case '6':
-                cout << endl << "Powrot do menu uzytkownika" << endl << endl;
+                cout << endl << "Returning to the user menu." << endl << endl;
                 break;
             default:
-                cout << endl << "Nie ma takiej opcji w menu! Powrot do menu uzytkownika." << endl << endl;
+                cout << endl << "Invalid number! Returning to the user menu." << endl << endl;
                 break;
             }
         }
     }
-    if (czyIstniejeAdresat == false)
+    if (doesRecipientExist == false)
     {
         cout << endl << "Nie ma takiego adresata." << endl << endl;
     }
@@ -205,7 +203,7 @@ void AdresatMenedzer::edytujAdresata()
 
 char AdresatMenedzer::wybierzOpcjeZMenuEdycja()
 {
-    char wybor;
+    char sign;
 
     cout << endl << "   >>> MENU  EDYCJA <<<" << endl;
     cout << "---------------------------" << endl;
@@ -217,9 +215,9 @@ char AdresatMenedzer::wybierzOpcjeZMenuEdycja()
     cout << "5 - Adres" << endl;
     cout << "6 - Powrot " << endl;
     cout << endl << "Twoj wybor: ";
-    wybor = MetodyPomocnicze::wczytajZnak();
+    sign = MetodyPomocnicze::wczytajZnak();
 
-    return wybor;
+    return sign;
 }
 
 void AdresatMenedzer::wyszukajAdresatowPoImieniu()
@@ -228,7 +226,7 @@ void AdresatMenedzer::wyszukajAdresatowPoImieniu()
     int iloscAdresatow = 0;
 
     system("cls");
-    if (!adresaci.empty())
+    if (!recipients.empty())
     {
         cout << ">>> WYSZUKIWANIE ADRESATOW O IMIENIU <<<" << endl << endl;
 
@@ -236,7 +234,7 @@ void AdresatMenedzer::wyszukajAdresatowPoImieniu()
         imiePoszukiwanegoAdresata = MetodyPomocnicze::wczytajLinie();
         imiePoszukiwanegoAdresata = MetodyPomocnicze::zamienPierwszaLitereNaDuzaAPozostaleNaMale(imiePoszukiwanegoAdresata);
 
-        for (vector <Adresat>::iterator  itr = adresaci.begin(); itr != adresaci.end(); itr++)
+        for (vector <Adresat>::iterator  itr = recipients.begin(); itr != recipients.end(); itr++)
         {
             if (itr -> getName() == imiePoszukiwanegoAdresata)
             {
@@ -278,7 +276,7 @@ void AdresatMenedzer::wyszukajAdresatowPoNazwisku()
     int iloscAdresatow = 0;
 
     system("cls");
-    if (!adresaci.empty())
+    if (!recipients.empty())
     {
         cout << ">>> WYSZUKIWANIE ADRESATOW O NAZWISKU <<<" << endl << endl;
 
@@ -286,7 +284,7 @@ void AdresatMenedzer::wyszukajAdresatowPoNazwisku()
         nazwiskoPoszukiwanegoAdresata = MetodyPomocnicze::wczytajLinie();
         nazwiskoPoszukiwanegoAdresata = MetodyPomocnicze::zamienPierwszaLitereNaDuzaAPozostaleNaMale(nazwiskoPoszukiwanegoAdresata);
 
-        for (vector <Adresat>::iterator itr = adresaci.begin(); itr != adresaci.end(); itr++)
+        for (vector <Adresat>::iterator itr = recipients.begin(); itr != recipients.end(); itr++)
         {
             if (itr -> getSurname() == nazwiskoPoszukiwanegoAdresata)
             {

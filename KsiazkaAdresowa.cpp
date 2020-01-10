@@ -41,13 +41,13 @@ void KsiazkaAdresowa::dodajAdresata()
 {
     if(uzytkownikMenedzer.czyUzytkownikJestZalogowany())
     {
-        adresatMenedzer->dodajAdresata();
+        adresatMenedzer->addRecipient();
     }
 }
 
 void KsiazkaAdresowa::wypiszWszystkichAdresatow()
 {
-    adresatMenedzer->wypiszWszystkichAdresatow();
+    adresatMenedzer->listAllRecipients();
 }
 
 void KsiazkaAdresowa::wyloguj()
@@ -107,12 +107,12 @@ bool KsiazkaAdresowa::czyUzytkownikJestZalogowany()
 
 void KsiazkaAdresowa::usunaAdresata()
 {
-     adresatMenedzer->usunAdresata();
+     adresatMenedzer->deleteRecipient();
 }
 
 void KsiazkaAdresowa::edytujAdresata()
 {
-    adresatMenedzer->edytujAdresata();
+    adresatMenedzer->editRecipient();
 }
 
 void KsiazkaAdresowa::wyszukajAdresatowPoImieniu()
