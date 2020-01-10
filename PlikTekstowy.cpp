@@ -1,23 +1,23 @@
 #include "PlikTekstowy.h"
 
-bool PlikTekstowy::czyPlikJestPusty()
+bool PlikTekstowy::ifFileEmpty()
 {
-    bool pusty = true;
-    fstream plikTekstowy;
-    plikTekstowy.open(pobierzNazwePliku().c_str(), ios::app);
+    bool isEmpty = true;
+    fstream textFile;
+    textFile.open(getFileName().c_str(), ios::app);
 
-    if (plikTekstowy.good() == true)
+    if (textFile.good() == true)
     {
-        plikTekstowy.seekg(0, ios::end);
-        if (plikTekstowy.tellg() != 0)
-            pusty = false;
+        textFile.seekg(0, ios::end);
+        if (textFile.tellg() != 0)
+            isEmpty = false;
     }
 
-    plikTekstowy.close();
-    return pusty;
+    textFile.close();
+    return isEmpty;
 }
 
-string PlikTekstowy::pobierzNazwePliku()
+string PlikTekstowy::getFileName()
 {
-    return NAZWA_PLIKU;
+    return FILE_NAME;
 }

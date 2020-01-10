@@ -8,17 +8,17 @@ using namespace std;
 
 class PlikTekstowy
 {
-    const string NAZWA_PLIKU;
+    const string FILE_NAME;
 
 public:
 
-    PlikTekstowy(string nazwaPliku)
-        : NAZWA_PLIKU(nazwaPliku)
+    PlikTekstowy(string fileName)
+        : FILE_NAME(fileName)
     {
     }
 
-    string pobierzNazwePliku();
-    bool czyPlikJestPusty();
+    string getFileName();
+    bool ifFileEmpty();
 };
 
 #endif
