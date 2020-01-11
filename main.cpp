@@ -1,27 +1,27 @@
 #include <iostream>
-#include "KsiazkaAdresowa.h"
+#include "AddressBook.h"
 
 using namespace std;
 
 int main()
 {
-    KsiazkaAdresowa ksiazka;
+    AddressBook addressBook;
 
-    char wybor;
+    char choice;
 
     while (true)
     {
-        if (ksiazka.czyUzytkownikJestZalogowany() == false)
+        if (addressBook.isUserLoggedIn() == false)
         {
-            wybor = ksiazka.wybierzOpcjeZMenuGlownego();
+            choice = addressBook.selectChoiceFromMainMenu();
 
-            switch (wybor)
+            switch (choice)
             {
             case '1':
-                ksiazka.rejestracjaUzytkownika();
+                addressBook.registerUser();
                 break;
             case '2':
-                ksiazka.logowanieUzytkownika();
+                addressBook.logIn();
                 break;
             case '9':
                 exit(0);
@@ -34,33 +34,33 @@ int main()
         }
         else
         {
-            wybor = ksiazka.wybierzOpcjeZMenuUzytkownika();
+            choice = addressBook.selectChoiceFromUserMenu();
 
-            switch (wybor)
+            switch (choice)
             {
             case '1':
-                ksiazka.dodajAdresata();
+                addressBook.addRecipient();
                 break;
             case '2':
-                ksiazka.wyszukajAdresatowPoImieniu();
+                addressBook.searchRecipientsByName();
                 break;
             case '3':
-                ksiazka.wyszukajAdresatowPoNazwisku();
+                addressBook.searchRecipientsBySurname();
                 break;
             case '4':
-                ksiazka.wypiszWszystkichAdresatow();
+                addressBook.listAllRecipients();
                 break;
             case '5':
-                ksiazka.usunaAdresata();
+                addressBook.deleteRecipient();
                 break;
             case '6':
-                ksiazka.edytujAdresata();
+                addressBook.editRecipient();
                 break;
             case '7':
-                ksiazka.zmianaHaslaZalogowanegoUzytkownika();
+                addressBook.changePasswordOfLoggedInUser();
                 break;
             case '8':
-                ksiazka.wyloguj();
+                addressBook.logOut();
                 break;
             }
         }
