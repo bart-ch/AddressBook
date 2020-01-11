@@ -1,23 +1,23 @@
-#ifndef KSIAZKAADRESOWA_H
-#define KSIAZKAADRESOWA_H
+#ifndef ADDRESSBOOK_H
+#define ADDRESSBOOK_H
 #include <iostream>
 
-#include "UzytkownikMenedzer.h"
-#include "AdresatMenedzer.h"
+#include "UserManager.h"
+#include "RecipientManager.h"
 
 using namespace std;
 
-class KsiazkaAdresowa
+class AddressBook
 {
-    UzytkownikMenedzer userManager;
-    AdresatMenedzer *recipientManager;
+    UserManager userManager;
+    RecipientManager *recipientManager;
     const string RECIPIENTS_FILE_NAME;
     const string TEMPORARY_RECIPIENTS_FILE_NAME;
 
 public:
 
-    KsiazkaAdresowa(string nazwaPlikuZUzytkownikami="Uzytkownicy.txt",string nazwaPlikuZAdresatami="Adresaci.txt",string nazwaPlikuTymczasowegoZAdresatami="Adresaci_tymczas.txt");
-    ~KsiazkaAdresowa();
+    AddressBook(string usersFileName="Users.txt",string recipientsFileName="Recipients.txt",string temporaryRecipientsFileName="Recipients_temp.txt");
+    ~AddressBook();
     void registerUser();
     void listAllUsers();
     void logIn();

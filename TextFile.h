@@ -1,18 +1,18 @@
-#ifndef PLIKTEKSTOWY_H
-#define PLIKTEKSTOWY_H
+#ifndef TEXTFILE_H
+#define TEXTFILE_H
 
 #include <iostream>
 #include <fstream>
 
 using namespace std;
 
-class PlikTekstowy
+class TextFile
 {
     const string FILE_NAME;
 
 public:
 
-    PlikTekstowy(string fileName)
+    TextFile(string fileName)
         : FILE_NAME(fileName)
     {
     }

@@ -1,11 +1,11 @@
-#ifndef ADRESAT_H
-#define ADRESAT_H
+#ifndef RECIPIENT_H
+#define RECIPIENT_H
 
 #include <iostream>
 
 using namespace std;
 
-class Adresat
+class Recipient
 {
     int id, userId;
     string name, surname, telephone, email, address;

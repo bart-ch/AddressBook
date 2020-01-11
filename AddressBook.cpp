@@ -1,43 +1,43 @@
-#include "KsiazkaAdresowa.h"
+#include "AddressBook.h"
 
-KsiazkaAdresowa::KsiazkaAdresowa(string usersFileName,string recipientsFileName,string temporaryRecipientsFileName)
+AddressBook::AddressBook(string usersFileName,string recipientsFileName,string temporaryRecipientsFileName)
     : userManager(usersFileName),
       RECIPIENTS_FILE_NAME(recipientsFileName),
     TEMPORARY_RECIPIENTS_FILE_NAME(temporaryRecipientsFileName)
 {
 }
 
-KsiazkaAdresowa::~KsiazkaAdresowa()
+AddressBook::~AddressBook()
 {
     delete recipientManager;
     recipientManager = NULL;
 }
 
-void KsiazkaAdresowa::registerUser()
+void AddressBook::registerUser()
 {
     userManager.registerAUser();
 }
 
-void KsiazkaAdresowa::listAllUsers()
+void AddressBook::listAllUsers()
 {
     userManager.listAllUsers();
 }
 
-void KsiazkaAdresowa::logIn()
+void AddressBook::logIn()
 {
     userManager.logIn();
     if(userManager.isUserLoggedIn())
     {
-        recipientManager = new AdresatMenedzer(RECIPIENTS_FILE_NAME,TEMPORARY_RECIPIENTS_FILE_NAME,userManager.getLoggedInUserId());
+        recipientManager = new RecipientManager(RECIPIENTS_FILE_NAME,TEMPORARY_RECIPIENTS_FILE_NAME,userManager.getLoggedInUserId());
     }
 }
 
-void KsiazkaAdresowa::changePasswordOfLoggedInUser()
+void AddressBook::changePasswordOfLoggedInUser()
 {
     userManager.changePasswordOfLoggedInUser();
 }
 
-void KsiazkaAdresowa::addRecipient()
+void AddressBook::addRecipient()
 {
     if(userManager.isUserLoggedIn())
     {
@@ -45,19 +45,19 @@ void KsiazkaAdresowa::addRecipient()
     }
 }
 
-void KsiazkaAdresowa::listAllRecipients()
+void AddressBook::listAllRecipients()
 {
     recipientManager->listAllRecipients();
 }
 
-void KsiazkaAdresowa::logOut()
+void AddressBook::logOut()
 {
     userManager.logOut();
     delete recipientManager;
     recipientManager = NULL;
 }
 
-char KsiazkaAdresowa::selectChoiceFromUserMenu()
+char AddressBook::selectChoiceFromUserMenu()
 {
     char choice;
 
@@ -75,12 +75,12 @@ char KsiazkaAdresowa::selectChoiceFromUserMenu()
     cout << "8. Log out" << endl;
     cout << "---------------------------" << endl;
     cout << "Your choice: ";
-    choice = MetodyPomocnicze::getCharacter();
+    choice = AncillaryMethods::getCharacter();
 
     return choice;
 }
 
-char KsiazkaAdresowa::selectChoiceFromMainMenu()
+char AddressBook::selectChoiceFromMainMenu()
 {
     char choice;
 
@@ -92,12 +92,12 @@ char KsiazkaAdresowa::selectChoiceFromMainMenu()
     cout << "9. Exit" << endl;
     cout << "---------------------------" << endl;
     cout << "Your choice: ";
-    choice = MetodyPomocnicze::getCharacter();
+    choice = AncillaryMethods::getCharacter();
 
     return choice;
 }
 
-bool KsiazkaAdresowa::isUserLoggedIn()
+bool AddressBook::isUserLoggedIn()
 {
     if(userManager.isUserLoggedIn())
         return true;
@@ -105,22 +105,22 @@ bool KsiazkaAdresowa::isUserLoggedIn()
         return false;
 }
 
-void KsiazkaAdresowa::deleteRecipient()
+void AddressBook::deleteRecipient()
 {
      recipientManager->deleteRecipient();
 }
 
-void KsiazkaAdresowa::editRecipient()
+void AddressBook::editRecipient()
 {
     recipientManager->editRecipient();
 }
 
-void KsiazkaAdresowa::searchRecipientsByName()
+void AddressBook::searchRecipientsByName()
 {
     recipientManager->searchRecipientsByName();
 }
 
-void KsiazkaAdresowa::searchRecipientsBySurname()
+void AddressBook::searchRecipientsBySurname()
 {
     recipientManager->searchRecipientsBySurname();
 }

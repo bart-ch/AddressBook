@@ -1,15 +1,15 @@
-#include "UzytkownikMenedzer.h"
+#include "UserManager.h"
 
-UzytkownikMenedzer::UzytkownikMenedzer(string nazwaPlikuZUzytkownikami)
+UserManager::UserManager(string nazwaPlikuZUzytkownikami)
     : usersFiles(nazwaPlikuZUzytkownikami)
 {
     loggedInUserId = 0;
     users = usersFiles.loadUsersFromFile();
 }
 
-void UzytkownikMenedzer::registerAUser()
+void UserManager::registerAUser()
 {
-    Uzytkownik user = enterNewUserData();
+    User user = enterNewUserData();
 
     users.push_back(user);
     usersFiles.addUserToFile(user);
@@ -18,9 +18,9 @@ void UzytkownikMenedzer::registerAUser()
     system("pause");
 }
 
-Uzytkownik UzytkownikMenedzer::enterNewUserData()
+User UserManager::enterNewUserData()
 {
-    Uzytkownik user;
+    User user;
 
     user.setId(getNewUserId());
 
@@ -28,20 +28,20 @@ Uzytkownik UzytkownikMenedzer::enterNewUserData()
     do
     {
         cout << "Enter login: ";
-        login = MetodyPomocnicze::getSingleLine();
+        login = AncillaryMethods::getSingleLine();
         user.setLogin(login);
     }
     while (doesLoginExist(user.getLogin()) == true);
 
     string password;
     cout << "Enter password: ";
-    password = MetodyPomocnicze::getSingleLine();
+    password = AncillaryMethods::getSingleLine();
     user.setPassword(password);
 
     return user;
 }
 
-int UzytkownikMenedzer::getNewUserId()
+int UserManager::getNewUserId()
 {
     if (users.empty() == true)
         return 1;
@@ -49,7 +49,7 @@ int UzytkownikMenedzer::getNewUserId()
         return users.back().getId() + 1;
 }
 
-bool UzytkownikMenedzer::doesLoginExist(string login)
+bool UserManager::doesLoginExist(string login)
 {
     for(int i = 0; i<users.size(); i++)
     {
@@ -62,7 +62,7 @@ bool UzytkownikMenedzer::doesLoginExist(string login)
     return false;
 }
 
-void UzytkownikMenedzer::listAllUsers()
+void UserManager::listAllUsers()
 {
     for(int i = 0; i<users.size(); i++)
     {
@@ -72,26 +72,26 @@ void UzytkownikMenedzer::listAllUsers()
     }
 }
 
-void UzytkownikMenedzer::changePasswordOfLoggedInUser()
+void UserManager::changePasswordOfLoggedInUser()
 {
     users = usersFiles.changePasswordOfLoggedInUser(loggedInUserId,users);
 }
 
-int UzytkownikMenedzer::logIn()
+int UserManager::logIn()
 {
     string login = "", password = "";
 
     cout << endl << "Enter login: ";
-    login = MetodyPomocnicze::getSingleLine();
+    login = AncillaryMethods::getSingleLine();
 
     for (int i = 0; i<users.size(); i++)
     {
         if (users[i].getLogin() == login)
         {
-            for (int iloscProb = 3; iloscProb > 0; iloscProb--)
+            for (int numberOfTest = 3; numberOfTest > 0; numberOfTest--)
             {
-                cout << "Enter password. Attempts remaining: " << iloscProb << ": ";
-                password = MetodyPomocnicze::getSingleLine();
+                cout << "Enter password. Attempts remaining: " << numberOfTest << ": ";
+                password = AncillaryMethods::getSingleLine();
 
                 if (users[i].getPassword() == password)
                 {
@@ -111,12 +111,12 @@ int UzytkownikMenedzer::logIn()
     return 0;
 }
 
-int UzytkownikMenedzer::getLoggedInUserId()
+int UserManager::getLoggedInUserId()
 {
     return loggedInUserId;
 }
 
-bool UzytkownikMenedzer::isUserLoggedIn()
+bool UserManager::isUserLoggedIn()
 {
     if(loggedInUserId == 0)
         return false;
@@ -124,7 +124,7 @@ bool UzytkownikMenedzer::isUserLoggedIn()
         return true;
 }
 
-void UzytkownikMenedzer::logOut()
+void UserManager::logOut()
 {
     loggedInUserId = 0;
 }

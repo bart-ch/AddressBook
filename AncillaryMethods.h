@@ -1,5 +1,5 @@
-#ifndef METODYPOMOCNICZE_H
-#define METODYPOMOCNICZE_H
+#ifndef ANCILLARYMETHODS_H
+#define ANCILLARYMETHODS_H
 
 #include <iostream>
 #include <sstream>
@@ -7,7 +7,7 @@
 
 using namespace std;
 
-class MetodyPomocnicze
+class AncillaryMethods
 {
 public:
     static string IntToStringConversion(int number);

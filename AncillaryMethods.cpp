@@ -1,6 +1,6 @@
-#include "MetodyPomocnicze.h"
+#include "AncillaryMethods.h"
 
-string MetodyPomocnicze::IntToStringConversion(int number)
+string AncillaryMethods::IntToStringConversion(int number)
 {
     ostringstream ss;
     ss << number;
@@ -8,7 +8,7 @@ string MetodyPomocnicze::IntToStringConversion(int number)
     return str;
 }
 
-string MetodyPomocnicze::replaceFirstLetterUppercaseAndOtherLowercase(string text)
+string AncillaryMethods::replaceFirstLetterUppercaseAndOtherLowercase(string text)
 {
     if (!text.empty())
     {
@@ -18,7 +18,7 @@ string MetodyPomocnicze::replaceFirstLetterUppercaseAndOtherLowercase(string tex
     return text;
 }
 
-int MetodyPomocnicze::StringToIntConversion(string number)
+int AncillaryMethods::StringToIntConversion(string number)
 {
     int liczbaInt;
     istringstream iss(number);
@@ -27,7 +27,7 @@ int MetodyPomocnicze::StringToIntConversion(string number)
     return liczbaInt;
 }
 
-string MetodyPomocnicze::getNumber(string text, int characterPosition)
+string AncillaryMethods::getNumber(string text, int characterPosition)
 {
     string liczba = "";
     while(isdigit(text[characterPosition]) == true)
@@ -38,7 +38,7 @@ string MetodyPomocnicze::getNumber(string text, int characterPosition)
     return liczba;
 }
 
-char MetodyPomocnicze::getCharacter()
+char AncillaryMethods::getCharacter()
 {
     string input = "";
     char sign  = {0};
@@ -57,14 +57,14 @@ char MetodyPomocnicze::getCharacter()
     return sign;
 }
 
-string MetodyPomocnicze::getSingleLine()
+string AncillaryMethods::getSingleLine()
 {
     string input = "";
     getline(cin, input);
     return input;
 }
 
-int MetodyPomocnicze::getInteger()
+int AncillaryMethods::getInteger()
 {
     string input = "";
     int liczba = 0;

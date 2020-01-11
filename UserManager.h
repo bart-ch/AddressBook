@@ -1,5 +1,5 @@
-#ifndef UZYTKOWNIKMENEDZER_H
-#define UZYTKOWNIKMENEDZER_H
+#ifndef USERMANAGER_H
+#define USERMANAGER_H
 
 #include <iostream>
 #include <vector>
@@ -7,23 +7,23 @@
 #include <fstream>
 #include <sstream>
 
-#include "Uzytkownik.h"
-#include "PlikiZUzytkownikami.h"
+#include "User.h"
+#include "UsersFiles.h"
 
 using namespace std;
 
-class UzytkownikMenedzer
+class UserManager
 {
     int loggedInUserId;
-    vector <Uzytkownik> users;
-    PlikiZUzytkownikami usersFiles;
+    vector <User> users;
+    UsersFiles usersFiles;
 
-    Uzytkownik enterNewUserData();
+    User enterNewUserData();
     int getNewUserId();
     bool doesLoginExist(string login);
 
 public:
-    UzytkownikMenedzer(string);
+    UserManager(string);
     void registerAUser();
     void listAllUsers();
     int logIn();

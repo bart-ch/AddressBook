@@ -1,15 +1,15 @@
-#include "PlikiZAdresatami.h"
+#include "RecipientsFiles.h"
 
 using namespace std;
 
-PlikiZAdresatami::PlikiZAdresatami(string fileName,string temporaryFileName)
-    :   PlikTekstowy(fileName),
+RecipientsFiles::RecipientsFiles(string fileName,string temporaryFileName)
+    :   TextFile(fileName),
         TEMPORARY_RECIPIENTS_FILE_NAME(temporaryFileName)
 {
     lastRecipientId = 0;
 }
 
-bool PlikiZAdresatami::appendRecipientToFile(Adresat recipient)
+bool RecipientsFiles::appendRecipientToFile(Recipient recipient)
 {
     string lineWithRecipientData = "";
     fstream textFile;
@@ -34,12 +34,12 @@ bool PlikiZAdresatami::appendRecipientToFile(Adresat recipient)
     return false;
 }
 
-string PlikiZAdresatami::changeRecipientDataOnLineWithDataSeparatedByPipe(Adresat recipient)
+string RecipientsFiles::changeRecipientDataOnLineWithDataSeparatedByPipe(Recipient recipient)
 {
     string lineWithRecipientData = "";
 
-    lineWithRecipientData += MetodyPomocnicze::IntToStringConversion(recipient.getRecipientId()) + '|';
-    lineWithRecipientData += MetodyPomocnicze::IntToStringConversion(recipient.getUserId()) + '|';
+    lineWithRecipientData += AncillaryMethods::IntToStringConversion(recipient.getRecipientId()) + '|';
+    lineWithRecipientData += AncillaryMethods::IntToStringConversion(recipient.getUserId()) + '|';
     lineWithRecipientData += recipient.getName() + '|';
     lineWithRecipientData += recipient.getSurname() + '|';
     lineWithRecipientData += recipient.getTelephone() + '|';
@@ -49,10 +49,10 @@ string PlikiZAdresatami::changeRecipientDataOnLineWithDataSeparatedByPipe(Adresa
     return lineWithRecipientData;
 }
 
-vector <Adresat> PlikiZAdresatami::loadLoggedUserRecipientsFromFile(int loggedUserId)
+vector <Recipient> RecipientsFiles::loadLoggedUserRecipientsFromFile(int loggedUserId)
 {
-    vector <Adresat> recipients;
-    Adresat recipient;
+    vector <Recipient> recipients;
+    Recipient recipient;
     string recipientDataSeparatedByPipe = "";
     string lastRecipientInFileData = "";
     fstream textFile;
@@ -82,24 +82,24 @@ vector <Adresat> PlikiZAdresatami::loadLoggedUserRecipientsFromFile(int loggedUs
     return recipients;
 }
 
-int PlikiZAdresatami::getUserIdFromDataSepararatedByPipe(string userDataSeparatedByPipe)
+int RecipientsFiles::getUserIdFromDataSepararatedByPipe(string userDataSeparatedByPipe)
 {
     int userIdStartPosition = userDataSeparatedByPipe.find_first_of('|') + 1;
-    int userId = MetodyPomocnicze::StringToIntConversion(MetodyPomocnicze::getNumber(userDataSeparatedByPipe, userIdStartPosition));
+    int userId = AncillaryMethods::StringToIntConversion(AncillaryMethods::getNumber(userDataSeparatedByPipe, userIdStartPosition));
 
     return userId;
 }
 
-int PlikiZAdresatami::getRecipientIdFromDataSepararatedByPipe(string recipientDataSeparatedByPipe)
+int RecipientsFiles::getRecipientIdFromDataSepararatedByPipe(string recipientDataSeparatedByPipe)
 {
     int recipientIdStartPosition = 0;
-    int recipientId = MetodyPomocnicze::StringToIntConversion(MetodyPomocnicze::getNumber(recipientDataSeparatedByPipe, recipientIdStartPosition));
+    int recipientId = AncillaryMethods::StringToIntConversion(AncillaryMethods::getNumber(recipientDataSeparatedByPipe, recipientIdStartPosition));
     return recipientId;
 }
 
-Adresat PlikiZAdresatami::getRecipientData(string recipientDataSeparatedByPipe)
+Recipient RecipientsFiles::getRecipientData(string recipientDataSeparatedByPipe)
 {
-    Adresat recipient;
+    Recipient recipient;
     string separatedRecipientData = "";
     int numberOfSeparatedRecipientData = 1;
 
@@ -142,12 +142,12 @@ Adresat PlikiZAdresatami::getRecipientData(string recipientDataSeparatedByPipe)
     return recipient;
 }
 
-int PlikiZAdresatami::getlastRecipientId()
+int RecipientsFiles::getlastRecipientId()
 {
     return lastRecipientId;
 }
 
-int PlikiZAdresatami::removeRecipientFromFile(int recipientId)
+int RecipientsFiles::removeRecipientFromFile(int recipientId)
 {
     fstream baseTextFile, temporaryTextFile;
     string recipientDataSeparatedByPipe = "";
@@ -193,21 +193,21 @@ int PlikiZAdresatami::removeRecipientFromFile(int recipientId)
 
 }
 
-void PlikiZAdresatami::removeFile(string fileNameWithExtension)
+void RecipientsFiles::removeFile(string fileNameWithExtension)
 {
     if (remove(fileNameWithExtension.c_str()) == 0) {}
     else
         cout << "Failed to delete the file " << fileNameWithExtension << endl;
 }
 
-void PlikiZAdresatami::changeFileName(string oldName, string newName)
+void RecipientsFiles::changeFileName(string oldName, string newName)
 {
     if (rename(oldName.c_str(), newName.c_str()) == 0) {}
     else
         cout << "Name of the file could not be changed." << oldName << endl;
 }
 
-int PlikiZAdresatami::giveLastRecipientIdAfterRemovingRecipient(int removedRecipientId)
+int RecipientsFiles::giveLastRecipientIdAfterRemovingRecipient(int removedRecipientId)
 {
     if (removedRecipientId == lastRecipientId)
         return getLastRecipientIdFromFile();
@@ -215,7 +215,7 @@ int PlikiZAdresatami::giveLastRecipientIdAfterRemovingRecipient(int removedRecip
         return lastRecipientId;
 }
 
-int PlikiZAdresatami::getLastRecipientIdFromFile()
+int RecipientsFiles::getLastRecipientIdFromFile()
 {
     string recipientDataSeparatedByPipe = "";
     string lastRecipientInFileData = "";
@@ -238,7 +238,7 @@ int PlikiZAdresatami::getLastRecipientIdFromFile()
     return lastRecipientId;
 }
 
-void PlikiZAdresatami::updateDataOfEditedRecipient(Adresat recipient)
+void RecipientsFiles::updateDataOfEditedRecipient(Recipient recipient)
 {
     fstream baseTextFile, temporaryTextFile;
     string loadedLine = "";

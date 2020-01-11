@@ -1,27 +1,27 @@
 #include <iostream>
-#include "KsiazkaAdresowa.h"
+#include "AddressBook.h"
 
 using namespace std;
 
 int main()
 {
-    KsiazkaAdresowa ksiazka;
+    AddressBook addressBook;
 
     char choice;
 
     while (true)
     {
-        if (ksiazka.isUserLoggedIn() == false)
+        if (addressBook.isUserLoggedIn() == false)
         {
-            choice = ksiazka.selectChoiceFromMainMenu();
+            choice = addressBook.selectChoiceFromMainMenu();
 
             switch (choice)
             {
             case '1':
-                ksiazka.registerUser();
+                addressBook.registerUser();
                 break;
             case '2':
-                ksiazka.logIn();
+                addressBook.logIn();
                 break;
             case '9':
                 exit(0);
@@ -34,33 +34,33 @@ int main()
         }
         else
         {
-            choice = ksiazka.selectChoiceFromUserMenu();
+            choice = addressBook.selectChoiceFromUserMenu();
 
             switch (choice)
             {
             case '1':
-                ksiazka.addRecipient();
+                addressBook.addRecipient();
                 break;
             case '2':
-                ksiazka.searchRecipientsByName();
+                addressBook.searchRecipientsByName();
                 break;
             case '3':
-                ksiazka.searchRecipientsBySurname();
+                addressBook.searchRecipientsBySurname();
                 break;
             case '4':
-                ksiazka.listAllRecipients();
+                addressBook.listAllRecipients();
                 break;
             case '5':
-                ksiazka.deleteRecipient();
+                addressBook.deleteRecipient();
                 break;
             case '6':
-                ksiazka.editRecipient();
+                addressBook.editRecipient();
                 break;
             case '7':
-                ksiazka.changePasswordOfLoggedInUser();
+                addressBook.changePasswordOfLoggedInUser();
                 break;
             case '8':
-                ksiazka.logOut();
+                addressBook.logOut();
                 break;
             }
         }

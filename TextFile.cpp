@@ -1,6 +1,6 @@
-#include "PlikTekstowy.h"
+#include "TextFile.h"
 
-bool PlikTekstowy::isFileEmpty()
+bool TextFile::isFileEmpty()
 {
     bool isEmpty = true;
     fstream textFile;
@@ -17,7 +17,7 @@ bool PlikTekstowy::isFileEmpty()
     return isEmpty;
 }
 
-string PlikTekstowy::getFileName()
+string TextFile::getFileName()
 {
     return FILE_NAME;
 }

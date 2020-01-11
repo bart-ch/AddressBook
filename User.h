@@ -1,11 +1,11 @@
-#ifndef UZYTKOWNIK_H
-#define UZYTKOWNIK_H
+#ifndef USER_H
+#define USER_H
 #include <iostream>
 
 
 using namespace std;
 
-class Uzytkownik
+class User
 {
     int id;
     string login;

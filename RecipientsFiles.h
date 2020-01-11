@@ -1,24 +1,24 @@
-#ifndef PLIKIZADRESATAMI_H
-#define PLIKIZADRESATAMI_H
+#ifndef RECIPIENTSFILES_H
+#define RECIPIENTSFILES_H
 
 #include <iostream>
 #include <vector>
 #include <windows.h>
-#include "Adresat.h"
-#include "MetodyPomocnicze.h"
-#include "UzytkownikMenedzer.h"
+#include "Recipient.h"
+#include "AncillaryMethods.h"
+#include "UserManager.h"
 #include <fstream>
 
 using namespace std;
 
-class PlikiZAdresatami :public PlikTekstowy
+class RecipientsFiles :public TextFile
 {
     const string TEMPORARY_RECIPIENTS_FILE_NAME;
     int lastRecipientId;
 
-    string changeRecipientDataOnLineWithDataSeparatedByPipe(Adresat recipient);
+    string changeRecipientDataOnLineWithDataSeparatedByPipe(Recipient recipient);
     int getUserIdFromDataSepararatedByPipe(string userDataSeparatedByPipe);
-    Adresat getRecipientData(string recipientDataSeparatedByPipe);
+    Recipient getRecipientData(string recipientDataSeparatedByPipe);
     int getRecipientIdFromDataSepararatedByPipe(string recipientDataSeparatedByPipe);
     void removeFile(string fileNameWithExtension);
     void changeFileName(string oldName, string newName);
@@ -26,12 +26,12 @@ class PlikiZAdresatami :public PlikTekstowy
     int getLastRecipientIdFromFile();
 
 public:
-    PlikiZAdresatami(string,string);
-    bool appendRecipientToFile(Adresat recipient);
-    vector <Adresat> loadLoggedUserRecipientsFromFile(int loggedUserId);
+    RecipientsFiles(string,string);
+    bool appendRecipientToFile(Recipient recipient);
+    vector <Recipient> loadLoggedUserRecipientsFromFile(int loggedUserId);
     int getlastRecipientId();
     int removeRecipientFromFile(int recipientId);
-    void updateDataOfEditedRecipient(Adresat adresat);
+    void updateDataOfEditedRecipient(Recipient adresat);
 };
 
 #endif

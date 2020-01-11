@@ -1,15 +1,15 @@
-#include "AdresatMenedzer.h"
+#include "RecipientManager.h"
 
-AdresatMenedzer::AdresatMenedzer(string recipientTextFile, string temporaryRecipientTextFile, int loggedUserId)
+RecipientManager::RecipientManager(string recipientTextFile, string temporaryRecipientTextFile, int loggedUserId)
     : recipientsFiles(recipientTextFile,temporaryRecipientTextFile),
       LOGGED_USER_ID(loggedUserId)
 {
     recipients = recipientsFiles.loadLoggedUserRecipientsFromFile(LOGGED_USER_ID);
 }
 
-void AdresatMenedzer::addRecipient()
+void RecipientManager::addRecipient()
 {
-    Adresat recipient;
+    Recipient recipient;
 
     system("cls");
     cout << " >>> NEW RECIPIENT MENU <<<" << endl << endl;
@@ -25,30 +25,30 @@ void AdresatMenedzer::addRecipient()
 
 }
 
-Adresat AdresatMenedzer::enterNewRecipientData()
+Recipient RecipientManager::enterNewRecipientData()
 {
-    Adresat recipient;
+    Recipient recipient;
     string name,surname,phoneNumber,email,address;
 
     recipient.setRecipientId(recipientsFiles.getlastRecipientId() + 1);
     recipient.setUserId(LOGGED_USER_ID);
 
     cout << "Enter name: ";
-    name = MetodyPomocnicze::getSingleLine();
-    name = MetodyPomocnicze::replaceFirstLetterUppercaseAndOtherLowercase(name);
+    name = AncillaryMethods::getSingleLine();
+    name = AncillaryMethods::replaceFirstLetterUppercaseAndOtherLowercase(name);
 
     cout << "Enter surname: ";
-    surname = MetodyPomocnicze::getSingleLine();
-    surname = MetodyPomocnicze::replaceFirstLetterUppercaseAndOtherLowercase(surname);
+    surname = AncillaryMethods::getSingleLine();
+    surname = AncillaryMethods::replaceFirstLetterUppercaseAndOtherLowercase(surname);
 
     cout << "Enter phone number: ";
-    phoneNumber = MetodyPomocnicze::getSingleLine();
+    phoneNumber = AncillaryMethods::getSingleLine();
 
     cout << "Enter email address: ";
-    email = MetodyPomocnicze::getSingleLine();
+    email = AncillaryMethods::getSingleLine();
 
     cout << "Enter address: ";
-    address = MetodyPomocnicze::getSingleLine();
+    address = AncillaryMethods::getSingleLine();
 
     recipient.setName(name);
     recipient.setSurname(surname);
@@ -59,7 +59,7 @@ Adresat AdresatMenedzer::enterNewRecipientData()
     return recipient;
 }
 
-void AdresatMenedzer::listAllRecipients()
+void RecipientManager::listAllRecipients()
 {
     if(recipients.empty() == true)
     {
@@ -82,7 +82,7 @@ void AdresatMenedzer::listAllRecipients()
     }
 }
 
-int AdresatMenedzer::deleteRecipient()
+int RecipientManager::deleteRecipient()
 {
     int deletedRecipientId = 0;
 
@@ -99,7 +99,7 @@ int AdresatMenedzer::deleteRecipient()
         {
             doesRecipientExist = true;
             cout << endl << "To confirm press 't': ";
-            choice = MetodyPomocnicze::getCharacter();
+            choice = AncillaryMethods::getCharacter();
             if (choice == 't')
             {
                 recipientsFiles.removeRecipientFromFile(deletedRecipientId);
@@ -124,15 +124,15 @@ int AdresatMenedzer::deleteRecipient()
     return 0;
 }
 
-int AdresatMenedzer::enterRecipientId()
+int RecipientManager::enterRecipientId()
 {
     int recipientId = 0;
     cout << "Enter recipient ID: ";
-    recipientId  = MetodyPomocnicze::getInteger();
+    recipientId  = AncillaryMethods::getInteger();
     return recipientId;
 }
 
-void AdresatMenedzer::editRecipient()
+void RecipientManager::editRecipient()
 {
     system("cls");
     string newSingleData = "";
@@ -155,33 +155,33 @@ void AdresatMenedzer::editRecipient()
             {
             case '1':
                 cout << "Enter new name: ";
-                newSingleData = MetodyPomocnicze::getSingleLine();
-                newSingleData = MetodyPomocnicze::replaceFirstLetterUppercaseAndOtherLowercase(newSingleData);
+                newSingleData = AncillaryMethods::getSingleLine();
+                newSingleData = AncillaryMethods::replaceFirstLetterUppercaseAndOtherLowercase(newSingleData);
                 recipients[i].setName(newSingleData);
                 recipientsFiles.updateDataOfEditedRecipient(recipients[i]);
                 break;
             case '2':
                 cout << "Enter new surname: ";
-                newSingleData = MetodyPomocnicze::getSingleLine();
-                newSingleData = MetodyPomocnicze::replaceFirstLetterUppercaseAndOtherLowercase(newSingleData);
+                newSingleData = AncillaryMethods::getSingleLine();
+                newSingleData = AncillaryMethods::replaceFirstLetterUppercaseAndOtherLowercase(newSingleData);
                 recipients[i].setSurname(newSingleData);
                 recipientsFiles.updateDataOfEditedRecipient(recipients[i]);
                 break;
             case '3':
                 cout << "Enter new phone number: ";
-                newSingleData = MetodyPomocnicze::getSingleLine();
+                newSingleData = AncillaryMethods::getSingleLine();
                 recipients[i].setTelephone(newSingleData);
                 recipientsFiles.updateDataOfEditedRecipient(recipients[i]);
                 break;
             case '4':
                 cout << "Enter new email address: ";
-                newSingleData = MetodyPomocnicze::getSingleLine();
+                newSingleData = AncillaryMethods::getSingleLine();
                 recipients[i].setEmail(newSingleData);
                 recipientsFiles.updateDataOfEditedRecipient(recipients[i]);
                 break;
             case '5':
                 cout << "Enter new address: ";
-                newSingleData = MetodyPomocnicze::getSingleLine();
+                newSingleData = AncillaryMethods::getSingleLine();
                 recipients[i].setAddress(newSingleData);
                 recipientsFiles.updateDataOfEditedRecipient(recipients[i]);
                 break;
@@ -201,7 +201,7 @@ void AdresatMenedzer::editRecipient()
     system("pause");
 }
 
-char AdresatMenedzer::selectChoiceFromEditMenu()
+char RecipientManager::selectChoiceFromEditMenu()
 {
     char choice;
 
@@ -215,12 +215,12 @@ char AdresatMenedzer::selectChoiceFromEditMenu()
     cout << "5 - Address" << endl;
     cout << "6 - Return " << endl;
     cout << endl << "Your choice: ";
-    choice = MetodyPomocnicze::getCharacter();
+    choice = AncillaryMethods::getCharacter();
 
     return choice;
 }
 
-void AdresatMenedzer::searchRecipientsByName()
+void RecipientManager::searchRecipientsByName()
 {
     string searchedName = "";
     int recipientsNumber = 0;
@@ -231,10 +231,10 @@ void AdresatMenedzer::searchRecipientsByName()
         cout << ">>> SEARCHING BY NAME <<<" << endl << endl;
 
         cout << "Enter the name you are looking for: ";
-        searchedName = MetodyPomocnicze::getSingleLine();
-        searchedName = MetodyPomocnicze::replaceFirstLetterUppercaseAndOtherLowercase(searchedName);
+        searchedName = AncillaryMethods::getSingleLine();
+        searchedName = AncillaryMethods::replaceFirstLetterUppercaseAndOtherLowercase(searchedName);
 
-        for (vector <Adresat>::iterator  itr = recipients.begin(); itr != recipients.end(); itr++)
+        for (vector <Recipient>::iterator  itr = recipients.begin(); itr != recipients.end(); itr++)
         {
             if (itr -> getName() == searchedName)
             {
@@ -252,7 +252,7 @@ void AdresatMenedzer::searchRecipientsByName()
     system("pause");
 }
 
-void AdresatMenedzer::showRecipientData(Adresat recipient)
+void RecipientManager::showRecipientData(Recipient recipient)
 {
     cout << endl << "Id:                 " << recipient.getRecipientId() << endl;
     cout << "Name:               " << recipient.getName() << endl;
@@ -262,7 +262,7 @@ void AdresatMenedzer::showRecipientData(Adresat recipient)
     cout << "Address:              " << recipient.getAddress() << endl;
 }
 
-void AdresatMenedzer::showNumberOfFoundRecipients(int recipientsNumber)
+void RecipientManager::showNumberOfFoundRecipients(int recipientsNumber)
 {
     if (recipientsNumber == 0)
         cout << endl << "No recipients with the data." << endl;
@@ -270,7 +270,7 @@ void AdresatMenedzer::showNumberOfFoundRecipients(int recipientsNumber)
         cout << endl << "The number of recipients is: " << recipientsNumber << endl << endl;
 }
 
-void AdresatMenedzer::searchRecipientsBySurname()
+void RecipientManager::searchRecipientsBySurname()
 {
     string searchedSurname;
     int recipientsNumber = 0;
@@ -281,10 +281,10 @@ void AdresatMenedzer::searchRecipientsBySurname()
         cout << ">>> SEARCHING BY SURNAME <<<" << endl << endl;
 
         cout << "Enter the surname you are looking for: : ";
-        searchedSurname = MetodyPomocnicze::getSingleLine();
-        searchedSurname = MetodyPomocnicze::replaceFirstLetterUppercaseAndOtherLowercase(searchedSurname);
+        searchedSurname = AncillaryMethods::getSingleLine();
+        searchedSurname = AncillaryMethods::replaceFirstLetterUppercaseAndOtherLowercase(searchedSurname);
 
-        for (vector <Adresat>::iterator itr = recipients.begin(); itr != recipients.end(); itr++)
+        for (vector <Recipient>::iterator itr = recipients.begin(); itr != recipients.end(); itr++)
         {
             if (itr -> getSurname() == searchedSurname)
             {

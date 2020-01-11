@@ -1,12 +1,12 @@
-#include "PlikiZUzytkownikami.h"
+#include "UsersFiles.h"
 
 
-PlikiZUzytkownikami::PlikiZUzytkownikami(string fileName)
-    :  PlikTekstowy(fileName)
+UsersFiles::UsersFiles(string fileName)
+    :  TextFile(fileName)
 {
 }
 
-void PlikiZUzytkownikami::addUserToFile(Uzytkownik user)
+void UsersFiles::addUserToFile(User user)
 {
     fstream textFile;
     string lineWithUserData = "";
@@ -30,22 +30,22 @@ void PlikiZUzytkownikami::addUserToFile(Uzytkownik user)
     textFile.close();
 }
 
-string PlikiZUzytkownikami::convertUserDataToLineWithDataSeparatedByPipe(Uzytkownik user)
+string UsersFiles::convertUserDataToLineWithDataSeparatedByPipe(User user)
 {
     string lineWithUserData = "";
 
-    lineWithUserData += MetodyPomocnicze::IntToStringConversion(user.getId())+ '|';
+    lineWithUserData += AncillaryMethods::IntToStringConversion(user.getId())+ '|';
     lineWithUserData += user.getLogin() + '|';
     lineWithUserData += user.getPassword() + '|';
 
     return lineWithUserData;
 }
 
-vector <Uzytkownik> PlikiZUzytkownikami::loadUsersFromFile()
+vector <User> UsersFiles::loadUsersFromFile()
 {
-    Uzytkownik user;
+    User user;
     fstream textFile;
-    vector <Uzytkownik> users;
+    vector <User> users;
 
     string userDataSeparatedByPipe = "";
 
@@ -64,9 +64,9 @@ vector <Uzytkownik> PlikiZUzytkownikami::loadUsersFromFile()
     return users;
 }
 
-Uzytkownik PlikiZUzytkownikami::getUserData(string userDataSeparatedByPipe)
+User UsersFiles::getUserData(string userDataSeparatedByPipe)
 {
-    Uzytkownik user;
+    User user;
     string separatedUserData = "";
     int numberOfSeparatedUserData = 1;
 
@@ -97,11 +97,11 @@ Uzytkownik PlikiZUzytkownikami::getUserData(string userDataSeparatedByPipe)
     return user;
 }
 
-vector <Uzytkownik> PlikiZUzytkownikami::changePasswordOfLoggedInUser(int loggedInUserId,vector <Uzytkownik> users)
+vector <User> UsersFiles::changePasswordOfLoggedInUser(int loggedInUserId,vector <User> users)
 {
     string newPassword = "";
     cout << "Enter new password: ";
-    newPassword = MetodyPomocnicze::getSingleLine();
+    newPassword = AncillaryMethods::getSingleLine();
 
     for (int i = 0; i < users.size(); i++)
     {
@@ -117,17 +117,17 @@ vector <Uzytkownik> PlikiZUzytkownikami::changePasswordOfLoggedInUser(int logged
     return users;
 }
 
-void PlikiZUzytkownikami::saveAllUsersToFile(vector <Uzytkownik> users)
+void UsersFiles::saveAllUsersToFile(vector <User> users)
 {
     fstream textFile;
     string lineWithUserData = "";
-    vector <Uzytkownik>::iterator itrEnd = --users.end();
+    vector <User>::iterator itrEnd = --users.end();
 
     textFile.open(getFileName().c_str(), ios::out);
 
     if (textFile.good() == true)
     {
-        for (vector <Uzytkownik>::iterator itr = users.begin(); itr != users.end(); itr++)
+        for (vector <User>::iterator itr = users.begin(); itr != users.end(); itr++)
         {
             lineWithUserData = convertUserDataToLineWithDataSeparatedByPipe(*itr);
 
