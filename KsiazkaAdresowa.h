@@ -9,29 +9,29 @@ using namespace std;
 
 class KsiazkaAdresowa
 {
-    UzytkownikMenedzer uzytkownikMenedzer;
-    AdresatMenedzer *adresatMenedzer;
-    const string NAZWA_PLIKU_Z_ADRESATAMI;
-    const string NAZWA_PLIKU_TYMCZASOWEGO_Z_ADRESATAMI;
+    UzytkownikMenedzer userManager;
+    AdresatMenedzer *recipientManager;
+    const string RECIPIENTS_FILE_NAME;
+    const string TEMPORARY_RECIPIENTS_FILE_NAME;
 
 public:
 
     KsiazkaAdresowa(string nazwaPlikuZUzytkownikami="Uzytkownicy.txt",string nazwaPlikuZAdresatami="Adresaci.txt",string nazwaPlikuTymczasowegoZAdresatami="Adresaci_tymczas.txt");
     ~KsiazkaAdresowa();
-    void rejestracjaUzytkownika();
-    void wypiszWszystkichUzytkownikow();
-    void logowanieUzytkownika();
-    void zmianaHaslaZalogowanegoUzytkownika();
-    void dodajAdresata();
-    void wypiszWszystkichAdresatow();
-    void wyloguj();
-    char wybierzOpcjeZMenuUzytkownika();
-    char wybierzOpcjeZMenuGlownego();
-    bool czyUzytkownikJestZalogowany();
-    void usunaAdresata();
-    void edytujAdresata();
-    void wyszukajAdresatowPoImieniu();
-    void wyszukajAdresatowPoNazwisku();
+    void registerUser();
+    void listAllUsers();
+    void logIn();
+    void changePasswordOfLoggedInUser();
+    void addRecipient();
+    void listAllRecipients();
+    void logOut();
+    char selectChoiceFromUserMenu();
+    char selectChoiceFromMainMenu();
+    bool isUserLoggedIn();
+    void deleteRecipient();
+    void editRecipient();
+    void searchRecipientsByName();
+    void searchRecipientsBySurname();
 
 };
 

@@ -1,63 +1,63 @@
 #include "KsiazkaAdresowa.h"
 
-KsiazkaAdresowa::KsiazkaAdresowa(string nazwaPlikuZUzytkownikami,string nazwaPlikuZAdresatami,string nazwaPlikuTymczasowegoZAdresatami)
-    : uzytkownikMenedzer(nazwaPlikuZUzytkownikami),
-      NAZWA_PLIKU_Z_ADRESATAMI(nazwaPlikuZAdresatami),
-    NAZWA_PLIKU_TYMCZASOWEGO_Z_ADRESATAMI(nazwaPlikuTymczasowegoZAdresatami)
+KsiazkaAdresowa::KsiazkaAdresowa(string usersFileName,string recipientsFileName,string temporaryRecipientsFileName)
+    : userManager(usersFileName),
+      RECIPIENTS_FILE_NAME(recipientsFileName),
+    TEMPORARY_RECIPIENTS_FILE_NAME(temporaryRecipientsFileName)
 {
 }
 
 KsiazkaAdresowa::~KsiazkaAdresowa()
 {
-    delete adresatMenedzer;
-    adresatMenedzer = NULL;
+    delete recipientManager;
+    recipientManager = NULL;
 }
 
-void KsiazkaAdresowa::rejestracjaUzytkownika()
+void KsiazkaAdresowa::registerUser()
 {
-    uzytkownikMenedzer.registerAUser();
+    userManager.registerAUser();
 }
 
-void KsiazkaAdresowa::wypiszWszystkichUzytkownikow()
+void KsiazkaAdresowa::listAllUsers()
 {
-    uzytkownikMenedzer.listAllUsers();
+    userManager.listAllUsers();
 }
 
-void KsiazkaAdresowa::logowanieUzytkownika()
+void KsiazkaAdresowa::logIn()
 {
-    uzytkownikMenedzer.logIn();
-    if(uzytkownikMenedzer.isUserLoggedIn())
+    userManager.logIn();
+    if(userManager.isUserLoggedIn())
     {
-        adresatMenedzer = new AdresatMenedzer(NAZWA_PLIKU_Z_ADRESATAMI,NAZWA_PLIKU_TYMCZASOWEGO_Z_ADRESATAMI,uzytkownikMenedzer.getLoggedInUserId());
+        recipientManager = new AdresatMenedzer(RECIPIENTS_FILE_NAME,TEMPORARY_RECIPIENTS_FILE_NAME,userManager.getLoggedInUserId());
     }
 }
 
-void KsiazkaAdresowa::zmianaHaslaZalogowanegoUzytkownika()
+void KsiazkaAdresowa::changePasswordOfLoggedInUser()
 {
-    uzytkownikMenedzer.changePasswordOfLoggedInUser();
+    userManager.changePasswordOfLoggedInUser();
 }
 
-void KsiazkaAdresowa::dodajAdresata()
+void KsiazkaAdresowa::addRecipient()
 {
-    if(uzytkownikMenedzer.isUserLoggedIn())
+    if(userManager.isUserLoggedIn())
     {
-        adresatMenedzer->addRecipient();
+        recipientManager->addRecipient();
     }
 }
 
-void KsiazkaAdresowa::wypiszWszystkichAdresatow()
+void KsiazkaAdresowa::listAllRecipients()
 {
-    adresatMenedzer->listAllRecipients();
+    recipientManager->listAllRecipients();
 }
 
-void KsiazkaAdresowa::wyloguj()
+void KsiazkaAdresowa::logOut()
 {
-    uzytkownikMenedzer.logOut();
-    delete adresatMenedzer;
-    adresatMenedzer = NULL;
+    userManager.logOut();
+    delete recipientManager;
+    recipientManager = NULL;
 }
 
-char KsiazkaAdresowa::wybierzOpcjeZMenuUzytkownika()
+char KsiazkaAdresowa::selectChoiceFromUserMenu()
 {
     char choice;
 
@@ -80,7 +80,7 @@ char KsiazkaAdresowa::wybierzOpcjeZMenuUzytkownika()
     return choice;
 }
 
-char KsiazkaAdresowa::wybierzOpcjeZMenuGlownego()
+char KsiazkaAdresowa::selectChoiceFromMainMenu()
 {
     char choice;
 
@@ -97,32 +97,32 @@ char KsiazkaAdresowa::wybierzOpcjeZMenuGlownego()
     return choice;
 }
 
-bool KsiazkaAdresowa::czyUzytkownikJestZalogowany()
+bool KsiazkaAdresowa::isUserLoggedIn()
 {
-    if(uzytkownikMenedzer.isUserLoggedIn())
+    if(userManager.isUserLoggedIn())
         return true;
     else
         return false;
 }
 
-void KsiazkaAdresowa::usunaAdresata()
+void KsiazkaAdresowa::deleteRecipient()
 {
-     adresatMenedzer->deleteRecipient();
+     recipientManager->deleteRecipient();
 }
 
-void KsiazkaAdresowa::edytujAdresata()
+void KsiazkaAdresowa::editRecipient()
 {
-    adresatMenedzer->editRecipient();
+    recipientManager->editRecipient();
 }
 
-void KsiazkaAdresowa::wyszukajAdresatowPoImieniu()
+void KsiazkaAdresowa::searchRecipientsByName()
 {
-    adresatMenedzer->searchRecipientsByName();
+    recipientManager->searchRecipientsByName();
 }
 
-void KsiazkaAdresowa::wyszukajAdresatowPoNazwisku()
+void KsiazkaAdresowa::searchRecipientsBySurname()
 {
-    adresatMenedzer->searchRecipientsBySurname();
+    recipientManager->searchRecipientsBySurname();
 }
 
 

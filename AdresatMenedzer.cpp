@@ -35,11 +35,11 @@ Adresat AdresatMenedzer::enterNewRecipientData()
 
     cout << "Enter name: ";
     name = MetodyPomocnicze::getSingleLine();
-    name = MetodyPomocnicze::replaceFirstLetterForUppercaseAndOtherLowercase(name);
+    name = MetodyPomocnicze::replaceFirstLetterUppercaseAndOtherLowercase(name);
 
     cout << "Enter surname: ";
     surname = MetodyPomocnicze::getSingleLine();
-    surname = MetodyPomocnicze::replaceFirstLetterForUppercaseAndOtherLowercase(surname);
+    surname = MetodyPomocnicze::replaceFirstLetterUppercaseAndOtherLowercase(surname);
 
     cout << "Enter phone number: ";
     phoneNumber = MetodyPomocnicze::getSingleLine();
@@ -156,14 +156,14 @@ void AdresatMenedzer::editRecipient()
             case '1':
                 cout << "Enter new name: ";
                 newSingleData = MetodyPomocnicze::getSingleLine();
-                newSingleData = MetodyPomocnicze::replaceFirstLetterForUppercaseAndOtherLowercase(newSingleData);
+                newSingleData = MetodyPomocnicze::replaceFirstLetterUppercaseAndOtherLowercase(newSingleData);
                 recipients[i].setName(newSingleData);
                 recipientsFiles.updateDataOfEditedRecipient(recipients[i]);
                 break;
             case '2':
                 cout << "Enter new surname: ";
                 newSingleData = MetodyPomocnicze::getSingleLine();
-                newSingleData = MetodyPomocnicze::replaceFirstLetterForUppercaseAndOtherLowercase(newSingleData);
+                newSingleData = MetodyPomocnicze::replaceFirstLetterUppercaseAndOtherLowercase(newSingleData);
                 recipients[i].setSurname(newSingleData);
                 recipientsFiles.updateDataOfEditedRecipient(recipients[i]);
                 break;
@@ -232,7 +232,7 @@ void AdresatMenedzer::searchRecipientsByName()
 
         cout << "Enter the name you are looking for: ";
         searchedName = MetodyPomocnicze::getSingleLine();
-        searchedName = MetodyPomocnicze::replaceFirstLetterForUppercaseAndOtherLowercase(searchedName);
+        searchedName = MetodyPomocnicze::replaceFirstLetterUppercaseAndOtherLowercase(searchedName);
 
         for (vector <Adresat>::iterator  itr = recipients.begin(); itr != recipients.end(); itr++)
         {
@@ -282,7 +282,7 @@ void AdresatMenedzer::searchRecipientsBySurname()
 
         cout << "Enter the surname you are looking for: : ";
         searchedSurname = MetodyPomocnicze::getSingleLine();
-        searchedSurname = MetodyPomocnicze::replaceFirstLetterForUppercaseAndOtherLowercase(searchedSurname);
+        searchedSurname = MetodyPomocnicze::replaceFirstLetterUppercaseAndOtherLowercase(searchedSurname);
 
         for (vector <Adresat>::iterator itr = recipients.begin(); itr != recipients.end(); itr++)
         {

@@ -8,7 +8,7 @@ string MetodyPomocnicze::IntToStringConversion(int number)
     return str;
 }
 
-string MetodyPomocnicze::replaceFirstLetterForUppercaseAndOtherLowercase(string text)
+string MetodyPomocnicze::replaceFirstLetterUppercaseAndOtherLowercase(string text)
 {
     if (!text.empty())
     {

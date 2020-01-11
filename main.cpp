@@ -7,21 +7,21 @@ int main()
 {
     KsiazkaAdresowa ksiazka;
 
-    char wybor;
+    char choice;
 
     while (true)
     {
-        if (ksiazka.czyUzytkownikJestZalogowany() == false)
+        if (ksiazka.isUserLoggedIn() == false)
         {
-            wybor = ksiazka.wybierzOpcjeZMenuGlownego();
+            choice = ksiazka.selectChoiceFromMainMenu();
 
-            switch (wybor)
+            switch (choice)
             {
             case '1':
-                ksiazka.rejestracjaUzytkownika();
+                ksiazka.registerUser();
                 break;
             case '2':
-                ksiazka.logowanieUzytkownika();
+                ksiazka.logIn();
                 break;
             case '9':
                 exit(0);
@@ -34,33 +34,33 @@ int main()
         }
         else
         {
-            wybor = ksiazka.wybierzOpcjeZMenuUzytkownika();
+            choice = ksiazka.selectChoiceFromUserMenu();
 
-            switch (wybor)
+            switch (choice)
             {
             case '1':
-                ksiazka.dodajAdresata();
+                ksiazka.addRecipient();
                 break;
             case '2':
-                ksiazka.wyszukajAdresatowPoImieniu();
+                ksiazka.searchRecipientsByName();
                 break;
             case '3':
-                ksiazka.wyszukajAdresatowPoNazwisku();
+                ksiazka.searchRecipientsBySurname();
                 break;
             case '4':
-                ksiazka.wypiszWszystkichAdresatow();
+                ksiazka.listAllRecipients();
                 break;
             case '5':
-                ksiazka.usunaAdresata();
+                ksiazka.deleteRecipient();
                 break;
             case '6':
-                ksiazka.edytujAdresata();
+                ksiazka.editRecipient();
                 break;
             case '7':
-                ksiazka.zmianaHaslaZalogowanegoUzytkownika();
+                ksiazka.changePasswordOfLoggedInUser();
                 break;
             case '8':
-                ksiazka.wyloguj();
+                ksiazka.logOut();
                 break;
             }
         }
